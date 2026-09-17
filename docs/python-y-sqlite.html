@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1.2 Planificación (tentativa) | Prácticas de Tecnologías de Gestión y Manipulación de Datos</title>
+  <title>4.2 Python y SQLite | Prácticas de Tecnologías de Gestión y Manipulación de Datos</title>
   <meta name="description" content="Prácticas de la asignatura de Tecnologías de Gestión de Datos del Máster en Técnicas Estadísticas." />
   <meta name="generator" content="bookdown 0.48 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1.2 Planificación (tentativa) | Prácticas de Tecnologías de Gestión y Manipulación de Datos" />
+  <meta property="og:title" content="4.2 Python y SQLite | Prácticas de Tecnologías de Gestión y Manipulación de Datos" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Prácticas de la asignatura de Tecnologías de Gestión de Datos del Máster en Técnicas Estadísticas." />
   <meta name="github-repo" content="gltaboada/tgdbook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1.2 Planificación (tentativa) | Prácticas de Tecnologías de Gestión y Manipulación de Datos" />
+  <meta name="twitter:title" content="4.2 Python y SQLite | Prácticas de Tecnologías de Gestión y Manipulación de Datos" />
   
   <meta name="twitter:description" content="Prácticas de la asignatura de Tecnologías de Gestión de Datos del Máster en Técnicas Estadísticas." />
   
@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="contenidos.html"/>
-<link rel="next" href="fuentes-de-información.html"/>
+<link rel="prev" href="introducción-a-python.html"/>
+<link rel="next" href="context-manager.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -388,76 +388,162 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="planificación-tentativa" class="section level2 hasAnchor" number="1.2">
-<h2><span class="header-section-number">1.2</span> Planificación (tentativa)<a href="planificación-tentativa.html#planificaci%C3%B3n-tentativa" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>La impartición de los contenidos durante el curso dependerá de los conocimientos de partida y la asimilación de los
-conceptos. Para completar nuestra visión de los conocimientos previos os requerimos completar este formulario en la primera sesión de clase: <a href="https://forms.gle/D5bhiLLBUFuh6k1n8" class="uri">https://forms.gle/D5bhiLLBUFuh6k1n8</a></p>
+<div id="python-y-sqlite" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Python y SQLite<a href="python-y-sqlite.html#python-y-sqlite" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><code>sqlite3</code> es un módulo estándar de Python que permite:</p>
 <ul>
-<li><p>Semana 1 (20/10) : 21/10 - Presentación</p></li>
-<li><p>Semana 2 (27/10) : 28 y 30/10 - Tema 1 - SQL</p></li>
-<li><p>Semana 3 (03/11) : 04 y 06/11 - Seminario dplyr</p></li>
-<li><p>Semana 4 (10/11) : 11, 13 y 14/11 - Tema 1 - SQL</p></li>
-<li><p>Semana 5 (17/11) : 18, 20/11 - Tema 1 - SQL. + 21/11 - Seminario texto proc. (CSV, excel, Json) y open data</p></li>
-<li><p>Semana 6 (24/11) : 25/11 - Tema 2 NOSQL + 27 y 28/11 - Tema 3 Big Data</p></li>
-<li><p>Semana 7 (1/12) : 2, 4 y 5/12 Tema 3 Big Data.</p></li>
-<li><p>Semana 8 (8/12) : 9 y 11/12 - Intro a AE + 12/12 Tutoría práctica ML.</p></li>
-<li><p>Semana 9 (15/12) : 16, 18 y 19/12 - Clases de paso / tutorías de cara a examen.</p></li>
+<li>Conectarse a una base de datos SQLite</li>
+<li>Ejecutar consultas SQL</li>
+<li>Gestionar transacciones (<code>commit</code>, <code>rollback</code>)</li>
+<li>Recibir datos como tuplas o diccionarios</li>
+<li>Crear tablas, insertar, actualizar y borrar datos</li>
 </ul>
-<!-- Curso 2019-2020
-
-- Clase 1 (12/9-R): Seminario R (Manipulación de datos con el paquete base de R)
-
-- Clase 2 (19/9): Tema 1: Conceptos de bases de datos
-
-- Clase 3 (26/9): Tema 1: Introducción a SQL
-
-- Clase 4 (3/10-R): Seminario dplyr (Manipulación de datos con el paquete dplyr)
-
-- Clase 5 (10/10): Jornada usuarios R Galicia (cubre objetivos de Seminario aplicaciones Big Data en investigación e industria)
-
-- Clase 6 (17/10): Tema 1: Ejercicios prácticos de Entidad-relación y SQL
-
-- Clase 7 (24/10): Tema 2: Introducción a NoSQL
-
-- Clase 8 (31/10):  Tema 1: Continuación de ejercicios prácticos SQL
-
-- Clase 9 (7/11):  Tema 2: Ejercicios prácticos de NoSQL
-
-- Clase 10 (14/11):   Seminario visualización con power BI
-
-- Clase 11 (21/11):  Tema 3: Ecosistema Big Data (Hadoop, Spark)
-
-- Clase 12 (28/11):  Tecnologías Big Data (Rspark/sparklyr) + Seminario machine learning CESGA/localhost
-
-- Clase 13 (5/12): Tema 3: Introducción al análisis de datos masivos son sparklyr
-
-- Clase 14 (12/12): Tema 3: Prácticas de Aprendizaje Estadístico/Automático, Data Mining con rattle
-
-- Clase 15 (19/12-R): Seminario conectividad dplyr a BBDD
-
--->
-<div id="evaluación" class="section level3 hasAnchor" number="1.2.1">
-<h3><span class="header-section-number">1.2.1</span> Evaluación<a href="planificación-tentativa.html#evaluaci%C3%B3n" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb303"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb303-1"><a href="python-y-sqlite.html#cb303-1" tabindex="-1"></a><span class="im">import</span> sqlite3</span>
+<span id="cb303-2"><a href="python-y-sqlite.html#cb303-2" tabindex="-1"></a></span>
+<span id="cb303-3"><a href="python-y-sqlite.html#cb303-3" tabindex="-1"></a>conn <span class="op">=</span> sqlite3.<span class="ex">connect</span>(<span class="st">&quot;chinook.db&quot;</span>)</span>
+<span id="cb303-4"><a href="python-y-sqlite.html#cb303-4" tabindex="-1"></a>cursor <span class="op">=</span> conn.cursor()</span></code></pre></div>
+<p><code>conn</code> es un <em>objeto conexión</em> análogo al que se usa en R.
+Representa un canal abierto entre tu programa y el archivo de base de datos.</p>
+<p>Sirve para:</p>
 <ul>
-<li><p><strong>Examen</strong> (60%): El examen de la materia evaluará los siguientes aspectos:
-Conceptos de la materia: Dominio de los conocimientos teóricos y operativos de la materia.
-Asimilación práctica de materia: Asimilación y comprensión de los conocimientos teóricos y operativos de la materia.</p></li>
-<li><p><strong>Prácticas de laboratorio</strong> (40%): Evaluación de las prácticas de laboratorio desarrolladas por los estudiantes.</p></li>
+<li>Iniciar y finalizar transacciones</li>
+<li>Ejecutar consultas</li>
+<li>Confirmar cambios (<code>commit</code>)</li>
+<li>Revertir cambios (<code>rollback</code>)</li>
+<li>Crear cursores</li>
+<li>Cerrar la base de datos</li>
 </ul>
-<!-- Curso 2019-2020
-#### Observaciones sobre la evaluación:
-
-* Las prácticas de laboratorio se realizarán de forma individual. El plazo para realizar las 3 prácticas será indicado en la presentación de la práctica. El plazo para la entrega de los trabajos tutelados es el último día de clase de la asignatura.
-
-* El estudiante que quiera realizar un trabajo tutelado ha de hablar (o mediante correo electrónico) con los profesores para validar y confirmar el tema y alcance del trabajo tutelado.
-
-* Para poder aprobar la asignatura en la primera oportunidad será necesario obtener como mínimo el 30% de la nota máxima de la suma de las prácticas de laboratorio y trabajos tutelados e, igualmente, el 30% de la nota máxima final de la Prueba mixta (examen), y tener una nota total (prácticas más trabajos tutelados más prueba mixta) igual o superior al 50% de la nota máxima.
-
-* En la segunda oportunidad solamente se podrá recuperar la nota del examen. Las notas de prácticas y de trabajos tutelados serán las obtenidas durante el curso. Para los alumnos que utilicen la oportunidad adelantada de diciembre se utilizarán las notas de prácticas y trabajos tutelados que obtuvieran en su último curso. En esta oportunidad solo será necesario para aprobar obtener una nota total igual o superior al 50% de la nota máxima.
-
-* Una vez que un estudiante es evaluado en una práctica de laboratorio o en un trabajo tutelado implica que será calificado. Por tanto, la calificación "No Presentado" no es posible una vez que una práctica/trabajo ha sido evaluada.
-
--->
+<p>Para ejecutar consultas se obtiene un <strong>cursor</strong> a partir de esa conexión.
+El cursor es uno de los conceptos más importantes cuando trabajas con cualquier base de datos desde Python.
+Un cursor es un objeto intermediario entre el programa y la base de datos.
+Se usa para:</p>
+<ul>
+<li>enviar consultas SQL a la base de datos</li>
+<li>recibir resultados de las consultas</li>
+<li>iterar sobre las filas devueltas</li>
+<li>ejecutar operaciones como INSERT, UPDATE, DELETE, CREATE TABLE</li>
+</ul>
+<p>En otras palabras, es como una “pluma” que escribe y lee en la base de datos a través de la conexión.</p>
+<p>A diferencia de R, Python separa estos dos conceptos:</p>
+<ul>
+<li><strong>conexión (conn)</strong>: maneja transacciones</li>
+<li><strong>cursor</strong>: ejecuta consultas y maneja resultados</li>
+</ul>
+<p>Cada cursor mantiene un “estado”</p>
+<p>Cuando haces un <code>SELECT</code>, el cursor “apunta” a la posición actual dentro del conjunto de resultados.</p>
+<p>Los cursores no necesitan cerrarse explícitamente, pero es buena práctica hacerlo:</p>
+<div class="sourceCode" id="cb304"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb304-1"><a href="python-y-sqlite.html#cb304-1" tabindex="-1"></a>cursor.close()</span></code></pre></div>
+<div id="operaciones-de-inserción-borrado-o-modificación-de-datos" class="section level3 hasAnchor" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> Operaciones de inserción, borrado o modificación de datos<a href="python-y-sqlite.html#operaciones-de-inserci%C3%B3n-borrado-o-modificaci%C3%B3n-de-datos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Igual que en R, se utiliza el método <strong>execute</strong> del objeto python</li>
+<li>Python inicia transacciones automáticamente en estas operaciones</li>
+<li>Por legibilidad normalmente las consultas se escriben en varias líneas.
+Para escrbir cadenas multilínea se usa <code>"""</code> en lugar de <code>"</code>.</li>
+</ul>
+<div class="sourceCode" id="cb305"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb305-1"><a href="python-y-sqlite.html#cb305-1" tabindex="-1"></a>cursor.execute(<span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb305-2"><a href="python-y-sqlite.html#cb305-2" tabindex="-1"></a><span class="st">CREATE TABLE IF NOT EXISTS usuarios (</span></span>
+<span id="cb305-3"><a href="python-y-sqlite.html#cb305-3" tabindex="-1"></a><span class="st">    id INTEGER PRIMARY KEY AUTOINCREMENT,</span></span>
+<span id="cb305-4"><a href="python-y-sqlite.html#cb305-4" tabindex="-1"></a><span class="st">    nombre TEXT NOT NULL,</span></span>
+<span id="cb305-5"><a href="python-y-sqlite.html#cb305-5" tabindex="-1"></a><span class="st">    edad INTEGER</span></span>
+<span id="cb305-6"><a href="python-y-sqlite.html#cb305-6" tabindex="-1"></a><span class="st">)</span></span>
+<span id="cb305-7"><a href="python-y-sqlite.html#cb305-7" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>)</span>
+<span id="cb305-8"><a href="python-y-sqlite.html#cb305-8" tabindex="-1"></a></span>
+<span id="cb305-9"><a href="python-y-sqlite.html#cb305-9" tabindex="-1"></a>cursor.executemany(</span>
+<span id="cb305-10"><a href="python-y-sqlite.html#cb305-10" tabindex="-1"></a>    <span class="st">&quot;INSERT INTO usuarios (nombre, edad) VALUES (?, ?)&quot;</span>,</span>
+<span id="cb305-11"><a href="python-y-sqlite.html#cb305-11" tabindex="-1"></a>    [(<span class="st">&quot;Luis&quot;</span>, <span class="dv">25</span>), (<span class="st">&quot;María&quot;</span>, <span class="dv">22</span>), (<span class="st">&quot;Pedro&quot;</span>, <span class="dv">40</span>)]</span>
+<span id="cb305-12"><a href="python-y-sqlite.html#cb305-12" tabindex="-1"></a>)</span>
+<span id="cb305-13"><a href="python-y-sqlite.html#cb305-13" tabindex="-1"></a></span>
+<span id="cb305-14"><a href="python-y-sqlite.html#cb305-14" tabindex="-1"></a>cursor.execute(</span>
+<span id="cb305-15"><a href="python-y-sqlite.html#cb305-15" tabindex="-1"></a>    <span class="st">&quot;UPDATE usuarios SET edad = ? WHERE nombre = ?&quot;</span>,</span>
+<span id="cb305-16"><a href="python-y-sqlite.html#cb305-16" tabindex="-1"></a>    (<span class="dv">31</span>, <span class="st">&quot;Ana&quot;</span>)</span>
+<span id="cb305-17"><a href="python-y-sqlite.html#cb305-17" tabindex="-1"></a>)</span>
+<span id="cb305-18"><a href="python-y-sqlite.html#cb305-18" tabindex="-1"></a></span>
+<span id="cb305-19"><a href="python-y-sqlite.html#cb305-19" tabindex="-1"></a>cursor.execute(<span class="st">&quot;DELETE FROM usuarios WHERE edad &lt; ?&quot;</span>, (<span class="dv">30</span>,))</span>
+<span id="cb305-20"><a href="python-y-sqlite.html#cb305-20" tabindex="-1"></a></span>
+<span id="cb305-21"><a href="python-y-sqlite.html#cb305-21" tabindex="-1"></a>conn.commit()</span></code></pre></div>
+<ul>
+<li>Para ejecutar varias sentencias a la vez, en lugar del método <code>execute</code> se usa <code>executescript</code></li>
+</ul>
+<div class="sourceCode" id="cb306"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb306-1"><a href="python-y-sqlite.html#cb306-1" tabindex="-1"></a>cursor.executescript(<span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb306-2"><a href="python-y-sqlite.html#cb306-2" tabindex="-1"></a><span class="st">    INSERT INTO usuarios (nombre, edad) VALUES (&#39;Roi&#39;, 20);</span></span>
+<span id="cb306-3"><a href="python-y-sqlite.html#cb306-3" tabindex="-1"></a><span class="st">    INSERT INTO usuarios (nombre, edad) VALUES (&#39;Sara&#39;, 33);</span></span>
+<span id="cb306-4"><a href="python-y-sqlite.html#cb306-4" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>)</span>
+<span id="cb306-5"><a href="python-y-sqlite.html#cb306-5" tabindex="-1"></a>conn.commit()</span></code></pre></div>
+</div>
+<div id="operaciones-de-consulta" class="section level3 hasAnchor" number="4.2.2">
+<h3><span class="header-section-number">4.2.2</span> Operaciones de consulta<a href="python-y-sqlite.html#operaciones-de-consulta" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Cuando se ejecuta una consulta, el cursor apunta a la primera fila de resultado.
+Para obtener los datos hay 3 métodos útiles:</p>
+<ul>
+<li><code>fetchone()</code>: Devuelve una fila cada vez. Cuando ya no quedan filas, devuelve <code>None</code>.</li>
+<li><code>fetchall()</code>: Devuelve todas las filas como una lista. Si la consulta devuelve muchas filas, es mejor optar por una de las otras opciones.</li>
+<li><code>fetchmany(n)</code>: Devuelve una lista con un bloque de como máximo <strong>n</strong> filas. Si quedan menos, devuelve un bloque menor. Si no quedan filas, devuelve una lista vacía <code>[]</code>.</li>
+<li><code>fetchmany()</code>: Si no se utiliza el parámetro n, se usa el tamaño por defecto del cursor (<code>cursor.arraysize</code>), que si no se modifica tiene valor 1.</li>
+</ul>
+<p>Ejemplo iterando sobre el cursor:</p>
+<div class="sourceCode" id="cb307"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb307-1"><a href="python-y-sqlite.html#cb307-1" tabindex="-1"></a>cursor.execute(<span class="st">&quot;SELECT * FROM Artist&quot;</span>)</span>
+<span id="cb307-2"><a href="python-y-sqlite.html#cb307-2" tabindex="-1"></a>filas <span class="op">=</span> cursor.fetchall()</span>
+<span id="cb307-3"><a href="python-y-sqlite.html#cb307-3" tabindex="-1"></a></span>
+<span id="cb307-4"><a href="python-y-sqlite.html#cb307-4" tabindex="-1"></a>fila <span class="op">=</span> cursor.fetchone()</span>
+<span id="cb307-5"><a href="python-y-sqlite.html#cb307-5" tabindex="-1"></a><span class="cf">while</span> fila <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb307-6"><a href="python-y-sqlite.html#cb307-6" tabindex="-1"></a>    <span class="bu">print</span>(fila)</span>
+<span id="cb307-7"><a href="python-y-sqlite.html#cb307-7" tabindex="-1"></a>    fila <span class="op">=</span> cursor.fetchone()</span></code></pre></div>
+<p>Ejemplo iterando sobre los resultados:</p>
+<div class="sourceCode" id="cb308"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb308-1"><a href="python-y-sqlite.html#cb308-1" tabindex="-1"></a>cursor.execute(<span class="st">&quot;SELECT * FROM Artist&quot;</span>)</span>
+<span id="cb308-2"><a href="python-y-sqlite.html#cb308-2" tabindex="-1"></a>filas <span class="op">=</span> cursor.fetchall()</span>
+<span id="cb308-3"><a href="python-y-sqlite.html#cb308-3" tabindex="-1"></a></span>
+<span id="cb308-4"><a href="python-y-sqlite.html#cb308-4" tabindex="-1"></a><span class="cf">for</span> fila <span class="kw">in</span> filas:</span>
+<span id="cb308-5"><a href="python-y-sqlite.html#cb308-5" tabindex="-1"></a>    <span class="bu">print</span>(fila)</span></code></pre></div>
+<div id="seleccionar-una-fila" class="section level4 hasAnchor" number="4.2.2.1">
+<h4><span class="header-section-number">4.2.2.1</span> Seleccionar una fila<a href="python-y-sqlite.html#seleccionar-una-fila" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb309"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb309-1"><a href="python-y-sqlite.html#cb309-1" tabindex="-1"></a>cursor.execute(<span class="st">&quot;SELECT * FROM usuarios WHERE id = ?&quot;</span>, (<span class="dv">1</span>,))</span>
+<span id="cb309-2"><a href="python-y-sqlite.html#cb309-2" tabindex="-1"></a>fila <span class="op">=</span> cursor.fetchone()</span>
+<span id="cb309-3"><a href="python-y-sqlite.html#cb309-3" tabindex="-1"></a><span class="bu">print</span>(fila)</span></code></pre></div>
+<p>El valor que devuelve es de tipo tupla.
+Es una <strong>estructura inmutable</strong>, rápida y ligera que garantiza que los datos no se modifiquen accidentalmente.
+Refleja una fila tal cual la devuelve SQLite.</p>
+<p>Se puede acceder a los campos por índices:</p>
+<div class="sourceCode" id="cb310"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb310-1"><a href="python-y-sqlite.html#cb310-1" tabindex="-1"></a><span class="bu">id</span> <span class="op">=</span> fila[<span class="dv">0</span>]</span>
+<span id="cb310-2"><a href="python-y-sqlite.html#cb310-2" tabindex="-1"></a>nombre <span class="op">=</span> fila[<span class="dv">1</span>]</span>
+<span id="cb310-3"><a href="python-y-sqlite.html#cb310-3" tabindex="-1"></a>edad <span class="op">=</span> fila[<span class="dv">2</span>]</span></code></pre></div>
+<p>Se puede desempaquetar la tupla:</p>
+<div class="sourceCode" id="cb311"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb311-1"><a href="python-y-sqlite.html#cb311-1" tabindex="-1"></a><span class="bu">id</span>, nombre, edad <span class="op">=</span> fila</span>
+<span id="cb311-2"><a href="python-y-sqlite.html#cb311-2" tabindex="-1"></a><span class="bu">print</span>(nombre)</span></code></pre></div>
+<p>Si la consulta devuelve un conjunto de tuplas, se puede recorrer en bucle:</p>
+<div class="sourceCode" id="cb312"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb312-1"><a href="python-y-sqlite.html#cb312-1" tabindex="-1"></a>cursor.execute(<span class="st">&quot;SELECT id, nombre, edad FROM usuarios&quot;</span>)</span>
+<span id="cb312-2"><a href="python-y-sqlite.html#cb312-2" tabindex="-1"></a></span>
+<span id="cb312-3"><a href="python-y-sqlite.html#cb312-3" tabindex="-1"></a><span class="cf">for</span> fila <span class="kw">in</span> cursor.fetchall():</span>
+<span id="cb312-4"><a href="python-y-sqlite.html#cb312-4" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;ID=</span><span class="sc">{</span>fila[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">, Nombre=</span><span class="sc">{</span>fila[<span class="dv">1</span>]<span class="sc">}</span><span class="ss">, Edad=</span><span class="sc">{</span>fila[<span class="dv">2</span>]<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<p>Se puede convertir en lista si se necesita modificar:</p>
+<div class="sourceCode" id="cb313"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb313-1"><a href="python-y-sqlite.html#cb313-1" tabindex="-1"></a>fila_lista <span class="op">=</span> <span class="bu">list</span>(fila)</span>
+<span id="cb313-2"><a href="python-y-sqlite.html#cb313-2" tabindex="-1"></a>fila_lista[<span class="dv">1</span>] <span class="op">=</span> <span class="st">&quot;NuevoNombre&quot;</span></span></code></pre></div>
+<p>O en diccionario para trabajar con mayor comodidad:</p>
+<div class="sourceCode" id="cb314"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb314-1"><a href="python-y-sqlite.html#cb314-1" tabindex="-1"></a>columnas <span class="op">=</span> [desc[<span class="dv">0</span>] <span class="cf">for</span> desc <span class="kw">in</span> cursor.description]</span>
+<span id="cb314-2"><a href="python-y-sqlite.html#cb314-2" tabindex="-1"></a>dic <span class="op">=</span> <span class="bu">dict</span>(<span class="bu">zip</span>(columnas, fila))</span>
+<span id="cb314-3"><a href="python-y-sqlite.html#cb314-3" tabindex="-1"></a><span class="bu">print</span>(dic)</span></code></pre></div>
+</div>
+<div id="devolver-resultados-como-diccionarios" class="section level4 hasAnchor" number="4.2.2.2">
+<h4><span class="header-section-number">4.2.2.2</span> Devolver resultados como diccionarios<a href="python-y-sqlite.html#devolver-resultados-como-diccionarios" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>También se puede cambiar el tipo devuelto para que sea un diccionario en lugar de una tupla y evitar la conversión explícita:</p>
+<div class="sourceCode" id="cb315"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb315-1"><a href="python-y-sqlite.html#cb315-1" tabindex="-1"></a>conn.row_factory <span class="op">=</span> sqlite3.Row</span>
+<span id="cb315-2"><a href="python-y-sqlite.html#cb315-2" tabindex="-1"></a>cursor <span class="op">=</span> conn.cursor()</span>
+<span id="cb315-3"><a href="python-y-sqlite.html#cb315-3" tabindex="-1"></a></span>
+<span id="cb315-4"><a href="python-y-sqlite.html#cb315-4" tabindex="-1"></a>cursor.execute(<span class="st">&quot;SELECT * FROM usuarios&quot;</span>)</span>
+<span id="cb315-5"><a href="python-y-sqlite.html#cb315-5" tabindex="-1"></a><span class="cf">for</span> fila <span class="kw">in</span> cursor.fetchall():</span>
+<span id="cb315-6"><a href="python-y-sqlite.html#cb315-6" tabindex="-1"></a>    <span class="bu">print</span>(<span class="bu">dict</span>(fila))</span></code></pre></div>
+<p>De esta forma también se puede acceder a los campos de una forma más human-readable:</p>
+<div class="sourceCode" id="cb316"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb316-1"><a href="python-y-sqlite.html#cb316-1" tabindex="-1"></a>cursor.execute(<span class="st">&quot;SELECT * FROM usuarios&quot;</span>)</span>
+<span id="cb316-2"><a href="python-y-sqlite.html#cb316-2" tabindex="-1"></a><span class="cf">for</span> fila <span class="kw">in</span> cursor.fetchall():</span>
+<span id="cb316-3"><a href="python-y-sqlite.html#cb316-3" tabindex="-1"></a>    <span class="bu">print</span>(fila[<span class="st">&quot;nombre&quot;</span>])</span></code></pre></div>
+</div>
+</div>
+<div id="usar-sqlite-con-pandas" class="section level3 hasAnchor" number="4.2.3">
+<h3><span class="header-section-number">4.2.3</span> Usar SQLite con Pandas<a href="python-y-sqlite.html#usar-sqlite-con-pandas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb317"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb317-1"><a href="python-y-sqlite.html#cb317-1" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb317-2"><a href="python-y-sqlite.html#cb317-2" tabindex="-1"></a></span>
+<span id="cb317-3"><a href="python-y-sqlite.html#cb317-3" tabindex="-1"></a>df <span class="op">=</span> pd.read_sql_query(<span class="st">&quot;SELECT * FROM usuarios&quot;</span>, conn)</span>
+<span id="cb317-4"><a href="python-y-sqlite.html#cb317-4" tabindex="-1"></a><span class="bu">print</span>(df)</span></code></pre></div>
 </div>
 </div>
             </section>
@@ -465,8 +551,8 @@ Asimilación práctica de materia: Asimilación y comprensión de los conocimien
           </div>
         </div>
       </div>
-<a href="contenidos.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="fuentes-de-información.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="introducción-a-python.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="context-manager.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -497,7 +583,7 @@ gitbook.start({
     "size": 2
   },
   "edit": {
-    "link": "https://github.com/gltaboada/tgdbook/edit/master/01-Introduccion.Rmd",
+    "link": "https://github.com/gltaboada/tgdbook/edit/master/04-Python.Rmd",
     "text": "Edit"
   },
   "history": {

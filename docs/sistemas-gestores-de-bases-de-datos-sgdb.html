@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1.2 Planificación (tentativa) | Prácticas de Tecnologías de Gestión y Manipulación de Datos</title>
+  <title>3.3 Sistemas Gestores de Bases de Datos (SGDB) | Prácticas de Tecnologías de Gestión y Manipulación de Datos</title>
   <meta name="description" content="Prácticas de la asignatura de Tecnologías de Gestión de Datos del Máster en Técnicas Estadísticas." />
   <meta name="generator" content="bookdown 0.48 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1.2 Planificación (tentativa) | Prácticas de Tecnologías de Gestión y Manipulación de Datos" />
+  <meta property="og:title" content="3.3 Sistemas Gestores de Bases de Datos (SGDB) | Prácticas de Tecnologías de Gestión y Manipulación de Datos" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Prácticas de la asignatura de Tecnologías de Gestión de Datos del Máster en Técnicas Estadísticas." />
   <meta name="github-repo" content="gltaboada/tgdbook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1.2 Planificación (tentativa) | Prácticas de Tecnologías de Gestión y Manipulación de Datos" />
+  <meta name="twitter:title" content="3.3 Sistemas Gestores de Bases de Datos (SGDB) | Prácticas de Tecnologías de Gestión y Manipulación de Datos" />
   
   <meta name="twitter:description" content="Prácticas de la asignatura de Tecnologías de Gestión de Datos del Máster en Técnicas Estadísticas." />
   
@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="contenidos.html"/>
-<link rel="next" href="fuentes-de-información.html"/>
+<link rel="prev" href="restricciones.html"/>
+<link rel="next" href="sintaxis-sql.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -388,85 +388,195 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="planificación-tentativa" class="section level2 hasAnchor" number="1.2">
-<h2><span class="header-section-number">1.2</span> Planificación (tentativa)<a href="planificación-tentativa.html#planificaci%C3%B3n-tentativa" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>La impartición de los contenidos durante el curso dependerá de los conocimientos de partida y la asimilación de los
-conceptos. Para completar nuestra visión de los conocimientos previos os requerimos completar este formulario en la primera sesión de clase: <a href="https://forms.gle/D5bhiLLBUFuh6k1n8" class="uri">https://forms.gle/D5bhiLLBUFuh6k1n8</a></p>
+<div id="sistemas-gestores-de-bases-de-datos-sgdb" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Sistemas Gestores de Bases de Datos (SGDB)<a href="sistemas-gestores-de-bases-de-datos-sgdb.html#sistemas-gestores-de-bases-de-datos-sgdb" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Utilizar un SGDB tiene múltiples ventajas:</p>
 <ul>
-<li><p>Semana 1 (20/10) : 21/10 - Presentación</p></li>
-<li><p>Semana 2 (27/10) : 28 y 30/10 - Tema 1 - SQL</p></li>
-<li><p>Semana 3 (03/11) : 04 y 06/11 - Seminario dplyr</p></li>
-<li><p>Semana 4 (10/11) : 11, 13 y 14/11 - Tema 1 - SQL</p></li>
-<li><p>Semana 5 (17/11) : 18, 20/11 - Tema 1 - SQL. + 21/11 - Seminario texto proc. (CSV, excel, Json) y open data</p></li>
-<li><p>Semana 6 (24/11) : 25/11 - Tema 2 NOSQL + 27 y 28/11 - Tema 3 Big Data</p></li>
-<li><p>Semana 7 (1/12) : 2, 4 y 5/12 Tema 3 Big Data.</p></li>
-<li><p>Semana 8 (8/12) : 9 y 11/12 - Intro a AE + 12/12 Tutoría práctica ML.</p></li>
-<li><p>Semana 9 (15/12) : 16, 18 y 19/12 - Clases de paso / tutorías de cara a examen.</p></li>
+<li>Administración centralizada de los datos (por un administrador en un servidor/plataforma central que evita la información en silos -redundante/inconsistente)</li>
+<li>Desacoplamiento del almacenamiento físico de los datos (no es necesario conocerlo)</li>
+<li>Simplicidad de acceso (ODBC + SQL, lenguaje declarativo)</li>
+<li>Control de integridad (restricciones genéricas, integridad de entidad y referencial, de dominio, y las del dominio en software)</li>
+<li>Control de acceso concurrente (evita inconsistencia)</li>
+<li>Seguridad (autenticación, roles de acceso)</li>
+<li>Recuperación ante fallos (backup, logs y transacciones -rollback-)</li>
 </ul>
-<!-- Curso 2019-2020
-
-- Clase 1 (12/9-R): Seminario R (Manipulación de datos con el paquete base de R)
-
-- Clase 2 (19/9): Tema 1: Conceptos de bases de datos
-
-- Clase 3 (26/9): Tema 1: Introducción a SQL
-
-- Clase 4 (3/10-R): Seminario dplyr (Manipulación de datos con el paquete dplyr)
-
-- Clase 5 (10/10): Jornada usuarios R Galicia (cubre objetivos de Seminario aplicaciones Big Data en investigación e industria)
-
-- Clase 6 (17/10): Tema 1: Ejercicios prácticos de Entidad-relación y SQL
-
-- Clase 7 (24/10): Tema 2: Introducción a NoSQL
-
-- Clase 8 (31/10):  Tema 1: Continuación de ejercicios prácticos SQL
-
-- Clase 9 (7/11):  Tema 2: Ejercicios prácticos de NoSQL
-
-- Clase 10 (14/11):   Seminario visualización con power BI
-
-- Clase 11 (21/11):  Tema 3: Ecosistema Big Data (Hadoop, Spark)
-
-- Clase 12 (28/11):  Tecnologías Big Data (Rspark/sparklyr) + Seminario machine learning CESGA/localhost
-
-- Clase 13 (5/12): Tema 3: Introducción al análisis de datos masivos son sparklyr
-
-- Clase 14 (12/12): Tema 3: Prácticas de Aprendizaje Estadístico/Automático, Data Mining con rattle
-
-- Clase 15 (19/12-R): Seminario conectividad dplyr a BBDD
-
--->
-<div id="evaluación" class="section level3 hasAnchor" number="1.2.1">
-<h3><span class="header-section-number">1.2.1</span> Evaluación<a href="planificación-tentativa.html#evaluaci%C3%B3n" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Existen muchos SGDBs, pero los más populares son:</p>
 <ul>
-<li><p><strong>Examen</strong> (60%): El examen de la materia evaluará los siguientes aspectos:
-Conceptos de la materia: Dominio de los conocimientos teóricos y operativos de la materia.
-Asimilación práctica de materia: Asimilación y comprensión de los conocimientos teóricos y operativos de la materia.</p></li>
-<li><p><strong>Prácticas de laboratorio</strong> (40%): Evaluación de las prácticas de laboratorio desarrolladas por los estudiantes.</p></li>
+<li><strong>SQLite</strong>: es muy ligero, no necesita un servidor para ejecutarse y es muy rápido cuando el conjunto de datos es pequeño.
+<ul>
+<li>Su escalabilidad y concurrencia son muy limitadas</li>
+<li>Ideal para proyectos pequeños, aplicaciones locales o móviles y prácticas de TXD</li>
+<li>Usado en Google Chrome, Firefox, Safari, Dropbox (app de escritorio)</li>
+<li>Es de dominio público</li>
+</ul></li>
+<li><strong>MySQL</strong>: requiere un servidor para ejecutarse, cuenta con soporte en la nube
+<ul>
+<li>Presenta buena escalabilidad y concurrencia</li>
+<li>Es muy utilizado en aplicaciones web de tamaño medio</li>
+<li>Usado en Wordpress, y en general un gran porcentaje de páginas y aplicaciones web de tamaño pequeño y mediano. Incluso sitios grandes como Wikipedia o Facebook emplean variantes de MySQL.</li>
+<li>Licencia GPL (con variantes comerciales)</li>
+</ul></li>
+<li><strong>PostgreSQL</strong>: también requiere un servidor y tiene soporte en la nube
+<ul>
+<li>Su escalabilidad es excelente, óptimo para grandes cantidades de datos</li>
+<li>Cuenta con muchas extensiones para, por ejemplo, información geográfica (PostGIS), series temporales (TimescaleDB), etc.</li>
+<li>Ideal para sistemas complejos, analíticos o con alta concurrencia</li>
+<li>Usado en Reddit, Instagram, Spotify, Netflix, …</li>
+<li>Licencia propia tipo MIT</li>
+</ul></li>
+<li>Otros SGDBs relacionales: MariaDB (derivado de MySQL), Microsoft SQL Server, Oracle</li>
 </ul>
-<!-- Curso 2019-2020
-#### Observaciones sobre la evaluación:
-
-* Las prácticas de laboratorio se realizarán de forma individual. El plazo para realizar las 3 prácticas será indicado en la presentación de la práctica. El plazo para la entrega de los trabajos tutelados es el último día de clase de la asignatura.
-
-* El estudiante que quiera realizar un trabajo tutelado ha de hablar (o mediante correo electrónico) con los profesores para validar y confirmar el tema y alcance del trabajo tutelado.
-
-* Para poder aprobar la asignatura en la primera oportunidad será necesario obtener como mínimo el 30% de la nota máxima de la suma de las prácticas de laboratorio y trabajos tutelados e, igualmente, el 30% de la nota máxima final de la Prueba mixta (examen), y tener una nota total (prácticas más trabajos tutelados más prueba mixta) igual o superior al 50% de la nota máxima.
-
-* En la segunda oportunidad solamente se podrá recuperar la nota del examen. Las notas de prácticas y de trabajos tutelados serán las obtenidas durante el curso. Para los alumnos que utilicen la oportunidad adelantada de diciembre se utilizarán las notas de prácticas y trabajos tutelados que obtuvieran en su último curso. En esta oportunidad solo será necesario para aprobar obtener una nota total igual o superior al 50% de la nota máxima.
-
-* Una vez que un estudiante es evaluado en una práctica de laboratorio o en un trabajo tutelado implica que será calificado. Por tanto, la calificación "No Presentado" no es posible una vez que una práctica/trabajo ha sido evaluada.
-
--->
-</div>
+<p>Ranking de popularidad según <a href="http://db-engines.com">DB-Engines</a>. La puntuación está calculada en función del número de menciones en páginas web, interés general en los sitemas, frecuencia de discusiones técnias, cantidad de ofertas de trabajo, relevancia en redes sociales, etc.</p>
+<table>
+<colgroup>
+<col width="9%" />
+<col width="9%" />
+<col width="9%" />
+<col width="41%" />
+<col width="20%" />
+<col width="9%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="right">2025</th>
+<th align="right">2024</th>
+<th>SGDB</th>
+<th>Modelo</th>
+<th>Puntuacion</th>
+<th>Var</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1.</td>
+<td align="right">1.</td>
+<td>Oracle</td>
+<td>Relacional, Multi-modelo</td>
+<td>1212.77</td>
+<td>-96.67</td>
+</tr>
+<tr class="even">
+<td align="right">2.</td>
+<td align="right">2.</td>
+<td>MySQL</td>
+<td>Relacional, Multi-modelo</td>
+<td>879.66</td>
+<td>-143.09</td>
+</tr>
+<tr class="odd">
+<td align="right">3.</td>
+<td align="right">3.</td>
+<td>Microsoft SQL Server</td>
+<td>Relacional, Multi-modelo</td>
+<td>715.05</td>
+<td>-87.04</td>
+</tr>
+<tr class="even">
+<td align="right">4.</td>
+<td align="right">4.</td>
+<td>PostgreSQL</td>
+<td>Relacional, Multi-modelo</td>
+<td>643.20</td>
+<td>-8.96</td>
+</tr>
+<tr class="odd">
+<td align="right">5.</td>
+<td align="right">5.</td>
+<td>MongoDB</td>
+<td>Documental, Multi-modelo</td>
+<td>368.01</td>
+<td>-37.20</td>
+</tr>
+<tr class="even">
+<td align="right">6.</td>
+<td align="right">7.</td>
+<td>Snowflake</td>
+<td>Relacional</td>
+<td>198.65</td>
+<td>+58.05</td>
+</tr>
+<tr class="odd">
+<td align="right">7.</td>
+<td align="right">6.</td>
+<td>Redis</td>
+<td>Clave-valor, Multi-modelo</td>
+<td>142.33</td>
+<td>-7.30</td>
+</tr>
+<tr class="even">
+<td align="right">8.</td>
+<td align="right">14.</td>
+<td>Databricks</td>
+<td>Multi-modelo</td>
+<td>128.80</td>
+<td>+43.21</td>
+</tr>
+<tr class="odd">
+<td align="right">9.</td>
+<td align="right">9.</td>
+<td>IBM Db2</td>
+<td>Relacional, Multi-modelo</td>
+<td>122.37</td>
+<td>-0.40</td>
+</tr>
+<tr class="even">
+<td align="right">10.</td>
+<td align="right">8.</td>
+<td>Elasticsearch</td>
+<td>Multi-modelo</td>
+<td>116.67</td>
+<td>-15.18</td>
+</tr>
+<tr class="odd">
+<td align="right">11.</td>
+<td align="right">11.</td>
+<td>Apache Cassandra</td>
+<td>Wide column, Multi-modelo</td>
+<td>105.16</td>
+<td>+7.56</td>
+</tr>
+<tr class="even">
+<td align="right">12.</td>
+<td align="right">10.</td>
+<td>SQLite</td>
+<td>Relacional</td>
+<td>104.56</td>
+<td>+2.64</td>
+</tr>
+<tr class="odd">
+<td align="right">13.</td>
+<td align="right">15.</td>
+<td>MariaDB</td>
+<td>Relacional, Multi-modelo</td>
+<td>87.77</td>
+<td>+2.88</td>
+</tr>
+<tr class="even">
+<td align="right">14.</td>
+<td align="right">12.</td>
+<td>Microsoft Access</td>
+<td>Relacional</td>
+<td>80.79</td>
+<td>-11.36</td>
+</tr>
+<tr class="odd">
+<td align="right">15.</td>
+<td align="right">17.</td>
+<td>Amazon DynamoDB</td>
+<td>Multi-modelo</td>
+<td>75.91</td>
+<td>+4.06</td>
+</tr>
+</tbody>
+</table>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="contenidos.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="fuentes-de-información.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="restricciones.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="sintaxis-sql.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -497,7 +607,7 @@ gitbook.start({
     "size": 2
   },
   "edit": {
-    "link": "https://github.com/gltaboada/tgdbook/edit/master/01-Introduccion.Rmd",
+    "link": "https://github.com/gltaboada/tgdbook/edit/master/03-SQL.Rmd",
     "text": "Edit"
   },
   "history": {

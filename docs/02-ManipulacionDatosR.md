@@ -1,5 +1,7 @@
 # Manipulación de datos con R {#manipR}
 
+<!-- 2026/09/16 corrección de erratas -->
+
 
 
 
@@ -7,17 +9,13 @@
 
 
 En el proceso de análisis de datos, al margen de su obtención y organización, una de las primeras etapas es el acceso y la manipulación de los datos (ver Figura \@ref(fig:esquema2)).
-En este capítulo se repasarán brevemente las principales herramientas disponibles en el paquete base de R para ello.
-Posteriormente en el Capítulo \@ref(tidyverse) se mostrará como alternativa el uso del paquete [`dplyr`](https://dplyr.tidyverse.org/index.html).
+En este capítulo se repasarán brevemente las principales herramientas disponibles en el paquete base de R para la lectura, exploración, filtrado, transformación y combinación de tablas de datos.
+Posteriormente en el Capítulo \@ref(tidyverse) se mostrará como alternativa el uso del paquete [`dplyr`](https://dplyr.tidyverse.org/index.html), resolviendo los mismos ejercicios de la Sección \@ref(ejercicios-manipR) con ambos enfoques.
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.8\linewidth]{images/esquema2} 
-
-}
-
-\caption{Etapas del proceso}(\#fig:esquema2)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="images/esquema2.png" alt="Etapas del proceso" width="80%" />
+<p class="caption">(\#fig:esquema2)Etapas del proceso</p>
+</div>
 
 
 
@@ -47,7 +45,7 @@ Para cargar un fichero de datos se emplea normalmente [`load()`](https://www.rdo
 A continuación se utiliza el fichero `empleados.RData` que contiene datos de empleados de un banco.
 
 
-```r
+``` r
 res <- load("data/empleados.RData")
 res
 ```
@@ -56,7 +54,7 @@ res
 ## [1] "empleados"
 ```
 
-```r
+``` r
 ls()
 ```
 
@@ -69,7 +67,7 @@ ls()
 ```
 y para guardar [`save()`](https://www.rdocumentation.org/packages/base/versions/3.6.1/topics/save):
 
-```r
+``` r
 # Guardar
 save(empleados, file = "data/empleados_new.RData")
 ```
@@ -81,7 +79,7 @@ Aunque, como indica este comando en la ayuda (`?save`):
 > *notably because of the functional nature of readRDS(), as opposed to load().*
 
 
-```r
+``` r
 saveRDS(empleados, file = "data/empleados_new.rds")
 ## restore it under a different name
 empleados2 <- readRDS("data/empleados_new.rds")
@@ -102,17 +100,17 @@ Con el comando `data()` podemos obtener un listado de las bases de datos disponi
 Para cargar una base de datos concreta se utiliza el comando
 `data(nombre)` (aunque en algunos casos se cargan automáticamente al emplearlos). 
 Por ejemplo, `data(cars)` carga la base de datos llamada `cars` en el entorno de trabajo (`".GlobalEnv"`)
-y `?cars` muestra la ayuda correspondiente con la descripición de la base de datos.
+y `?cars` muestra la ayuda correspondiente con la descripción de la base de datos.
 
 
 ### Lectura de archivos de texto {#cap2-texto}
 
 En R, para leer archivos de texto se suele utilizar la función `read.table()`.
-Suponinedo, por ejemplo, que en el directorio actual está el fichero
+Suponiendo, por ejemplo, que en el directorio actual está el fichero
 *empleados.txt*. La lectura de este fichero vendría dada por el código:
 
 
-```r
+``` r
 # Session > Set Working Directory > To Source...?
 datos <- read.table(file = "data/empleados.txt", header = TRUE)
 # head(datos)
@@ -133,7 +131,7 @@ str(datos)
 ##  $ minoria : chr  "No" "No" "No" "No" ...
 ```
 
-```r
+``` r
 class(datos)
 ```
 
@@ -163,18 +161,18 @@ Resumiendo, los (principales) argumentos por defecto de la función
 `read.table` son los que se muestran en la siguiente línea:
 
 
-```r
+``` r
 read.table(file, header = FALSE, sep = "", dec = ".")  
 ```
 
 Para más detalles sobre esta función véase
 `help(read.table)`.
 
-Estan disponibles otras funciones con valores por defecto de los parámetros 
+Están disponibles otras funciones con valores por defecto de los parámetros 
 adecuados para otras situaciones. Por ejemplo, para ficheros separados por tabuladores 
 se puede utilizar `read.delim()` o `read.delim2()`:
 
-```r
+``` r
 read.delim(file, header = TRUE, sep = "\t", dec = ".")
 read.delim2(file, header = TRUE, sep = "\t", dec = ",")
 ```
@@ -194,7 +192,7 @@ Por ejemplo:
 
 
 
-```r
+``` r
 library(foreign)
 datos <- read.spss(file = "data/Employee data.sav", 
                    to.data.frame = TRUE)
@@ -232,7 +230,7 @@ Se pueden leer fichero de Excel (con extensión *.xlsx*) utilizando, por ejemplo
 + [`openxlsx`](https://cran.r-project.org/web/packages/openxlsx/index.html), 
 
 
-```r
+``` r
 library(openxlsx)
 datos<-read.xlsx("./data/coches.xlsx")
 class(datos)
@@ -250,7 +248,7 @@ El siguiente código implementa una función que permite leer todos
 los archivos en formato *.xlsx* en un directorio:
 
 
-```r
+``` r
 library(openxlsx)
 read_xlsx <- function(path = '.') {
   files <- dir(path, pattern = '*.xlsx') # list.files
@@ -266,17 +264,17 @@ read_xlsx <- function(path = '.') {
 
 Para combinar los archivos, suponiendo que tienen las mismas columnas, podríamos ejecutar una llamada a [`rbind()` ](https://www.rdocumentation.org/packages/base/versions/3.6.1/topics/rbind)(R base):
 
-```r
+``` r
 df <- do.call('rbind', file.list)
 ```
 o emplear la función [`bind_rows()` ](https://www.rdocumentation.org/packages/dplyr/versions/0.7.8/topics/bind)
 del paquete [`dplyr`](https://dplyr.tidyverse.org), donde las columnas se emparejan por nombre, y cualquier columna que falte se rellenará con `NA`:
 
 
-```r
+``` r
 df <- dplyr::bind_rows(file.list)
 ```
-El Capítulo 4, provee de otras utilidades  para la manipulación de datos con `dplyr` [@R-dplyr]. 
+El Capítulo \@ref(tidyverse) provee de otras utilidades para la manipulación de datos con `dplyr` [@R-dplyr].
 
 
 
@@ -291,7 +289,7 @@ Por ejemplo, supongamos que queremos leer el fichero *coches.xls*:
 -   Por lo tanto, la lectura de este fichero se puede hacer con:
 
     
-    ```r
+    ``` r
     datos <- read.table("coches.csv", header = TRUE, 
                         sep = ";", dec = ",")
     ```
@@ -299,14 +297,14 @@ Por ejemplo, supongamos que queremos leer el fichero *coches.xls*:
 Otra posibilidad, es utilizar la función `read.csv2`. Esta función no es más que una adaptación de la función general `read.table` con las siguientes
 opciones:
 
-```r
+``` r
 read.csv2(file, header = TRUE, sep = ";", dec = ",", ...)
 ```
 
 Por lo tanto, la lectura del fichero *coches.csv* se puede hacer de modo
 más directo con:
 
-```r
+``` r
 datos <- read.csv2("coches.csv")
 ```
 
@@ -316,12 +314,12 @@ Hay que tener en cuenta que si estas fuentes emplean el formato anglosajón, el 
 
 ### Exportación de datos  {#cap2-exporta}
 
-Puede ser de interés la exportacifn de datos para que puedan ser leídos con otros programas. Para ello, se puede emplear la función `write.table()`. Esta función es similar, pero funcionando en sentido inverso, a `read.table()`, ver Sección \@ref(cap2-texto).
+Puede ser de interés la exportación de datos para que puedan ser leídos con otros programas. Para ello, se puede emplear la función `write.table()`. Esta función es similar, pero funcionando en sentido inverso, a `read.table()`, ver Sección \@ref(cap2-texto).
 
 Veamos un ejemplo:
 
 
-```r
+``` r
 tipo <- c("A", "B", "C")
 longitud <- c(120.34, 99.45, 115.67)
 datos <- data.frame(tipo, longitud)
@@ -337,12 +335,12 @@ datos
 Para guardar el data.frame `datos` en un fichero de texto se
 puede utilizar:
 
-```r
+``` r
 write.table(datos, file = "datos.txt")
 ```
 Otra posibilidad es utilizar la función:
 
-```r
+``` r
 write.csv2(datos, file = "datos.csv")
 ```
 que dará lugar al fichero *datos.csv* importable directamente desde Excel. Las opciones anteriores sólo dependen del paquete `utils`, que se instala por defecto con R base.
@@ -352,34 +350,32 @@ que dará lugar al fichero *datos.csv* importable directamente desde Excel. Las 
 ### Python, Julia y otros lenguajes de programación
 R es un lenguaje de programación libre (derivado del lenguaje S  en  los Laboratorios Bell) que se caracteriza por su capacidad para interactuar con otros lenguajes de programación, incluyendo Python [@python] y Julia [@julia]. 
 
-En el ámbito de la Estadística (como en la denominada **Ciendica de Datos**), R destaca por su extensa y detallada documentación  (en muchos casos como resultado de aportaciones metodológicas y/o avances científicos). Por ejemplo, después de diez años de la primera edición del libro *An Introduction to Statistical Learning con aplicaciones en R (ISLR)* , @james2013introduction, algunos de los mismos autores publicaron la edición en Python (ISLP), @james2023introduction.  
+En el ámbito de la Estadística (como en la denominada **Ciencia de Datos**), R destaca por su extensa y detallada documentación  (en muchos casos como resultado de aportaciones metodológicas y/o avances científicos). Por ejemplo, después de diez años de la primera edición del libro *An Introduction to Statistical Learning con aplicaciones en R (ISLR)* , @james2013introduction, algunos de los mismos autores publicaron la edición en Python (ISLP), @james2023introduction.  
+Las últimas ediciones de ambos libros están disponibles en abierto en [https://www.statlearning.com](https://www.statlearning.com/).
 Por otro lado, en 2015, se lanzó el paquete [`reticulate`](https://rstudio.github.io/reticulate/) disponible en [https://rstudio.github.io/reticulate/](https://rstudio.github.io/reticulate/), permitiendo la ejecución de código Python desde R (y en 2020 se completó la integración de Python en la interfaz de RStudio).  
 
 
 
-```r
+``` r
 library(reticulate)
 os <- import("os")
 os$listdir(".")
 ```
 
-
 Si queremos trabajar con Python de forma interactiva, podemos usar `repl_python()`. Los objetos creados en Python se pueden usar en R con `py`  de `reticulate`.
 
 Recientemente, *Julia* se presenta también como una alternativa a considerar. 
-El paquete  [`JuliaConnectoR`](NA) disponible en [https://cran.r-project.org/web/packages/JuliaConnectoR/](https://cran.r-project.org/web/packages/JuliaConnectoR/) facilita la importación de funciones y paquetes completos de Julia a R, es decir, permite el uso de funciones de Julia directamente en R.
-
+El paquete  [`JuliaConnectoR`](https://github.com/stefan-m-lenz/JuliaConnectoR) disponible en [https://cran.r-project.org/web/packages/JuliaConnectoR/](https://cran.r-project.org/web/packages/JuliaConnectoR/) facilita la importación de funciones y paquetes completos de Julia a R, es decir, permite el uso de funciones de Julia directamente en R.
 
 R también permite el uso/comunicación de otros lenguajes de programación como Java, C, C++, Fortran, entre otros.
 
+En julio de 2022, la compañía *RStudio Inc* anunció que cambiaba su nombre a [*Posit*](https://posit.co), para reflejar su interés en el desarrollo de herramientas para lenguajes adicionales de programación, principalmente Python.
+En esa misma fecha lanzó [Quarto](https://quarto.org) como una nueva alternativa a R Markdown para ofrecer compatibilidad integrada para múltiples lenguajes, como Python o Julia, además de R.
+Desde julio de 2025 ya están disponibles versiones estables de [Positron](https://positron.posit.co/), un nuevo IDE para el análisis de datos que es compatible de forma nativa con otros lenguajes, como Python o Julia, y que se supone que será un sustituto de RStudio en el futuro.
 
-<!--
-https://es.r4ds.hadley.nz/01-intro.html
--->
 
 
-Manipulación de datos
----------------------
+## Manipulación de datos {#manip}
 
 Una vez cargada una (o varias) bases de datos hay una series de operaciones que serán de interés para el tratamiento de datos: 
 
@@ -408,7 +404,7 @@ A continuación se tratan algunas operaciones *básicas*.
 
 Consideremos de nuevo la base de datos `cars` incluida en el paquete `datasets`:
 
-```r
+``` r
 data(cars)
 # str(cars)
 head(cars)
@@ -435,7 +431,7 @@ Recordemos que, para acceder a la variable `speed` se puede
 hacer directamente con su nombre o bien utilizando notación
 "matricial" (se seleccionan las 6 primeras observaciones por comodidad).
 
-```r
+``` r
 cars$speed
 ```
 
@@ -445,7 +441,7 @@ cars$speed
 ## [37] 19 19 20 20 20 20 20 22 23 24 24 24 24 25
 ```
 
-```r
+``` r
 # cars[, 1]       # Equivalente
 # cars[,"speed"]  # Equivalente
 ```
@@ -457,14 +453,14 @@ La transformación que permite pasar millas a kilómetros es
 `kilómetros=millas/0.62137` que en R se hace directamente con:
 
 
-```r
+``` r
 (cars$speed/0.62137)[1:10]
 ```
 
  Finalmente, incluimos la nueva variable que llamaremos
 `velocidad` en `cars`:
 
-```r
+``` r
 cars$velocidad <- cars$speed / 0.62137
 head(cars)
 ```
@@ -484,8 +480,8 @@ variable `distancia` (en metros), por lo que la transformación deseada es
 `metros=pies/3.2808`:
 
 
-```r
-cars$distancia <- cars$dis / 3.2808
+``` r
+cars$distancia <- cars$dist / 3.2808
 head(cars)
 ```
 
@@ -504,7 +500,7 @@ head(cars)
 En primer lugar, veamos varias formas de acceder a las variables de
 interés:
 
-```r
+``` r
 cars[, c(3, 4)]
 cars[, c("velocidad", "distancia")]
 cars[, -c(1, 2)]
@@ -513,7 +509,7 @@ cars[, -c(1, 2)]
 Utilizando alguna de las opciones anteriores se obtiene el `data.frame`
 deseado:
 
-```r
+``` r
 coches <- cars[, c("velocidad", "distancia")]
 # head(coches)
 str(coches)
@@ -528,7 +524,7 @@ str(coches)
 Finalmente, los datos anteriores podrían ser guardados en un fichero
 exportable a Excel con el siguiente comando:
 
-```r
+``` r
 write.csv2(coches, file = "coches.csv")
 ```
 
@@ -539,7 +535,7 @@ El parámetro `breaks` permite especificar los intervalos para la discretizació
 Por ejemplo, para categorizar la variable `cars$speed` en tres intervalos equidistantes podemos emplear^[Aunque si el objetivo es obtener las frecuencias de cada intervalo puede ser más eficiente emplear `hist()` con `plot = FALSE`.]:
 
 
-```r
+``` r
 fspeed <- cut(cars$speed, 3, labels = c("Baja", "Media", "Alta"))
 table(fspeed)
 ```
@@ -553,7 +549,7 @@ table(fspeed)
 Para categorizar esta variable en tres niveles con aproximadamente el mismo número de observaciones podríamos combinar esta función con `quantile()`:
 
 
-```r
+``` r
 breaks <- quantile(cars$speed, probs = 0:3/3)
 etiquetas3 <- c("Baja", "Media", "Alta")
 fspeed <- cut(cars$speed, breaks, labels = etiquetas3)
@@ -569,7 +565,7 @@ table(fspeed)
 Para otro tipo de recodificaciones podríamos emplear la función `ifelse()` vectorial:
 
 
-```r
+``` r
 fspeed <- ifelse(cars$speed < 15, "Baja", "Alta")
 etiquetas2 <- c("Baja", "Alta")
 fspeed <- factor(fspeed, levels = etiquetas2)
@@ -585,7 +581,7 @@ table(fspeed)
 Alternativamente, en el caso de dos niveles podríamos emplear directamente la función `factor()`:
 
 
-```r
+``` r
 fspeed <- factor(cars$speed >= 15, 
                  labels = etiquetas2) # levels = c("FALSE", "TRUE")
 table(fspeed)
@@ -600,7 +596,7 @@ table(fspeed)
 En el caso de múltiples niveles, se podría emplear `ifelse()` anidados:
 
 
-```r
+``` r
 fspeed <- ifelse(cars$speed < 10, "Baja",
                  ifelse(cars$speed < 20, "Media", "Alta"))
 fspeed <- factor(fspeed, levels = etiquetas3)
@@ -616,7 +612,7 @@ table(fspeed)
 Otra alternativa, sería emplear la función [`recode()`](https://www.rdocumentation.org/packages/car/versions/3.0-9/topics/recode) del paquete `car`. 
 
 
-```r
+``` r
 library(car)
 fspeed <- recode(cars$speed, "0:10 = 'Baja'; 
                  10:20 = 'Media';
@@ -630,7 +626,7 @@ Sin embargo esta forma de proceder puede causar numerosos inconvenientes, especi
 Por ejemplo, podríamos calcular el factor anterior empleando:
 
 
-```r
+``` r
 fspeed <- with(cars, ifelse(speed < 10, "Baja",
                  ifelse(speed < 20, "Media", "Alta")))
 fspeed <- factor(fspeed, levels = c("Baja", "Media", "Alta"))
@@ -657,7 +653,7 @@ Este vector establece el orden en que tienen que ser elegidos los
 elementos para obtener la ordenación deseada. 
 Veamos primero un ejemplo sencillo:
 
-```r
+``` r
 x <- c(2.5, 4.3, 1.2, 3.1, 5.0) # valores originales
 ii <- order(x)
 ii    # vector de ordenación
@@ -667,7 +663,7 @@ ii    # vector de ordenación
 ## [1] 3 1 4 2 5
 ```
 
-```r
+``` r
 x[ii] # valores ordenados (por defecto, ascendentemente)
 ```
 
@@ -677,7 +673,7 @@ x[ii] # valores ordenados (por defecto, ascendentemente)
 En el caso de vectores, el procedimiento anterior se podría
 hacer directamente con: 
 
-```r
+``` r
 sort(x)
 ```
 
@@ -685,7 +681,7 @@ Sin embargo, para ordenar tablas de datos será necesario la utilización del
 vector de índices de ordenación. A continuación, se muestan los datos de `cars` ordenados por `dist`:
 
 
-```r
+``` r
 ii <- order(cars$dist) # Vector de índices de ordenación
 cars2 <- cars[ii, ]    # Datos ordenados por dist
 head(cars2)
@@ -707,7 +703,7 @@ El filtrado de datos consiste en elegir una submuestra que cumpla determinadas c
 
 A continuación se muestran un par de ejemplos:
 
-```r
+``` r
 # datos con dis>85
 subset(cars, dist > 85) 
 ```
@@ -719,7 +715,7 @@ subset(cars, dist > 85)
 ## 49    24  120  38.62433  36.57644
 ```
 
-```r
+``` r
 # datos con speed en (10,15) y dist > 45
 subset(cars, speed > 10 & speed < 15 & dist > 45)
 ```
@@ -735,7 +731,7 @@ También se pueden hacer el filtrado empleando directamente los
 correspondientes vectores de índices:
 
 
-```r
+``` r
 ii <- cars$dist > 85
 cars[ii, ]   # dis>85
 ```
@@ -747,7 +743,7 @@ cars[ii, ]   # dis>85
 ## 49    24  120  38.62433  36.57644
 ```
 
-```r
+``` r
 ii <- cars$speed > 10 & cars$speed < 15 & cars$dist > 45
 cars[ii, ]  # speed en (10,15) y dist>45
 ```
@@ -762,7 +758,7 @@ cars[ii, ]  # speed en (10,15) y dist>45
 En este caso, puede ser de utilidad la función [`which()` ](https://www.rdocumentation.org/packages/base/versions/3.6.1/topics/which):
 
 
-```r
+``` r
 it <- which(ii)
 str(it)
 ```
@@ -771,7 +767,7 @@ str(it)
 ##  int [1:3] 19 22 23
 ```
 
-```r
+``` r
 cars[it, ]
 ```
 
@@ -782,7 +778,7 @@ cars[it, ]
 ## 23    14   80  22.53086  24.38430
 ```
 
-```r
+``` r
 # rownames(cars[it, ])
 id <- which(!ii)
 str(cars[id, ])
@@ -796,7 +792,7 @@ str(cars[id, ])
 ##  $ distancia: num  0.61 3.05 1.22 6.71 4.88 ...
 ```
 
-```r
+``` r
 # Equivalentemente:
 str(cars[-it, ])
 ```
@@ -809,13 +805,13 @@ str(cars[-it, ])
 ##  $ distancia: num  0.61 3.05 1.22 6.71 4.88 ...
 ```
 
-```r
+``` r
 # ?which.min
 ```
 
 Si se realiza una selección de variables como en:
 
-```r
+``` r
 cars[ii, "speed"]
 ```
 
@@ -825,7 +821,7 @@ cars[ii, "speed"]
 es posible que se quiera mantener la estructura original de los datos, para ello, 
 bastaría con:
 
-```r
+``` r
 cars[ii, "speed", drop=FALSE]
 ```
 
@@ -836,14 +832,14 @@ cars[ii, "speed", drop=FALSE]
 ## 23    14
 ```
 
-```r
+``` r
 # subset(cars, ii, "speed") # equivalente
 ```
 
 A veces puede ser necesario dividir (particionar) el conjunto de datos, uno para cada nivel de un grupo (factor), para ello se puede usar la función `split()`:
 
 
-```r
+``` r
 speed2 <- factor(cars$speed > 20, labels = c("slow","fast"))
 table(speed2)
 ```
@@ -854,7 +850,7 @@ table(speed2)
 ##   43    7
 ```
 
-```r
+``` r
 cars2 <- split(cars,speed2)
 class(cars2) # lista con 2 data.frames
 ```
@@ -863,7 +859,7 @@ class(cars2) # lista con 2 data.frames
 ## [1] "list"
 ```
 
-```r
+``` r
 sapply(cars2,class)
 ```
 
@@ -872,7 +868,7 @@ sapply(cars2,class)
 ## "data.frame" "data.frame"
 ```
 
-```r
+``` r
 sapply(cars2,dim)
 ```
 
@@ -882,7 +878,7 @@ sapply(cars2,dim)
 ## [2,]    4    4
 ```
 
-```r
+``` r
 cars2$fast
 ```
 
@@ -900,19 +896,19 @@ cars2$fast
 De forma inversa, podríamos recuperar el  data.frame original con:
 
 
-```r
+``` r
 unsplit(cars2,speed2)
 ```
 
-## Datos faltantes {#missing}
+### Datos faltantes {#missing}
 
 La problemática originada por los datos faltantes (*missing data*) en cualquier conjunto de datos subyace cuando se desea
 realizar un análisis estadístico, para más información en R, se puede consultar [CRAN Task View: Missing Data](https://cran.r-project.org/web/views/MissingData.html)
 
 
-Vamos a ver un ejemplo, empleando el conjunto de datos `airquality` que contiene datos falntantes en sus dos primeras variables:
+Vamos a ver un ejemplo, empleando el conjunto de datos `airquality` que contiene datos faltantes en sus dos primeras variables:
 
-```r
+``` r
 data("airquality")
 datos <- airquality[,1:3]
 summary(datos)
@@ -926,10 +922,10 @@ summary(datos)
 ##  Mean   : 42.13   Mean   :185.9   Mean   : 9.958  
 ##  3rd Qu.: 63.25   3rd Qu.:258.8   3rd Qu.:11.500  
 ##  Max.   :168.00   Max.   :334.0   Max.   :20.700  
-##  NA's   :37       NA's   :7
+##  NAs    :37       NAs    :7
 ```
 
-```r
+``` r
 nrow(datos)
 ```
 
@@ -937,7 +933,7 @@ nrow(datos)
 ## [1] 153
 ```
 
-```r
+``` r
 # Datos faltantes por variable
 sapply(datos, function(x) sum(is.na(x)))
 ```
@@ -950,37 +946,33 @@ A continuación se muestra la distribución de los datos perdidos en el data.fra
 
 <!--
 
-```r
+``` r
 library(naniar)
 vis_miss(airquality)
 ```
 
-
-
-\begin{center}\includegraphics[width=0.7\linewidth]{02-ManipulacionDatosR_files/figure-latex/unnamed-chunk-48-1} \end{center}
+<img src="02-ManipulacionDatosR_files/figure-html/unnamed-chunk-48-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 -->
 
-```r
+``` r
 plot(ts(airquality[,1:2]))
 ```
 
-
-
-\begin{center}\includegraphics[width=0.7\linewidth]{02-ManipulacionDatosR_files/figure-latex/unnamed-chunk-49-1} \end{center}
+<img src="02-ManipulacionDatosR_files/figure-html/unnamed-chunk-49-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 
 
-¿Existe un patrón no aleatorio en los datos faltantes del ozono? Esta pregunta puede ser abordada parcialmente utilizando el test de Little [@little1998], disponible en la función `mcar_test()` del paquete `naniar`. Este test permite evaluar si los datos faltantes son generados por un mecanismo completamente aleatorio (MCAR). Si la hipótesis de MCAR es rechazada, esto sugiere que los datos faltantes podrían estar siguiendo un mecanismo MAR (*missing at random*) o MNAR (*non missing at random*).
+¿Existe un patrón no aleatorio en los datos faltantes del ozono? Esta pregunta puede ser abordada parcialmente utilizando el test de Little [@little1998], disponible en la función `mcar_test()` del paquete [`naniar`](https://naniar.njtierney.com). Este test permite evaluar si los datos faltantes son generados por un mecanismo completamente aleatorio (MCAR). Si la hipótesis de MCAR es rechazada, esto sugiere que los datos faltantes podrían estar siguiendo un mecanismo MAR (*missing at random*) o MNAR (*non missing at random*).
 
 <!--Esto,  si los datos faltantes son completamente aleatorios (MCAR) o no usando el test de Little [@little1998].
 
 
-```r
+``` r
 mcar_test(airquality[,-2])
 ```
 
 ```
-## # A tibble: 1 x 4
+## # A tibble: 1 × 4
 ##   statistic    df p.value missing.patterns
 ##       <dbl> <dbl>   <dbl>            <int>
 ## 1      13.7     4 0.00829                2
@@ -993,10 +985,10 @@ Sin embargo, en muchos estudios, se omite el paso anterior y se procede directam
 + Análisis de casos disponibles (borrado por parejas *pairwise cases*)
 + Imputación de datos faltantes (por la media, mediana, último valor observado, vecino más cercano, valores predichos usando los datos observados....)
 
-Siguiendo con el ejemplo, ante la presencia de datos faltantes, en R inicialmente no podemos conocer cómo se relacionan las tres primeras variables:"
+Siguiendo con el ejemplo, ante la presencia de datos faltantes, en R inicialmente no podemos conocer cómo se relacionan las tres primeras variables:
 
 
-```r
+``` r
 cor(datos[,1:3])
 ```
 
@@ -1010,7 +1002,7 @@ y requiere indicar cómo tratar los datos perdidos. Por ejemplo,
 una opción sería realizar un análisis sólo de los casos completos, eliminando todas las observaciones (filas) con algún dato faltante de nuestro conjunto de datos:
 
 
-```r
+``` r
 datosC <- na.omit(datos)
 nrow(datosC) # n fija (sólo se utilizan 111 de las 153 de Wind)
 ```
@@ -1019,7 +1011,7 @@ nrow(datosC) # n fija (sólo se utilizan 111 de las 153 de Wind)
 ## [1] 111
 ```
 
-```r
+``` r
 cor(datosC[,1:3])
 ```
 
@@ -1030,7 +1022,7 @@ cor(datosC[,1:3])
 ## Wind    -0.6124966 -0.1271835  1.0000000
 ```
 
-```r
+``` r
 # otra forma de hacerlo sería:
 # nrow(datos[complete.cases(datos),]) 
 # cor(datos[,1:3], use ="complete.obs") 
@@ -1039,7 +1031,7 @@ cor(datosC[,1:3])
 También, se podría usar toda la información disponible. El tamaño muestral $n$ sería variable en función de los NA's de cada par de variables: 
 
 
-```r
+``` r
 cor(datos[,1:3], use = "pairwise.complete.obs")
 ```
 
@@ -1050,11 +1042,11 @@ cor(datos[,1:3], use = "pairwise.complete.obs")
 ## Wind    -0.6015465 -0.05679167  1.00000000
 ```
 
-Por ejmmplo, ahora la correlación usa los $146$ pares de observaciones disponibles para (`Solar.R`,`Wind`), en lugar de $111$ del primer caso.
+Por ejemplo, ahora la correlación usa los $146$ pares de observaciones disponibles para (`Solar.R`,`Wind`), en lugar de $111$ del primer caso.
 
 Por último, también se podría realizar una imputación [@van2018flexible]. A modo de ejemplo, en el siguiente código, se utiliza la media:
 
-```r
+``` r
 datosI <- datos
 datosI$Ozone[is.na(datos$Ozone)] <- mean(datos$Ozone, na.rm = T)
 datosI$Solar.R[is.na(datos$Solar.R)] <- mean(datosI$Solar.R, na.rm = T)
@@ -1070,7 +1062,7 @@ cor(datosI[,1:3])
 Notar que para el caso del ozono, se han sustituido los 37 *NA's* (24% de las observaciones) por un único valor (de ahí que ahora la varianza sea menor a la observada inicialmente, algo que en principio, no sería deseable).
 
 
-```r
+``` r
 var(datos$Ozone,na.rm = T)
 ```
 
@@ -1078,7 +1070,7 @@ var(datos$Ozone,na.rm = T)
 ## [1] 1088.201
 ```
 
-```r
+``` r
 var(datosI$Ozone)
 ```
 
@@ -1102,7 +1094,7 @@ Una forma de evitar la utilización de bucles es utilizando la sentencia `apply`
 
 La sintaxis de esta función es:
 
-```r
+``` r
 apply(X, MARGIN, FUN, ...)
 ```
 -   `X`: matriz (o array).
@@ -1114,7 +1106,7 @@ apply(X, MARGIN, FUN, ...)
 
 Veamos la utilización de la función `apply` con un ejemplo:
 
-```r
+``` r
 x <- matrix(1:9, nrow = 3)
 x
 ```
@@ -1126,7 +1118,7 @@ x
 ## [3,]    3    6    9
 ```
 
-```r
+``` r
 apply(x, 1, sum)    # Suma por filas
 ```
 
@@ -1134,7 +1126,7 @@ apply(x, 1, sum)    # Suma por filas
 ## [1] 12 15 18
 ```
 
-```r
+``` r
 apply(x, 2, sum)    # Suma por columnas
 ```
 
@@ -1142,7 +1134,7 @@ apply(x, 2, sum)    # Suma por columnas
 ## [1]  6 15 24
 ```
 
-```r
+``` r
 apply(x, 2, min)    # Mínimo de las columnas
 ```
 
@@ -1150,7 +1142,7 @@ apply(x, 2, min)    # Mínimo de las columnas
 ## [1] 1 4 7
 ```
 
-```r
+``` r
 apply(x, 2, range)  # Rango (mínimo y máximo) de las columnas
 ```
 
@@ -1162,7 +1154,7 @@ apply(x, 2, range)  # Rango (mínimo y máximo) de las columnas
 Alternativamente, se puede utilizar opciones más eficientes: `colSums()`, `rowSums()`, `colMeans()` y `rowMeans()`, como se muestra en el siguiente código de ejemplo:
 
 
-```r
+``` r
 x <- matrix(1:1e8, ncol = 10, byrow = FALSE)
 t1 <- proc.time()
 out<-apply(x, 2, mean)   
@@ -1171,10 +1163,10 @@ proc.time() - t1
 
 ```
 ##    user  system elapsed 
-##    0.83    0.12    0.95
+##    1.05    0.09    1.16
 ```
 
-```r
+``` r
 t2 <- proc.time()
 out <- colMeans(x)
 proc.time() - t2
@@ -1182,7 +1174,7 @@ proc.time() - t2
 
 ```
 ##    user  system elapsed 
-##    0.14    0.00    0.14
+##    0.08    0.02    0.08
 ```
 
 
@@ -1194,7 +1186,7 @@ a. La función [`lapply(X, FUN, ...)`](https://www.rdocumentation.org/packages/b
  aplica la función `FUN` a cada elemento de una lista en R y devuelve una lista como resultado (sin necesidad de especificar el argumento MARGIN). Notar  que todas las estructuras de datos en R pueden convertirse en listas, por lo que  `lapply()` puede utilizarse en más casos que `apply()`. 
 
 
-```r
+``` r
 # lista con las medianas de las variables
 list <- lapply(cars, median)
 str(list)
@@ -1211,7 +1203,7 @@ str(list)
 b. La función 
 [`sapply(X, FUN, ..., simplify = TRUE, USE.NAMES = TRUE) `](https://www.rdocumentation.org/packages/base/versions/3.6.1/topics/sapply) permite iterar sobre una lista o vector (alternativa más eficiente a un `for`):
 
-```r
+``` r
 # matriz con las medias, medianas y desv. de las variables
 res <- sapply(cars, 
           function(x) c(mean = mean(x), 
@@ -1230,7 +1222,7 @@ res
 
 
 
-```r
+``` r
 cfuns <- function(x, funs = c(mean, median, sd))
             sapply(funs, function(f) f(x))
 x <- 1:10
@@ -1241,7 +1233,7 @@ cfuns(x)
 ## [1] 5.50000 5.50000 3.02765
 ```
 
-```r
+``` r
 sapply(cars, cfuns)
 ```
 
@@ -1252,7 +1244,7 @@ sapply(cars, cfuns)
 ## [3,]  5.287644 25.76938  8.509655  7.854602
 ```
 
-```r
+``` r
 nfuns <- c("mean", "median", "sd")
 sapply(nfuns, 
        function(f) eval(parse(text = paste0(f, "(x)"))))
@@ -1277,9 +1269,9 @@ cfuns <- function(x, funs = c(mean, median, sd)){
 c. La función [`tapply()`](https://www.rdocumentation.org/packages/base/versions/3.6.1/topics/tapply) es
 similar a la función `apply()` y permite aplicar una función a los datos desagregados,
 utilizando como criterio los distintos niveles de una variable factor. Es decir, 
- facilita la creación de tablars resumen por grupos. La sintaxis de esta función es como sigue:
+ facilita la creación de tablas resumen por grupos. La sintaxis de esta función es como sigue:
 
-```r
+``` r
     tapply(X, INDEX, FUN, ...,)
 ```
 -   `X`: matriz (o array).
@@ -1292,13 +1284,14 @@ experimento relacionado con la repercusión de varias dietas en el peso
 de pollos.
 
 
-```r
+``` r
 data(ChickWeight)
 # str(ChickWeight)
 head(ChickWeight)
 ```
 
 ```
+## Grouped Data: weight ~ Time | Chick
 ##   weight Time Chick Diet
 ## 1     42    0     1    1
 ## 2     51    2     1    1
@@ -1308,7 +1301,7 @@ head(ChickWeight)
 ## 6     93   10     1    1
 ```
 
-```r
+``` r
 peso <- ChickWeight$weight
 dieta <- ChickWeight$Diet
 levels(dieta) <- c("Dieta 1", "Dieta 2", "Dieta 3", "Dieta 4")
@@ -1320,7 +1313,7 @@ tapply(peso, dieta, mean)  # Peso medio por dieta
 ## 102.6455 122.6167 142.9500 135.2627
 ```
 
-```r
+``` r
 tapply(peso, dieta, summary)
 ```
 
@@ -1354,9 +1347,9 @@ tapply(peso, dieta, summary)
 Alternativamente, se podría emplear la función `aggregate()` que tiene las ventajas de admitir fórmulas y disponer de un método para series de tiempo.
 
 
-```r
-help(aggregate)
-aggregate(peso,by=list(dieta=dieta),FUN = "mean" )
+``` r
+# help(aggregate)
+aggregate(peso, by = list(dieta = dieta), FUN = "mean" )
 ```
 
 ```
@@ -1367,8 +1360,8 @@ aggregate(peso,by=list(dieta=dieta),FUN = "mean" )
 ## 4 Dieta 4 135.2627
 ```
 
-```r
-aggregate(peso~dieta,FUN = "summary" ) # con formula
+``` r
+aggregate(peso ~ dieta, FUN = "summary" ) # con formula
 ```
 
 ```
@@ -1384,14 +1377,22 @@ aggregate(peso~dieta,FUN = "summary" ) # con formula
 ## 4     184.7500  322.0000
 ```
 
-### Tablas (para informes)
 
-a. Tablas con `kable()`:
+### Generación de tablas
+
+Hay muchos paquetes de R que se pueden utilizar para generar tablas en informes RMarkdown o en aplicaciones shiny.
+Entre las herramientas disponibles podríamos destacar la función `kable()` del paquete `knitr` para generar tablas básicas, y la función `datatable()` del paquete `DT` para generar tablas dinámicas.
+Otros paquetes son:
+`kableExtra`, `flextable`, `reactable`, `reactablefmtr`, 
+`formattable`, `gt` y `tinytable`.
+
+
+#### Tablas con `kable()`
 
 A continuación, se muestra un ejemplo, de tabla resumen, con las medias, medianas y desviación típica de las variables:
 
 
-```r
+``` r
 res <- sapply(cars, 
           function(x) c(mean = mean(x), 
                         median = median(x), 
@@ -1401,24 +1402,18 @@ knitr::kable(t(res), digits = 1,
 ```
 
 
-\begin{tabular}{l|r|r|r}
-\hline
-  & Media & Mediana & Desv. típica\\
-\hline
-speed & 15.4 & 15.0 & 5.3\\
-\hline
-dist & 43.0 & 36.0 & 25.8\\
-\hline
-velocidad & 24.8 & 24.1 & 8.5\\
-\hline
-distancia & 13.1 & 11.0 & 7.9\\
-\hline
-\end{tabular}
+
+|          | Media| Mediana| Desv. típica|
+|:---------|-----:|-------:|------------:|
+|speed     |  15.4|    15.0|          5.3|
+|dist      |  43.0|    36.0|         25.8|
+|velocidad |  24.8|    24.1|          8.5|
+|distancia |  13.1|    11.0|          7.9|
 
 <!--
 Consideremos, el conjunto de datos `iris`  
 
-```r
+``` r
 data(iris)
 iris2 <- head(iris)
 knitr::kable(iris2, 
@@ -1426,77 +1421,57 @@ knitr::kable(iris2,
 ```
 
 
-\begin{tabular}{r|r|r|r|l}
-\hline
-Sepal Length & Sepal Width & Petal Length & Petal Width & Species\\
-\hline
-5.1 & 3.5 & 1.4 & 0.2 & setosa\\
-\hline
-4.9 & 3.0 & 1.4 & 0.2 & setosa\\
-\hline
-4.7 & 3.2 & 1.3 & 0.2 & setosa\\
-\hline
-4.6 & 3.1 & 1.5 & 0.2 & setosa\\
-\hline
-5.0 & 3.6 & 1.4 & 0.2 & setosa\\
-\hline
-5.4 & 3.9 & 1.7 & 0.4 & setosa\\
-\hline
-\end{tabular}
+
+| Sepal Length| Sepal Width| Petal Length| Petal Width|Species |
+|------------:|-----------:|------------:|-----------:|:-------|
+|          5.1|         3.5|          1.4|         0.2|setosa  |
+|          4.9|         3.0|          1.4|         0.2|setosa  |
+|          4.7|         3.2|          1.3|         0.2|setosa  |
+|          4.6|         3.1|          1.5|         0.2|setosa  |
+|          5.0|         3.6|          1.4|         0.2|setosa  |
+|          5.4|         3.9|          1.7|         0.4|setosa  |
 -->
 Y en este segundo ejemplo, se muestra el resumen de un modelo de regresión lineal simple (distancia de frenado en función de la velocidad del vehículo):
 
-```r
+``` r
 modelo <- lm(dist ~ speed, data = cars)
 coefs <- coef(summary(modelo))
 knitr::kable(coefs, escape = FALSE, digits = 5)
 ```
 
 
-\begin{tabular}{l|r|r|r|r}
-\hline
-  & Estimate & Std. Error & t value & Pr(>|t|)\\
-\hline
-(Intercept) & -17.57909 & 6.75844 & -2.60106 & 0.01232\\
-\hline
-speed & 3.93241 & 0.41551 & 9.46399 & 0.00000\\
-\hline
-\end{tabular}
 
-b. Tablas interactivas con `datatabe()` del paquete `DT`:
+|            |  Estimate| Std. Error|  t value| Pr(>&#124;t&#124;)|
+|:-----------|---------:|----------:|--------:|------------------:|
+|(Intercept) | -17.57909|    6.75844| -2.60106|            0.01232|
+|speed       |   3.93241|    0.41551|  9.46399|            0.00000|
 
-```r
+#### Tablas interactivas con `datatable()`
+
+
+``` r
 library(DT)
 datatable(iris,options = list(scrollX = TRUE))
+```
+
+```{=html}
+<div class="datatables html-widget html-fill-item" id="htmlwidget-cb9f9f412d7aae8dc95d" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-cb9f9f412d7aae8dc95d">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117","118","119","120","121","122","123","124","125","126","127","128","129","130","131","132","133","134","135","136","137","138","139","140","141","142","143","144","145","146","147","148","149","150"],[5.1,4.9,4.7,4.6,5,5.4,4.6,5,4.4,4.9,5.4,4.8,4.8,4.3,5.8,5.7,5.4,5.1,5.7,5.1,5.4,5.1,4.6,5.1,4.8,5,5,5.2,5.2,4.7,4.8,5.4,5.2,5.5,4.9,5,5.5,4.9,4.4,5.1,5,4.5,4.4,5,5.1,4.8,5.1,4.6,5.3,5,7,6.4,6.9,5.5,6.5,5.7,6.3,4.9,6.6,5.2,5,5.9,6,6.1,5.6,6.7,5.6,5.8,6.2,5.6,5.9,6.1,6.3,6.1,6.4,6.6,6.8,6.7,6,5.7,5.5,5.5,5.8,6,5.4,6,6.7,6.3,5.6,5.5,5.5,6.1,5.8,5,5.6,5.7,5.7,6.2,5.1,5.7,6.3,5.8,7.1,6.3,6.5,7.6,4.9,7.3,6.7,7.2,6.5,6.4,6.8,5.7,5.8,6.4,6.5,7.7,7.7,6,6.9,5.6,7.7,6.3,6.7,7.2,6.2,6.1,6.4,7.2,7.4,7.9,6.4,6.3,6.1,7.7,6.3,6.4,6,6.9,6.7,6.9,5.8,6.8,6.7,6.7,6.3,6.5,6.2,5.9],[3.5,3,3.2,3.1,3.6,3.9,3.4,3.4,2.9,3.1,3.7,3.4,3,3,4,4.4,3.9,3.5,3.8,3.8,3.4,3.7,3.6,3.3,3.4,3,3.4,3.5,3.4,3.2,3.1,3.4,4.1,4.2,3.1,3.2,3.5,3.6,3,3.4,3.5,2.3,3.2,3.5,3.8,3,3.8,3.2,3.7,3.3,3.2,3.2,3.1,2.3,2.8,2.8,3.3,2.4,2.9,2.7,2,3,2.2,2.9,2.9,3.1,3,2.7,2.2,2.5,3.2,2.8,2.5,2.8,2.9,3,2.8,3,2.9,2.6,2.4,2.4,2.7,2.7,3,3.4,3.1,2.3,3,2.5,2.6,3,2.6,2.3,2.7,3,2.9,2.9,2.5,2.8,3.3,2.7,3,2.9,3,3,2.5,2.9,2.5,3.6,3.2,2.7,3,2.5,2.8,3.2,3,3.8,2.6,2.2,3.2,2.8,2.8,2.7,3.3,3.2,2.8,3,2.8,3,2.8,3.8,2.8,2.8,2.6,3,3.4,3.1,3,3.1,3.1,3.1,2.7,3.2,3.3,3,2.5,3,3.4,3],[1.4,1.4,1.3,1.5,1.4,1.7,1.4,1.5,1.4,1.5,1.5,1.6,1.4,1.1,1.2,1.5,1.3,1.4,1.7,1.5,1.7,1.5,1,1.7,1.9,1.6,1.6,1.5,1.4,1.6,1.6,1.5,1.5,1.4,1.5,1.2,1.3,1.4,1.3,1.5,1.3,1.3,1.3,1.6,1.9,1.4,1.6,1.4,1.5,1.4,4.7,4.5,4.9,4,4.6,4.5,4.7,3.3,4.6,3.9,3.5,4.2,4,4.7,3.6,4.4,4.5,4.1,4.5,3.9,4.8,4,4.9,4.7,4.3,4.4,4.8,5,4.5,3.5,3.8,3.7,3.9,5.1,4.5,4.5,4.7,4.4,4.1,4,4.4,4.6,4,3.3,4.2,4.2,4.2,4.3,3,4.1,6,5.1,5.9,5.6,5.8,6.6,4.5,6.3,5.8,6.1,5.1,5.3,5.5,5,5.1,5.3,5.5,6.7,6.9,5,5.7,4.9,6.7,4.9,5.7,6,4.8,4.9,5.6,5.8,6.1,6.4,5.6,5.1,5.6,6.1,5.6,5.5,4.8,5.4,5.6,5.1,5.1,5.9,5.7,5.2,5,5.2,5.4,5.1],[0.2,0.2,0.2,0.2,0.2,0.4,0.3,0.2,0.2,0.1,0.2,0.2,0.1,0.1,0.2,0.4,0.4,0.3,0.3,0.3,0.2,0.4,0.2,0.5,0.2,0.2,0.4,0.2,0.2,0.2,0.2,0.4,0.1,0.2,0.2,0.2,0.2,0.1,0.2,0.2,0.3,0.3,0.2,0.6,0.4,0.3,0.2,0.2,0.2,0.2,1.4,1.5,1.5,1.3,1.5,1.3,1.6,1,1.3,1.4,1,1.5,1,1.4,1.3,1.4,1.5,1,1.5,1.1,1.8,1.3,1.5,1.2,1.3,1.4,1.4,1.7,1.5,1,1.1,1,1.2,1.6,1.5,1.6,1.5,1.3,1.3,1.3,1.2,1.4,1.2,1,1.3,1.2,1.3,1.3,1.1,1.3,2.5,1.9,2.1,1.8,2.2,2.1,1.7,1.8,1.8,2.5,2,1.9,2.1,2,2.4,2.3,1.8,2.2,2.3,1.5,2.3,2,2,1.8,2.1,1.8,1.8,1.8,2.1,1.6,1.9,2,2.2,1.5,1.4,2.3,2.4,1.8,1.8,2.1,2.4,2.3,1.9,2.3,2.5,2.3,1.9,2,2.3,1.8],["setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Sepal.Length<\/th>\n      <th>Sepal.Width<\/th>\n      <th>Petal.Length<\/th>\n      <th>Petal.Width<\/th>\n      <th>Species<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Sepal.Length","targets":1},{"name":"Sepal.Width","targets":2},{"name":"Petal.Length","targets":3},{"name":"Petal.Width","targets":4},{"name":"Species","targets":5}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 <!--  options = list(scrollX = TRUE))-->
 
 
-
-Hay muchos otros paquetes de R que se pueden utilizar para generar tablas como:
-`kableExtra()`, `flextable()`, `reactable()`, `reactablefmtr()`, 
-`formattable()`, `gt()` y `tinytable()`.
-
-<!--https://bookdown.org/yihui/rmarkdown-cookbook/table-other.html-->
-<!-- c. Tablas con `tt()` del paquete `tinytable`: -->
-<!-- ```{r} -->
-<!-- library(tinytable) -->
-<!-- tt(data.frame(variables=rownames(res),res), digits = 3) -->
-<!-- ``` -->
-
-
 ### Operaciones con tablas de datos
 
+#### Unir tablas:
 
-***Unir tablas***:
+* [`rbind()`](https://www.rdocumentation.org/packages/base/versions/3.6.1/topics/rbind): combina vectores, matrices, arrays o data.frames por filas.
 
-* [`rbind()` ](https://www.rdocumentation.org/packages/base/versions/3.6.1/topics/rbind): combina vectores, matrices, arrays o data.frames por filas.
+* [`cbind()`](https://www.rdocumentation.org/packages/base/versions/3.6.1/topics/cbind): Idem por columnas.
 
-* [`cbind()` ](https://www.rdocumentation.org/packages/base/versions/3.6.1/topics/cbind): Idem por columnas.
+* [`merge()`](https://www.rdocumentation.org/packages/base/versions/3.6.1/topics/merge): Fusiona dos data.frame por columnas o nombres de fila comunes.  También permite otras operaciones de unión (*join*) de bases de datos, algunas de ellas se verán con más detalle en el Capítulo \@ref(tidyverse).
 
-* [`merge()` ](https://www.rdocumentation.org/packages/base/versions/3.6.1/topics/merge): Fusiona dos data.frame por columnas o nombres de fila comunes.  También permite otras operaciones de unión (*join*) de bases de datos, algunas de ellas se verán con más detalle en el Capítulo 4.
-
-***Combinar tablas***:
+#### Combinar tablas:
 
 
 * [`match(x, table)`](https://www.rdocumentation.org/packages/base/versions/3.6.1/topics/match) devuelve un vector (de la misma longitud que `x`)  con las (primeras) posiciones de coincidencia de `x` en `table` (o `NA`, por defecto, si no hay coincidencia).
@@ -1508,16 +1483,15 @@ Hay muchos otros paquetes de R que se pueden utilizar para generar tablas como:
 
 ## Ejemplo WoS data
 
-Ejemplo [*wosdata.R*](data/wosdata.R) en [*wosdata.zip*](data/wosdata.zip).
-Ver Apéndice \@ref(scimetr).
+Ejemplo *wosdata.R* en [*wosdata.zip*](data/wosdata.zip).
+Ver paquete [scimetr](https://rubenfcasal.github.io/scimetr/articles/scimetr.html).
+
+Empleando la función `ImportSources.wos()` se importaron ficheros de texto descargados de WoS (que por defecto tienen una limitación de 500 registros).
+Posteriormente se creo una base de datos como una lista de tablas con la función  `CreateDB.wos()`, 
+que finalmente se almacenó en el fichero *db_udc_2015.rds*.
 
 
-```r
-# library(dplyr)
-# library(stringr)
-# https://rubenfcasal.github.io/scimetr/articles/scimetr.html
-# library(scimetr)
-
+``` r
 db <- readRDS("data/wosdata/db_udc_2015.rds")
 str(db, 1)
 ```
@@ -1540,152 +1514,142 @@ str(db, 1)
 ##  - attr(*, "class")= chr "wos.db"
 ```
 
-```r
+Puede ser recomendable añadir a los datos un atributo `variable.labels` que
+contenga un vector de etiquetas de las variables y empleando como nombres de
+las componentes las propias variables:
+
+
+``` r
 variable.labels <- attr(db, "variable.labels")
-knitr::kable(as.data.frame(variable.labels),
+knitr::kable(head(as.data.frame(variable.labels)),
              caption = "Variable labels")
 ```
 
-\begin{table}
-
-\caption{(\#tab:unnamed-chunk-69)Variable labels}
-\centering
-\begin{tabular}[t]{l|l}
-\hline
-  & variable.labels\\
-\hline
-PT & Publication type\\
-\hline
-AU & Author\\
-\hline
-BA & Book authors\\
-\hline
-BE & Editor\\
-\hline
-GP & Group author\\
-\hline
-AF & Author full\\
-\hline
-BF & Book authors fullname\\
-\hline
-CA & Corporate author\\
-\hline
-TI & Title\\
-\hline
-SO & Publication name\\
-\hline
-SE & Series title\\
-\hline
-BS & Book series\\
-\hline
-LA & Language\\
-\hline
-DT & Document type\\
-\hline
-CT & Conference title\\
-\hline
-CY & Conference year\\
-\hline
-CL & Conference place\\
-\hline
-SP & Conference sponsors\\
-\hline
-HO & Conference host\\
-\hline
-DE & Keywords\\
-\hline
-ID & Keywords Plus\\
-\hline
-AB & Abstract\\
-\hline
-C1 & Addresses\\
-\hline
-RP & Reprint author\\
-\hline
-EM & Author email\\
-\hline
-RI & Researcher id numbers\\
-\hline
-OI & Orcid numbers\\
-\hline
-FU & Funding agency and grant number\\
-\hline
-FX & Funding text\\
-\hline
-CR & Cited references\\
-\hline
-NR & Number of cited references\\
-\hline
-TC & Times cited\\
-\hline
-Z9 & Total times cited count\\
-\hline
-U1 & Usage Count (Last 180 Days)\\
-\hline
-U2 & Usage Count (Since 2013)\\
-\hline
-PU & Publisher\\
-\hline
-PI & Publisher city\\
-\hline
-PA & Publisher address\\
-\hline
-SN & ISSN\\
-\hline
-EI & eISSN\\
-\hline
-BN & ISBN\\
-\hline
-J9 & Journal.ISI\\
-\hline
-JI & Journal.ISO\\
-\hline
-PD & Publication date\\
-\hline
-PY & Year published\\
-\hline
-VL & Volume\\
-\hline
-IS & Issue\\
-\hline
-PN & Part number\\
-\hline
-SU & Supplement\\
-\hline
-SI & Special issue\\
-\hline
-MA & Meeting abstract\\
-\hline
-BP & Beginning page\\
-\hline
-EP & Ending page\\
-\hline
-AR & Article number\\
-\hline
-DI & DOI\\
-\hline
-D2 & Book DOI\\
-\hline
-PG & Page count\\
-\hline
-WC & WOS category\\
-\hline
-SC & Research areas\\
-\hline
-GA & Document delivery number\\
-\hline
-UT & Access number\\
-\hline
-PM & Pub Med ID\\
-\hline
-\end{tabular}
-\end{table}
-
-Veamos ahora un par de ejemplos, en el primero se buscan los documentos correspondientes a revistas (que contiene `Chem` en el título de la revista *journal*).  Para ello utilizamos la función  `grepl()` que busca las coincidencias con el patrón `Chem` dentro de cada elemento de un vector de caracteres.
 
 
-```r
-# View(db$Journals)
+Table: (\#tab:unnamed-chunk-70)Variable labels
+
+|   |variable.labels  |
+|:--|:----------------|
+|PT |Publication type |
+|AU |Author           |
+|BA |Book authors     |
+|BE |Editor           |
+|GP |Group author     |
+|AF |Author full      |
+
+Las tablas de datos con este atributo son compatibles con RStudio.
+Por ejemplo, también se mostrarán las etiquetas al abrirla con `View()`
+
+
+``` r
+Docs <- db$Docs # No copia los datos (crea otro objeto que apunta a los mismos datos)
+attr(Docs, "variable.labels") <- variable.labels[names(Docs)]
+# View(Docs)
+```
+
+
+Para combinar tablas podemos emplear `match(x, table)`.
+Por ejemplo, el siguiente código permite añadir el nombre de la revista a la
+tabla de documentos, combinándola con la de revistas:
+
+
+``` r
+str(Docs)
+```
+
+```
+## 'data.frame':	856 obs. of  26 variables:
+##  $ idd: int  1 2 3 4 5 6 7 8 9 10 ...
+##  $ idj: int  260 37 86 272 64 429 14 408 333 214 ...
+##  $ TI : chr  "Fractionation of Miscanthus x giganteus via modification of the Formacell process" "Role of Temperature and Pressure on the Multisensitive Multiferroic Dicyanamide Framework [TPrA][Mn(dca)(3)] wi"| __truncated__ "Methane and carbon dioxide emissions from constructed wetlands receiving anaerobically pretreated sewage" "Exceptionally Inert Lanthanide(III) PARACEST MRI Contrast Agents Based on an 18-Membered Macrocyclic Platform" ...
+##  $ PT : Factor w/ 2 levels "Journal","Series": 1 1 1 1 1 1 1 1 1 1 ...
+##  $ DT : Factor w/ 9 levels "Article","Book Review",..: 1 1 1 1 5 1 6 9 1 1 ...
+##  $ NR : int  40 45 35 78 2 59 0 53 20 50 ...
+##  $ TC : int  1 5 2 2 1 0 0 10 0 1 ...
+##  $ Z9 : int  1 5 2 2 1 0 0 10 0 1 ...
+##  $ U1 : int  5 0 10 4 0 1 0 26 0 3 ...
+##  $ U2 : int  6 0 61 21 2 5 0 66 2 4 ...
+##  $ PD : chr  "DEC 23" "DEC 21" "DEC 15" "DEC 14" ...
+##  $ PY : int  2015 2015 2015 2015 2015 2015 2015 2015 2015 2015 ...
+##  $ VL : chr  "77" "54" "538" "21" ...
+##  $ IS : chr  "" "24" "" "51" ...
+##  $ PN : chr  "" "" "" "" ...
+##  $ SU : chr  "" "" "" "" ...
+##  $ SI : chr  "" "" "" "" ...
+##  $ MA : chr  "" "" "" "" ...
+##  $ BP : chr  "275" "11680" "824" "18662" ...
+##  $ EP : chr  "281" "11687" "833" "18670" ...
+##  $ AR : chr  "" "" "" "" ...
+##  $ DI : chr  "10.1016/j.indcrop.2015.08.066" "10.1021/acs.inorgchem.5b01652" "10.1016/j.scitotenv.2015.08.090" "10.1002/chem.201502937" ...
+##  $ D2 : chr  "" "" "" "" ...
+##  $ PG : int  7 8 10 9 2 28 3 16 4 25 ...
+##  $ UT : num  3.66e+11 3.67e+11 3.63e+11 3.68e+11 3.66e+11 ...
+##  $ an : num  3 9 4 8 3 5 8 5 3 3 ...
+##  - attr(*, "variable.labels")= Named chr [1:26] NA NA "Title" "Publication type" ...
+##   ..- attr(*, "names")= chr [1:26] NA NA "TI" "PT" ...
+```
+
+``` r
+str(db$Journals) # View(db$Journals)
+```
+
+```
+## 'data.frame':	520 obs. of  12 variables:
+##  $ idj: int  1 2 3 4 5 6 7 8 9 10 ...
+##  $ SO : chr  "TISSUE ANTIGENS" "ACTA NEUROLOGICA SCANDINAVICA" "ACTA PSYCHOLOGICA" "AFINIDAD" ...
+##  $ SE : chr  "" "" "" "" ...
+##  $ BS : chr  "" "" "" "" ...
+##  $ LA : chr  "English" "English" "English" "English" ...
+##  $ PU : chr  "WILEY-BLACKWELL" "WILEY-BLACKWELL" "ELSEVIER SCIENCE BV" "ASOC QUIMICOS" ...
+##  $ PI : chr  "HOBOKEN" "HOBOKEN" "AMSTERDAM" "BARCELONA" ...
+##  $ PA : chr  "111 RIVER ST, HOBOKEN 07030-5774, NJ USA" "111 RIVER ST, HOBOKEN 07030-5774, NJ USA" "PO BOX 211, 1000 AE AMSTERDAM, NETHERLANDS" "INST QUIMICO SARRIA, VIA AUGUSTA, 390, 08017 BARCELONA, SPAIN" ...
+##  $ SN : chr  "0001-2815" "0001-6314" "0001-6918" "0001-9704" ...
+##  $ EI : chr  "1399-0039" "1600-0404" "1873-6297" "" ...
+##  $ J9 : chr  "TISSUE ANTIGENS" "ACTA NEUROL SCAND" "ACTA PSYCHOL" "AFINIDAD" ...
+##  $ JI : chr  "Tissue Antigens" "Acta Neurol. Scand." "Acta Psychol." "Afinidad" ...
+```
+
+``` r
+ii <- match(Docs$idj, db$Journals$idj)
+docs2 <- Docs[, c("PY", "TI")]
+docs2$Journal <- db$Journals$SO[ii]
+head(docs2)
+```
+
+```
+##     PY
+## 1 2015
+## 2 2015
+## 3 2015
+## 4 2015
+## 5 2015
+## 6 2015
+##                                                                                                                                            TI
+## 1                                                           Fractionation of Miscanthus x giganteus via modification of the Formacell process
+## 2 Role of Temperature and Pressure on the Multisensitive Multiferroic Dicyanamide Framework [TPrA][Mn(dca)(3)] with Perovskite-like Structure
+## 3                                    Methane and carbon dioxide emissions from constructed wetlands receiving anaerobically pretreated sewage
+## 4                               Exceptionally Inert Lanthanide(III) PARACEST MRI Contrast Agents Based on an 18-Membered Macrocyclic Platform
+## 5                                                                                      Community-Acquired Pneumonia Requiring Hospitalization
+## 6                                                                             Low-latency Java communication devices on RDMA-enabled networks
+##                                             Journal
+## 1                     INDUSTRIAL CROPS AND PRODUCTS
+## 2                               INORGANIC CHEMISTRY
+## 3                  SCIENCE OF THE TOTAL ENVIRONMENT
+## 4                      CHEMISTRY-A EUROPEAN JOURNAL
+## 5                   NEW ENGLAND JOURNAL OF MEDICINE
+## 6 CONCURRENCY AND COMPUTATION-PRACTICE & EXPERIENCE
+```
+
+Si solo nos interesa hacer un filtrado puede resultar más cómodo emplear
+el operador `%in%` (`?'%in%'`).
+Por ejemplo, podemos buscar los documentos correspondientes a revistas (que
+contengan `"Chem"` en el nombre ISO de la revista).
+Para ello utilizamos la función `grepl()` que busca las coincidencias de
+un patrón dentro de cada elemento de un vector de caracteres:
+
+
+``` r
 iidj <- with(db$Journals, idj[grepl('Chem', JI)])
 db$Journals$JI[iidj]
 ```
@@ -1722,8 +1686,8 @@ db$Journals$JI[iidj]
 ## [29] "J. Mat. Chem. B"
 ```
 
-```r
-idd <- with(db$Docs, idj %in% iidj)
+``` r
+idd <- with(Docs, idj %in% iidj)
 which(idd)
 ```
 
@@ -1734,39 +1698,34 @@ which(idd)
 ## [43] 697 751 753 775 784 796 806 808 847 848
 ```
 
-```r
-# View(db$Docs[idd, ])
-head(db$Docs[idd, -3])
+``` r
+# View(Docs[idd, ])
+head(Docs[idd, 1:3])
 ```
 
 ```
-##    idd idj      PT      DT  NR TC Z9 U1 U2     PD   PY VL
-## 2    2  37 Journal Article  45  5  5  0  0 DEC 21 2015 54
-## 4    4 272 Journal Article  78  2  2  4 21 DEC 14 2015 21
-## 16  16 195 Journal Article  34  2  2  0  0    DEC 2015 70
-## 23  23 436 Journal Article  48  3  3  0  4    DEC 2015 10
-## 43  43 455 Journal  Review 214  0  0  0  8    DEC 2015 13
-## 69  69  37 Journal Article  86  2  2  8 28  NOV 2 2015 54
-##    IS PN SU SI MA    BP    EP AR
-## 2  24             11680 11687   
-## 4  51             18662 18670   
-## 16 12              3222  3229   
-## 23 12              2850  2860   
-## 43  4               413   430   
-## 69 21             10342 10350   
-##                               DI D2 PG           UT an
-## 2  10.1021/acs.inorgchem.5b01652     8 367118100013  9
-## 4         10.1002/chem.201502937     9 368280400026  8
-## 16            10.1093/jac/dkv262     8 368246800008 10
-## 23    10.1021/acschembio.5b00624    11 366875400020 10
-## 43     10.1007/s10311-015-0526-2    18 365096700004  2
-## 69 10.1021/acs.inorgchem.5b01719     9 364175000028  8
+##    idd idj
+## 2    2  37
+## 4    4 272
+## 16  16 195
+## 23  23 436
+## 43  43 455
+## 69  69  37
+##                                                                                                                                                                                                                                 TI
+## 2                                                                                      Role of Temperature and Pressure on the Multisensitive Multiferroic Dicyanamide Framework [TPrA][Mn(dca)(3)] with Perovskite-like Structure
+## 4                                                                                                                    Exceptionally Inert Lanthanide(III) PARACEST MRI Contrast Agents Based on an 18-Membered Macrocyclic Platform
+## 16 Reduced susceptibility to biocides in Acinetobacter baumannii: association with resistance to antimicrobials, epidemiological behaviour, biological cost and effect on the expression of genes encoding porins and efflux pumps
+## 23                                                       Two Catechol Siderophores, Acinetobactin and Amonabactin, Are Simultaneously Produced by Aeromonas salmonicida subsp salmonicida Sharing Part of the Biosynthetic Pathway
+## 43                                                                                                                                                                        Conservation of stony materials in the built environment
+## 69                                                                                                                                                         Gd3+-Based Magnetic Resonance Imaging Contrast Agent Responsive to Zn2+
 ```
 
-En este segundo ejemplo, se buscan los documentos correspondientes a autores (que contiene `Abad` en su nombre):
+
+Como ejemplo adicional, se buscan los documentos correspondientes a autores
+(que contiene `"Abad"` en su nombre):
 
 
-```r
+``` r
 # View(db$Authors)
 iida <- with(db$Authors, ida[grepl('Abad', AF)])
 db$Authors$AF[iida]
@@ -1777,7 +1736,7 @@ db$Authors$AF[iida]
 ## [3] "Abad Vicente, J."    "Abada, Sabah"
 ```
 
-```r
+``` r
 idd <- with(db$AutDoc, idd[ida %in% iida])
 idd
 ```
@@ -1786,25 +1745,226 @@ idd
 ## [1] 273 291 518 586
 ```
 
-```r
-# View(db$Docs[idd, ])
-head(db$Docs[idd, -3])
+``` r
+# View(Docs[idd, ])
+head(Docs[idd, 1:3])
 ```
 
 ```
-##     idd idj      PT               DT  NR TC Z9 U1 U2     PD
-## 273 273 282 Journal          Article 107  8  8  0  0    SEP
-## 291 291 141 Journal Meeting Abstract   0  0  0  0  1  AUG 1
-## 518 518 272 Journal          Article 103  4  4  0  0 APR 20
-## 586 586 311 Journal          Article  32  2  2  2 19    APR
-##       PY VL    IS PN SU SI   MA   BP   EP AR
-## 273 2015 42 15-16               6205 6214   
-## 291 2015 36           1    P167    9    9   
-## 518 2015 21    17               6535 6546   
-## 586 2015 26     4                369  375   
-##                             DI D2 PG           UT an
-## 273 10.1016/j.eswa.2015.03.011    10 355063700018  7
-## 291                                1 361205101026 10
-## 518     10.1002/chem.201500155    12 352796100030 10
-## 586           10.1002/pat.3462     7 351472700012  6
+##     idd idj
+## 273 273 282
+## 291 291 141
+## 518 518 272
+## 586 586 311
+##                                                                                                                                                                                      TI
+## 273                                 Classification of mild cognitive impairment and Alzheimer's Disease with machine-learning techniques using H-1 Magnetic Resonance Spectroscopy data
+## 291 Identifying a population of patients suitable for the implantation of a subcutaneous defibrillator (S-ICD) among patients implanted with a conventional transvenous device (TV-ICD)
+## 518           Importance of Outer-Sphere and Aggregation Phenomena in the Relaxation Properties of Phosphonated Gadolinium Complexes with Potential Applications as MRI Contrast Agents
+## 586                                                                      Enhanced thermal conductivity of rheologically percolated carbon nanofiber reinforced polypropylene composites
 ```
+
+## Eficiencia en R: preasignación, vectorización y desfases {#eficiencia-manipR}
+
+R permite escribir código muy expresivo, pero no todas las formas de hacer lo mismo son igual de eficientes. A continuación se ilustran tres buenas prácticas habituales, empleando el paquete [`microbenchmark`](https://github.com/joshuaulrich/microbenchmark/) para comparar tiempos de ejecución (más fiable que una única medición con [`proc.time()`](https://rdrr.io/r/base/proc.time.html), ya que repite cada alternativa varias veces).
+
+**Preasignar en lugar de crecer un vector dentro de un bucle.** Cada vez que se amplía un vector elemento a elemento (`a[i] <- i` sin haber fijado antes su longitud), R puede tener que reservar memoria nueva y copiar todo el vector; si se preasigna con [`numeric()`](https://rdrr.io/r/base/numeric.html) (o `vector()`), el tamaño ya es el definitivo y no hay redimensionamientos:
+
+
+``` r
+library(microbenchmark)
+n <- 3e4
+microbenchmark(
+  crecer      = { a <- numeric(); for (i in seq_len(n)) a[i] <- i },
+  preasignado = { d <- numeric(n); for (i in seq_len(n)) d[i] <- i },
+  times = 10
+)
+```
+
+```
+## Unit: milliseconds
+##         expr     min      lq     mean   median      uq
+##       crecer 11.2600 12.2017 12.90545 12.93315 13.3264
+##  preasignado  3.0892  3.6697  6.03477  5.78825  8.1019
+##      max neval cld
+##  15.4908    10  a 
+##   9.3904    10   b
+```
+
+Con un `n` mucho mayor la diferencia se dispara (no se evalúa en el libro por el tiempo de cómputo que implicaría repetirlo varias veces):
+
+
+``` r
+n <- 1e8
+a <- numeric()
+system.time(for (i in seq_len(n)) a[i] <- i)
+d <- numeric(n)
+system.time(for (i in seq_len(n)) d[i] <- i)
+```
+
+**Usar funciones vectorizadas en lugar de [`apply()`](https://rdrr.io/r/base/apply.html).** Funciones como [`colMeans()`](https://rdrr.io/r/base/colSums.html) o [`rowSums()`](https://rdrr.io/r/base/colSums.html) están implementadas internamente en C y evitan el bucle (implícito) de `apply()`:
+
+
+``` r
+m <- matrix(rnorm(1e6), nrow = 1000)
+microbenchmark(
+  apply_mean = apply(m, 2, mean),
+  colMeans   = colMeans(m),
+  apply_sum  = apply(m, 1, sum),
+  rowSums    = rowSums(m),
+  times = 20
+)
+```
+
+```
+## Unit: milliseconds
+##        expr     min       lq      mean   median       uq
+##  apply_mean 17.8846 23.26870 25.467780 26.19270 27.43020
+##    colMeans  1.2296  1.36390  1.463310  1.46220  1.55245
+##   apply_sum 12.6796 14.78950 20.106695 16.27625 16.91945
+##     rowSums  1.2316  1.43565  2.263425  2.01455  3.30040
+##       max neval cld
+##   32.8468    20  a 
+##    1.8692    20   b
+##  101.8854    20  a 
+##    3.6706    20   b
+```
+
+**Calcular desfases (*lag*/*lead*) sin bucles.** Para comparar cada valor con el anterior (o el siguiente) de un vector, en R base basta con desplazar el vector y alinearlo con [`cbind()`](https://rdrr.io/r/base/cbind.html), en lugar de recorrerlo con un bucle:
+
+
+``` r
+a <- 1:11
+diff(a)                 # diferencias consecutivas
+```
+
+```
+##  [1] 1 1 1 1 1 1 1 1 1 1
+```
+
+``` r
+y <- c(NA, a[-length(a)])  # "lag": a desplazado una posición hacia atrás
+x <- c(a[-1], NA)          # "lead": a desplazado una posición hacia adelante
+cbind(original = a, lag = y, lead = x)
+```
+
+```
+##       original lag lead
+##  [1,]        1  NA    2
+##  [2,]        2   1    3
+##  [3,]        3   2    4
+##  [4,]        4   3    5
+##  [5,]        5   4    6
+##  [6,]        6   5    7
+##  [7,]        7   6    8
+##  [8,]        8   7    9
+##  [9,]        9   8   10
+## [10,]       10   9   11
+## [11,]       11  10   NA
+```
+
+En el Capítulo \@ref(tidyverse) se retoma este mismo desfase con `dplyr::lag()`/`lead()` (Sección \@ref(eficiencia-tidyverse)), comprobando que su sintaxis más legible no penaliza el rendimiento.
+
+## Resumen: R base {#resumen-manipR}
+
+A modo de referencia rápida, la siguiente tabla recoge las tareas más
+habituales de manipulación de datos vistas en este capítulo. En el
+Capítulo \@ref(tidyverse) se retomará esta misma lista mostrando el
+equivalente en `dplyr`/`tidyr` para cada tarea (ver el resumen
+comparativo de la Sección \@ref(resumen-tidyverse)):
+
+| Tarea                     | R base                              |
+|---------------------------|--------------------------------------|
+| Leer texto/CSV            | `read.table()`, `read.delim()`       |
+| Leer Excel                | `openxlsx::read.xlsx()`              |
+| Escribir texto/CSV        | `write.table()`                      |
+| Seleccionar columnas      | `df[, c("a","b")]`                   |
+| Renombrar columnas        | `names(df)[i] <- "x"`                |
+| Filtrar filas             | `subset(df, cond)`, `df[cond, ]`     |
+| Ordenar filas             | `df[order(df$x), ]`                  |
+| Crear/transformar variable| `df$z <- expr`                       |
+| Recodificar/categorizar   | `cut()`, `ifelse()`                  |
+| Resumir                   | `aggregate()`, `tapply()`            |
+| Agrupar y resumir         | `aggregate(y ~ g, df, FUN)`          |
+| Unir tablas (*join*)      | `merge()`                            |
+| Filtrar por coincidencia  | `df1[df1$x %in% df2$x, ]`            |
+| Encadenar operaciones     | llamadas anidadas                    |
+
+## Ejercicios {#ejercicios-manipR}
+
+Para practicar lo visto en este capítulo se proponen los siguientes
+ejercicios (los enunciados se dan sin solución; las soluciones se
+distribuyen aparte).
+
+
+``` r
+load("data/empleados.RData")
+```
+
+### Ejercicio 1: incremento salarial (`empleados`)
+
+A partir de los datos de `empleados` (Sección \@ref(read)), calcula para
+cada empleado el incremento salarial relativo respecto a su salario inicial:
+`incremento = salario / salini - 1`. Muestra los 5 empleados con mayor
+incremento porcentual, junto con su categoría laboral (`catlab`) y su
+antigüedad en meses (`tiempemp`).
+
+Para los siguientes ejercicios se empleará el conjunto de datos `starwars`
+(incluido en el paquete `dplyr`, aunque aquí se usa únicamente como fuente
+de datos, sin necesidad de emplear sus funciones):
+
+
+``` r
+data(starwars, package = "dplyr")
+starwars <- as.data.frame(starwars) # para evitar el formato tibble al imprimir
+```
+
+Para el ejercicio de unión de tablas se empleará además la siguiente tabla,
+creada manualmente, con información de algunos planetas:
+
+
+``` r
+planetas <- data.frame(
+  homeworld = c("Tatooine", "Naboo", "Alderaan", "Coruscant", "Kamino",
+                "Corellia", "Kashyyyk", "Ryloth", "Mirial", "Hoth"),
+  region    = c("Outer Rim", "Mid Rim", "Core Worlds", "Core Worlds", "Outer Rim",
+                "Core Worlds", "Mid Rim", "Outer Rim", "Outer Rim", "Outer Rim"),
+  clima     = c("Desértico", "Templado", "Templado", "Urbano", "Oceánico",
+                "Urbano", "Boscoso", "Húmedo", "Templado", "Helado")
+)
+```
+
+### Ejercicio 2: Filtrado y selección (`starwars`)
+
+Obtén el nombre, la altura, el peso y el planeta natal (`homeworld`) de los
+personajes de especie (`species`) `"Human"` con una altura (`height`)
+superior a 180 cm.
+
+### Ejercicio 3: Creación de una variable y categorización
+
+Calcula el índice de masa corporal (IMC = peso / altura^2^, con la altura en
+metros) de cada personaje, descartando aquellos con valores faltantes en
+peso o altura. A continuación, categoriza el IMC empleando los umbrales
+estándar de la OMS: menos de 18.5 "Bajo peso", de 18.5 a 25 "Normal", de 25
+a 30 "Sobrepeso" y 30 o más "Obesidad". Indica cuántos personajes hay en
+cada categoría.
+
+### Ejercicio 4: Resumen y agrupación
+
+Calcula la altura media y el número de personajes por especie, considerando
+únicamente las especies con al menos 3 personajes, y ordena el resultado de
+mayor a menor altura media.
+
+### Ejercicio 5: Unión de tablas
+
+Une `starwars` con `planetas` por la columna `homeworld` y muestra, para cada
+personaje, su nombre, `homeworld`, región y clima. ¿Qué ocurre con los
+personajes cuyo planeta no aparece en `planetas` (o cuyo `homeworld` es
+`NA`)? ¿Y con `"Hoth"`, que está en `planetas` pero no es el planeta natal de
+ningún personaje?
+
+### Ejercicio 6 (opcional): columnas-lista
+
+`starwars` incluye columnas que son listas, como `films` (las películas en
+las que aparece cada personaje). Calcula en cuántas películas aparece cada
+personaje y muestra los que más aparecen.
+

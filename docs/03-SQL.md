@@ -1,6 +1,4 @@
-Introducción al lenguaje SQL
-============================
-
+# Introducción al lenguaje SQL {#introSQL}
 
 
 
@@ -8,7 +6,7 @@ Introducción al lenguaje SQL
 Los sistemas de información gestionan repositorios de información en múltiples formatos, 
 siendo el más popular las bases de datos relacionales a las que se accede mediante SQL (Structured Query Language).
 
-El ejemplo que trabajaremos en este capítulo está disponible en Kaggle: [www.kaggle.com/gltaboada/sqlite-tutorial-in-r](https://www.kaggle.com/gltaboada/sqlite-tutorial-in-r)
+El ejemplo que trabajaremos en este capítulo está disponible en Kaggle: [kaggle.com/code/diegodx/txd-2026-tutorialsql](https://www.kaggle.com/code/diegodx/txd-2026-tutorialsql)
 
 ## Bases de Datos Relacionales
 
@@ -20,11 +18,11 @@ El ejemplo que trabajaremos en este capítulo está disponible en Kaggle: [www.k
 
 * **Base de datos**: colección de datos de un determinado dominio relacionados entre sí, organizados de forma que sea posible manipularlos y recuperarlos de forma eficiente.
 
-* Sistema de Gestión de Bases de Datos (**SGBD**) (en inglés **RDBMS**, Relational Database Management System): software que permite a los usuarios crear y manipular bases de datos mediante operaciones CRUD:
-	+ Crear / Insertar Datos (Create)
-	+ Consultar / Leer (Read)
-	+ Actualizar / Modificar (Update)
-	+ Eliminar (Delete)
+* Sistema de Gestión de Bases de Datos (**SGBD**) (en inglés **RDBMS**, Relational Database Management System): software que permite a los usuarios crear y manipular bases de datos mediante operaciones **CRUD**:
+	+ **C**reate: Crear / Insertar datos
+	+ **R**read: Consultar / Leer datos
+	+ **U**pdate: Actualizar / Modificar datos
+	+ **D**elete: Eliminar datos
 
 ***
 
@@ -33,30 +31,22 @@ El ejemplo que trabajaremos en este capítulo está disponible en Kaggle: [www.k
 	+ Integridad: reglas para relaciones los elementos
 	+ Manipulación: operaciones sobre los datos adaptadas a la estructura y reglas
 
-* Modelo de datos conceptual **Entidad Relación** (entidades, relaciones, atributos)
+* Modelo **Entidad Relación** (entidades, relaciones, atributos)
+
+![](images/modelo-ER.png){width=400px}
 
 * Modelo de datos lógico o de representación (**modelo relacional** de Codd)
 	+ Datos en relaciones (tablas)
 	+ Base matemática formal
 	+ Flexible
 
+![](images/modelo-relacional.png){width=600px}
+
 * Modelo de datos físico (tal y como se almacenan los datos)
 
-Una fila de la tabla (relación) es una tupla y una columna un atributo (ver Figura \@ref(fig:relacion)). 
+Una fila de la tabla (relación) es una tupla y una columna un atributo. 
 
-(ver Figura \@ref(fig:relacion))
-
-(ver Figura \@ref(fig:relacion))
-
-
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{images/Relacion} 
-
-}
-
-\caption{Esquema de una relación.}(\#fig:relacion)
-\end{figure}
+![](images/Relacion.png){width=600px}
 
 Una base de datos es un conjunto de tablas (al menos una).
 
@@ -72,23 +62,20 @@ La tabla no es una relación porque la relación es un conjunto sin orden y una 
 
 * Restricción de **integridad**: regla que debe cumplir la información registrada en la base de datos para garantizar la integridad de la información.
 
-Cualquier Base de Datos basada en el modelo relacional ha de cumplir como mínimo estas restricciones (además de las propias del dominio):
+## Restricciones
 
-* Restricción de dominio: el valor de cada atributo debe de ser único (teléfono, no valor único), no descomponible (nombre completo descomponible en nombre y apellidos, domicilio en calle, CP, localidad, etc...)
+Cualquier Base de Datos basada en el modelo relacional debería cumplir como mínimo estas restricciones (además de las propias del dominio):
 
-* Una relación es un conjunto de tuplas, por tanto todas las tuplas son distintas.
+* **Restricción de dominio**: Cada atributo debe tener un tipo de valores permitido, asegurando que sólo se almacenan datos válidos y consistentes
+* **Atributos atómicos**: Cada atributo debe almacenar valores indivisibles (nombre completo descomponible en nombre y apellidos, domicilio en calle, CP, localidad, etc...)
+* **Unicidad**: Co pueden existir dos tuplas iguales. Para ello se definen claves: 
+	* Una **superclave** es un subconjunto de atributos tal que no existen dos tuplas con la misma superclave.
+	> Ejercicio. En la relación Empleado(dni, nombre, apellidos, email) ¿cuántas superclaves existen?
+	* Una **clave candidata** es una superclave mínima (superclave mínima es la clave a la que no se le puede eliminar un atributo). 
+	> ¿Cuántas claves candidatas hay en el ejemplo anterior?
+	* La **clave primaria** es la clave candidata que elegimos que identificar de forma unívoca las tuplas de una relación. Restricción de integridad de entidad: Ningún valor de la clave primaria puede ser un valor nulo.
 
-* Una **superclave** es un subconjunto de atributos tal que no existen dos tuplas con la misma superclave. 
-
-> Ejercicio. En la relación Empleado(dni, nombre, apellidos, email) ¿cuántas superclaves existen?
-
-* Una **clave candidata** es una superclave mínima (superclave mínima es la clave a la que no se le puede eliminar un atributo). 
-
-> ¿Cuántas claves candidatas hay en el ejemplo anterior?
-
-* **Clave primaria** es la clave candidata que elegimos que identificar de forma unívoca las tuplas de una relación. Restricción de integridad de entidad: Ningún valor de la clave primaria puede ser un valor nulo.
-
-* **Clave foránea** es un conjunto de atributos de una relación R_1 que, para cada tupla, identifican a otra tupla de una relación R_2 con la que está relacionada. 
+* Una **clave foránea** es un conjunto de atributos de una relación R_1 que, para cada tupla, identifican a otra tupla de una relación R_2 con la que está relacionada. 
 La Restricción de integridad referencial nos dice que la clave foránea ha de corresponderse con la clave primaria de R_2, y si la clave foránea no es nula ha de refir a una tupla en R_2.
 
 ![](images/ClaveForanea.png){width=600px}
@@ -97,139 +84,660 @@ La Restricción de integridad referencial nos dice que la clave foránea ha de c
 
 Si borramos/actualizamos un valor de clave foránea podemos: (a) prohibir el cambio, o (b) poner a nulo la clave foránea (borrado) o propagar el cambio (modificación).
 
-***
+## Sistemas Gestores de Bases de Datos (SGDB)
 
-* Ventajas de SGBD:
-	+ Administración centralizada de los datos (por un administrador en un servidor/plataforma central que evita la información en silos -redundante/inconsistente)
-	+ Desacoplado del almacenamiento físico de los datos (no es necesario conocerlo)
-	+ Simplicidad de acceso (ODBC + SQL, lenguaje declarativo)
-	+ Control de integridad (restricciones genéricas, integridad de entidad y referencial, de dominio, y las del dominio en software)
-	+ Control de acceso concurrente (evita inconsistencia)
-	+ Seguridad (autenticación, roles de acceso)
-	+ Recuperación ante fallos (backup, logs y transacciones -rollback-)
+Utilizar un SGDB tiene múltiples ventajas:
 
+* Administración centralizada de los datos (por un administrador en un servidor/plataforma central que evita la información en silos -redundante/inconsistente)
+* Desacoplamiento del almacenamiento físico de los datos (no es necesario conocerlo)
+* Simplicidad de acceso (ODBC + SQL, lenguaje declarativo)
+* Control de integridad (restricciones genéricas, integridad de entidad y referencial, de dominio, y las del dominio en software)
+* Control de acceso concurrente (evita inconsistencia)
+* Seguridad (autenticación, roles de acceso)
+* Recuperación ante fallos (backup, logs y transacciones -rollback-)
+
+Existen muchos SGDBs, pero los más populares son:
+
+* **SQLite**: es muy ligero, no necesita un servidor para ejecutarse y es muy rápido cuando el conjunto de datos es pequeño.
+	* Su escalabilidad y concurrencia son muy limitadas
+	* Ideal para proyectos pequeños, aplicaciones locales o móviles y prácticas de TXD 
+	* Usado en Google Chrome, Firefox, Safari, Dropbox (app de escritorio)
+	* Es de dominio público
+* **MySQL**: requiere un servidor para ejecutarse, cuenta con soporte en la nube
+	* Presenta buena escalabilidad y concurrencia
+	* Es muy utilizado en aplicaciones web de tamaño medio
+	* Usado en Wordpress, y en general un gran porcentaje de páginas y aplicaciones web de tamaño pequeño y mediano. Incluso sitios grandes como Wikipedia o Facebook emplean variantes de MySQL.
+	* Licencia GPL (con variantes comerciales)
+* **PostgreSQL**: también requiere un servidor y tiene soporte en la nube
+	* Su escalabilidad es excelente, óptimo para grandes cantidades de datos
+	* Cuenta con muchas extensiones para, por ejemplo, información geográfica (PostGIS), series temporales (TimescaleDB), etc.
+	* Ideal para sistemas complejos, analíticos o con alta concurrencia
+	* Usado en Reddit, Instagram, Spotify, Netflix, ...
+	* Licencia propia tipo MIT
+* Otros SGDBs relacionales: MariaDB (derivado de MySQL), Microsoft SQL Server, Oracle
+
+Ranking de popularidad según [DB-Engines](http://db-engines.com). La puntuación está calculada en función del número de menciones en páginas web, interés general en los sitemas, frecuencia de discusiones técnias, cantidad de ofertas de trabajo, relevancia en redes sociales, etc.
+
+| 2025  | 2024  | SGDB  | Modelo                        | Puntuacion    | Var   |
+|------:|------:|-------|-------------------------------|---------------|-------|
+| 1. |1. |Oracle               |Relacional, Multi-modelo  |1212.77         |-96.67 |
+| 2. |2. |MySQL                |Relacional, Multi-modelo  |879.66                 |-143.09 |
+| 3. |3. |Microsoft SQL Server |Relacional, Multi-modelo  |715.05 |-87.04 |
+| 4. |4. |PostgreSQL           |Relacional, Multi-modelo  |643.20         |-8.96 |
+| 5. |5. |MongoDB              |Documental, Multi-modelo  |368.01 |-37.20 |
+| 6. |7. |Snowflake            |Relacional                |198.65    |+58.05 |
+| 7. |6. |Redis                |Clave-valor, Multi-modelo |142.33   |-7.30 |
+| 8. |14. |Databricks          |Multi-modelo              |128.80   |+43.21 |
+| 9. |9. |IBM Db2              |Relacional, Multi-modelo  |122.37  |-0.40 |
+| 10. |8. |Elasticsearch       |Multi-modelo              |116.67   |-15.18 |
+| 11. |11. |Apache Cassandra   |Wide column, Multi-modelo |105.16 |+7.56 |
+| 12. |10. |SQLite             |Relacional                |104.56     |+2.64 |
+| 13. |15. |MariaDB            |Relacional, Multi-modelo  |87.77 |+2.88 |
+| 14. |12. |Microsoft Access   |Relacional                |80.79   |-11.36 |
+| 15. |17. |Amazon DynamoDB    |Multi-modelo              |75.91  |+4.06 |
 
 ## Sintaxis SQL
 
-A continuación 27 clásulas SQL básicas
+SQL (Structured Query Language) es un lenguaje declarativo.
+Es un lenguaje estándar: tiene un estándar oficial definido por ISO y ANSI.
+Sin embargo, en la práctica cada SGDB implementa solo una parte de él, y además tiene sus propios dialectos, en los que puede variar por ejemplo lo siguiente:
 
-### Extracción SQL (11 statements)
+* Tipos de datos (TEXT, VARCHAR, BLOB, etc.)
+* Distinción o no de mayúsculas y minúsculas (cap sensitiveness)
+* Cómo se manejan las transacciones
+* Funciones (LENGTH(), LEN(), etc.)
+* Formato de fechas
+* Gestión de triggers
+* ...
+
+Sintaxis general:
+
+* Consulta
 
 
-```r
-SELECT column1, column2....columnN
-FROM   table_name;
-
-SELECT DISTINCT column1, column2....columnN
-FROM   table_name;
-
-SELECT column1, column2....columnN
-FROM   table_name
-WHERE  CONDITION;
-
-SELECT column1, column2....columnN
-FROM   table_name
-WHERE  CONDITION-1 {AND|OR} CONDITION-2;
-
-SELECT column1, column2....columnN
-FROM   table_name
-WHERE  column_name IN (val-1, val-2,...val-N);
-
-SELECT column1, column2....columnN
-FROM   table_name
-WHERE  column_name BETWEEN val-1 AND val-2;
-
-SELECT column1, column2....columnN
-FROM   table_name
-WHERE  column_name LIKE { PATTERN };
-
-SELECT column1, column2....columnN
-FROM   table_name
-WHERE  CONDITION
-ORDER BY column_name {ASC|DESC};
-
-SELECT SUM(column_name)
-FROM   table_name
-WHERE  CONDITION
-GROUP BY column_name;
-
-SELECT COUNT(column_name)
-FROM   table_name
-WHERE  CONDITION;
-
-SELECT SUM(column_name)
-FROM   table_name
-WHERE  CONDITION
-GROUP BY column_name
-HAVING (arithematic function condition);
+``` sql
+  SELECT <campo/s>
+  FROM <tabla>
+  WHERE <condición>
+  GROUP BY <campo>
+  HAVING <condición>
+  ORDER BY <campo>
+  LIMIT <m> OFFSET <n>
 ```
 
-### Crear/Actualizar/Borrar tablas SQL (8 statements)
+* Modificación
 
 
-
-```r
-CREATE TABLE table_name(
-column1 datatype,
-column2 datatype,
-column3 datatype,
-.....
-columnN datatype,
-PRIMARY KEY( one or more columns )
-);
-
-DROP TABLE table_name;
-
-CREATE UNIQUE INDEX index_name
-ON table_name ( column1, column2,...columnN);
-
-ALTER TABLE table_name
-DROP INDEX index_name;
-
-DESC table_name;
-
-TRUNCATE TABLE table_name;
-
-ALTER TABLE table_name {ADD|DROP|MODIFY} column_name {data_ype};
-
-ALTER TABLE table_name RENAME TO new_table_name;
+``` sql
+  UPDATE <tabla>
+  SET <cambios>
+  WHERE <condición>
 ```
 
-### Añadir/Actualizar/Borrar tuplas en SQL (3 statements)
+* Borrado
 
 
-```r
+``` sql
+  DELETE FROM <tabla>
+  WHERE <condición>
+```
+
+## Cláusulas básicas de SQL
+
+### Selección de campos
+
+* Seleccionar todas las columnas de una tabla: 
+
+
+``` sql
+  SELECT * FROM Track;  
+```
+
+* Seleccionar columnas específicas: 
+
+
+``` sql
+  SELECT name, composer FROM Track; 
+```
+
+* Alias de columna y tabla: 
+
+
+``` sql
+  SELECT name AS Canción FROM Track; 
+
+  SELECT T.name FROM Track AS T;
+```
+
+* Funciones de agregación: 
+
+
+``` sql
+  SELECT COUNT(*), SUM(UnitPrice), MIN(UnitPrice), MAX(UnitPrice) FROM Track; 
+
+  SELECT AVG(milliseconds) AS 'Duración Media' FROM Track; 
+```
+
+* Formato: 
+
+
+``` sql
+  SELECT CONCAT(FirstName, ' ', LastName) AS Nombre FROM Employee; 
+
+  SELECT (FirstName || ' ' || LastName) AS Nombre FROM Employee; 
+
+  SELECT ROUND(AVG(Total), 2) AS 'Facturacion Media' FROM Invoice; 
+```
+
+### Número de filas (paginación) 
+
+* Obtener las N primeras: 
+
+
+``` sql
+  SELECT * FROM Track
+  ORDER BY title ASC
+  LIMIT 5;
+```
+
+* Obtener las N filas siguientes:
+
+
+``` sql
+  SELECT * FROM Track
+  ORDER BY title ASC
+  OFFSET 5 LIMIT 5;
+```
+
+### Filtrado de Resultados 
+
+* Filtrado de duplicados: 
+
+
+``` sql
+  SELECT DISTINCT FirstName FROM Customer; 
+
+  SELECT COUNT(DISTINCT FirstName) FROM Customer; 
+```
+
+* Seleccionar filas con condiciones: 
+
+
+``` sql
+SELECT name FROM Track
+WHERE UnitPrice < 2.0; 
+```
+
+* Múltiples condiciones: 
+
+  * Operadores: 'AND', 'OR', 'LIKE', 'NOT', 'IS NULL', 'IS NOT NULL' 
+                'BETWEEN x AND y', 'IN (lista)' 
+                
+
+``` sql
+  SELECT name FROM Track
+  WHERE milliseconds > 120000 AND UnitPrice < 2.0; 
+```
+ 
+
+``` sql
+  SELECT name FROM Track
+  WHERE composer LIKE 'Metallica' OR composer LIKE 'Ulrich'; 
+```
+ 
+* Coincidencias parciales: 
+
+
+``` sql
+  SELECT * FROM Track
+  WHERE name LIKE '%Love%'; 
+```
+
+  + '%' : Reemplazo por un conjunto de caracteres 
+  + '_' : Reemplazo por un caracter 
+
+* Rangos: 
+
+
+``` sql
+  SELECT * FROM Track
+  WHERE UnitPrice BETWEEN 0.5 AND 1.5; 
+```
+
+* Valores en una lista: 
+
+
+``` sql
+  SELECT * FROM Track
+  WHERE composer IN ('Metallica', 'Ulrich'); 
+```
+
+### Ordenación de Resultados 
+
+* Ordenar por una columna: 
+
+
+``` sql
+  SELECT * FROM Track
+  ORDER BY title ASC; 
+
+  SELECT * FROM Track
+  ORDER BY title DESC; 
+```
+
+* Ordenar por múltiples columnas: 
+
+
+``` sql
+  SELECT * FROM Track
+  ORDER BY composer ASC, title DESC; 
+```
+
+### Unión de tablas
+
+* Intersección por clave primaria / clave foránea: 
+
+  + Operador A *[INNER] JOIN* B: interesección de A y B
+
+
+``` sql
+  SELECT ar.Name AS Artista, a.Title AS Album
+  FROM Artist ar JOIN Album a ON ar.ArtistId = a.ArtistId;
+```
+    
+  + Operador A *LEFT JOIN* B: interesección de A y B, y filas de A sin correspondencia en B
+  
+
+``` sql
+  SELECT ar.Name AS Artista, a.Title AS Album
+  FROM Artist ar LEFT JOIN Album a ON ar.ArtistId = a.ArtistId;
+```
+
+  + Operador A *RIGHT JOIN* B:  interesección de A y B, y filas de B sin correspondencia en A
+  
+  + A 'FULL [OUTER] JOIN' B: interesección de A y B, y filas de A y B sin correspondencia
+
+  + sqlite no soporta directamente RIGHT JOIN ni FULL JOIN
+
+* Producto cartesiano
+
+
+``` sql
+  SELECT g.Name AS Genero, m.Name AS Formato
+  FROM Genre g CROSS JOIN MediaType m
+```
+
+### Agrupamiento
+
+* Funciones de agregación parciales
+
+
+``` sql
+  SELECT A.Title AS Album, COUNT(*) AS Canciones, SUM(UnitPrice) AS Precio 
+  FROM Album A JOIN Track T ON A.AlbumId = T.AlbumId 
+  GROUP BY A.Title; 
+```
+
+  + *CONSEJO:* Es importante agrupar por *clave candidata* o *superclave*.
+    La consulta anterior daría resultados incorrectos si existen dos álbumes diferentes con el mismo título.
+    Mejor:
+
+
+``` sql
+  SELECT A.Title AS Album, COUNT(*) AS Canciones, SUM(UnitPrice) AS Precio 
+  FROM Album A JOIN Track T ON A.AlbumId = T.AlbumId 
+  GROUP BY A.AlbumId;
+```
+
+  + Además, también es importante que ese campo de agrupación o algo que garantice la identificación unívoca
+    se presente en los resultados. En el ejemplo anterior sí aparecerían los álbumes por separado, pero no
+    sería posible identificar cuál es cuál en los resultados. Mejor:
+    
+
+``` sql
+  SELECT A.AlbumId, A.Title AS Album, COUNT(*) AS Canciones, SUM(UnitPrice) AS Precio 
+  FROM Album A JOIN Track T ON A.AlbumId = T.AlbumId 
+  GROUP BY A.AlbumId;
+```
+
+  + Incluso mejor, si asumimos que no habrá un artista con dos álbumes con el mismo nombre:
+
+
+``` sql
+  SELECT AR.Name AS Artista, AS Album, COUNT(*) AS Canciones, SUM(UnitPrice) AS Precio 
+  FROM Album A JOIN Track T ON A.AlbumId = T.AlbumId
+               JOIN Artist AR ON A.ArtistId = AR.ArtistId 
+  GROUP BY A.AlbumId;
+```
+
+* Filtrado por grupos (seleccionar grupos con condiciones)
+
+
+``` sql
+  SELECT AR.Name AS Artista, AS Album, COUNT(*) AS Canciones, SUM(UnitPrice) AS Precio
+  FROM Album A JOIN Track T ON A.AlbumId = T.AlbumId 
+  GROUP BY A.AlbumId
+  HAVING Canciones > 6; 
+```
+
+### Subconsultas (subqueries)
+
+* Subqueries en la cláusula SELECT:
+
+  + La consulta debe devolver una única columna, y típicamente un único valor 
+ 
+
+``` sql
+  SELECT T.Name, (SELECT COUNT(*) 
+                  FROM Track T2 
+                  WHERE T2.GenreId = T.GenreId) AS Canciones 
+  FROM Track T JOIN Genre G ON T.GenreId = G.GenreId; 
+```
+
+  + *Observación:* en una subquery se puede hacer referencia a columnas de la consulta externa. 
+
+* Subqueries en la cláusula WHERE / HAVING:
+
+
+``` sql
+  SELECT T.Name, T.Milliseconds 
+  FROM Track T 
+  WHERE T.Milliseconds > (SELECT AVG(Milliseconds) FROM Track);  
+```
+
+* Subqueries en la cláusula FROM:
+
+
+``` sql
+  SELECT T.Song, G.Name 
+  FROM Genre G JOIN (SELECT Name AS Song, GenreId as Id 
+                     FROM Track) AS T 
+               ON Id = G.GenreId 
+```
+
+### Operaciones con conjuntos de resultados
+
+
+``` sql
+  Query1 
+  { UNION [ ALL ] | INTERSECT | EXCEPT } 
+  Query2 
+```
+
+* Query1 y Query2 deben devolver el *mismo número de columnas*, pero no necesariamente el mismo tipo de dato.
+  Elimina filas duplicadas.
+* **Unión:** Resultados existentes en alguna consulta (eq. OR)
+* **Intersección:** Resultados existentes en ambas consultas (eq. AND) 
+* **Diferencia (Except):** Resultados existentes en Query1 pero no en Query2 (eq. MINUS) 
+* Cláusula **UNION ALL**: Elimina la restricción de filas duplicadas y muestra todo
+ 
+
+## Gestión de datos
+
+### Operaciones CRUD
+
+#### Inserción de tuplas
+
+
+``` sql
 INSERT INTO table_name( column1, column2....columnN)
 VALUES ( value1, value2....valueN);
+```
 
+* El número de valores **debe coincidir** con el número de columnas especificadas
+
+* Si alguna columna de la tabla no se indica, su valor será el indicado por defecto o **NULL**
+  * Por ejemplo, AUTOINCREMENT
+  
+* Si no se especifica alguna columna con restricción **NOT NULL**, la inserción producirá un error
+
+* Igualmente, dará error si no se cumple cualquier otra restricción
+
+* Es posible insertar datos a partir de otra consulta:
+
+
+``` sql
+INSERT INTO TopClientes (nombre, gasto_total)
+  SELECT nombre, SUM(importe)
+  FROM Ventas
+  GROUP BY nombre
+  HAVING SUM(monto) > 1000;
+```
+
+#### Modificación de datos
+
+
+``` sql
 UPDATE table_name
 SET column1 = value1, column2 = value2....columnN=valueN
 [ WHERE  CONDITION ];
+```
 
+* Si no se incluye WHERE, se actualiza toda la tabla. Lo más habitual es utilizar la clave primaria en el WHERE.
+
+* Se puede actualizar una columna a partir de un cálculo:
+
+
+``` sql
+UPDATE Ventas
+SET total = cantidad * precio_unitario;
+```
+
+* Se puede actualizar a partir de una consulta
+
+
+``` sql
+UPDATE Album
+SET artista_id = (
+    SELECT id FROM Artista WHERE nombre = 'Queen'
+  )
+WHERE titulo = 'A Night at the Opera';
+```
+
+* Si la actualización afecta una columna usada en la condición, la comprobación se hace sobre el valor original, no el nuevo.
+
+* Al actualizar también se verifican las restricciones
+
+* Buenas prácticas:
+  * Realizar copias de seguridad antes de actualizaciones masivas.
+  * Usar transacciones si se actualizan varias tablas relacionadas.
+  * No modificar claves primarias salvo necesidad justificada.
+  * Revisar restricciones de integridad antes de ejecutar.
+
+#### Eliminación de datos
+
+
+``` sql
 DELETE FROM table_name
 WHERE  {CONDITION};
 ```
 
-### Gestión Bases de Datos (5 statements)
+* Antes de borrar, se comprueban las restricciones de la Base de Datos.
+* Al usar DELETE, los valores de una columna AUTOINCREMENT no se modifican: el siguiente INSERT seguirá con el siguiente número disponible.
+* Buenas prácticas:
+  * Siempre incluir WHERE salvo que se quiera vaciar la tabla.
+  * Comprobar cuántas filas se afectarán con SELECT COUNT(*) ... antes.
+  * Usar transacciones para borrados masivos o dependientes.
+  * Revisar reglas ON DELETE en claves foráneas (para evitar borrados en cascada inesperados).
+  * Realizar copia de seguridad antes de operaciones grandes.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/i_cVJgIz_Cs" frameborder="0" allowfullscreen></iframe>
+
+#### Gestión de transacciones
 
 
-```r
-CREATE DATABASE database_name;
+``` sql
+BEGIN;
 
-DROP DATABASE database_name;
-
-USE database_name;
-
+  ...
+  
 COMMIT;
 
 ROLLBACK;
 ```
 
+* Ejemplo: si alguna operación falla, no se realiza ninguna
 
-### Ejemplos de consultas SQL
+
+``` sql
+BEGIN;
+  INSERT INTO Pedido VALUES (1, '2025-11-04', 100);
+  UPDATE Cliente SET saldo = saldo - 100 WHERE id = 1;
+COMMIT;
+```
+
+* Las transacciones cumplen las propiedades **ACID**
+
+| Propiedad                   | Significado                                                                    |
+| --------------------------- | ------------------------------------------------------------------------------ |
+| **Atomicidad**              | Todas las operaciones se ejecutan como una sola — o todas, o ninguna.          |
+| **Consistencia**            | Los datos pasan de un estado válido a otro estado válido.                      |
+| **Aislamiento (Isolation)** | Cada transacción se ejecuta como si fuera la única.                            |
+| **Durabilidad**             | Una vez hecho COMMIT, los cambios se hacen persistentes.                       |
+
+* Los cambios realizados no son visibles para otras conexiones hasta que se hace COMMIT
+
+* Inserciones/actualizaciones en bloque son mucho más rápidas dentro de una transacción
+
+## Gestión de Bases de Datos
+
+### Creación de una base de datos
 
 
-```r
+``` sql
+CREATE DATABASE database_name;
+```
+
+### Eliminación de una base de datos
+
+
+``` sql
+DROP DATABASE database_name;
+```
+
+### Selección de base de datos
+
+
+``` sql
+USE database_name;
+```
+
+## Gestión de tablas
+
+### Creación de tablas
+
+
+``` sql
+CREATE TABLE [IF NOT EXISTS] table_name (
+  column1 datatype [constraints],
+  column2 datatype [constraints],
+  ...
+  columnN datatype [constraints],
+  [table_constraints])
+);
+```
+
+#### Tipos de datos
+
+| Propósito / tipo lógico               | **SQLite**                                        | **MySQL**                                           | **PostgreSQL**                                 |
+| ------------------------------------- | ------------------------------------------------- | --------------------------------------------------- | ---------------------------------------------- |
+| **Enteros (números sin decimales)**   | `INTEGER` / `INT` / `SMALLINT` / `BIGINT`         | `TINYINT`, `SMALLINT`, `MEDIUMINT`, `INT`, `BIGINT` | `SMALLINT`, `INTEGER`, `BIGINT`                |
+| **Números reales / decimales**        | `REAL` / `FLOAT` / `DOUBLE` / `NUMERIC`           | `FLOAT`, `DOUBLE`, `DECIMAL(p,s)`                   | `REAL`, `DOUBLE PRECISION`, `NUMERIC(p,s)`     |
+| **Texto / cadenas**                   | `TEXT`, `CHAR(n)`, `VARCHAR(n)`                   | `CHAR(n)`, `VARCHAR(n)`, `TEXT`                     | `CHAR(n)`, `VARCHAR(n)`, `TEXT`                |
+| **Valores booleanos**                 | `BOOLEAN`                                         | `BOOLEAN` / `TINYINT(1)` *(interpreta 0/1)*         | `BOOLEAN` *(nativo)*                           |
+| **Fechas y horas**                    | `DATE`, `TIME`, `DATETIME`, `TIMESTAMP`           | `DATE`, `TIME`, `DATETIME`, `TIMESTAMP`             | `DATE`, `TIME`, `TIMESTAMP`, `INTERVAL`        |
+| **Información binaria**               | `BLOB`                                            | `BLOB`, `BINARY`, `VARBINARY`                       | `BYTEA`                                        |
+
+#### Restricciones a nivel de columna:
+
+| Restricción                     | Descripción                                       | Ejemplo                                     |
+| ------------------------------- | ------------------------------------------------- | ------------------------------------------- |
+| **`PRIMARY KEY`**               | Clave primaria | `id INTEGER PRIMARY KEY`         | `id INTEGER PRIMARY KEY`                    |
+| **`AUTOINCREMENT`**             | Hace que un `INTEGER PRIMARY KEY` aumente siempre | `id INTEGER PRIMARY KEY AUTOINCREMENT`      |
+| **`NOT NULL`**                  | No permite valores nulos                          | `nombre TEXT NOT NULL`                      |
+| **`UNIQUE`**                    | Impide valores duplicados                         | `email TEXT UNIQUE`                         |
+| **`CHECK (condición)`**         | Impone una condición lógica                       | `edad INTEGER CHECK (edad >= 0)`            |
+| **`DEFAULT valor`**             | Asigna un valor por defecto si no se especifica   | `pais TEXT DEFAULT 'España'`                |
+| **`REFERENCES tabla(columna)`** | Define una **clave foránea**                      | `artista_id INTEGER REFERENCES Artista(id)` |
+
+* En una **clave foránea** se puede especificar el trigger **ON DELETE** para determina qué ocurre cuando se elimina la tupla referenciada:
+  * **CASCADE**: Se borran todas las filas que referencian a la tupla eliminada
+  * **SET NULL**: Se pone a nulo la clave foránea
+  * **SET DEFAULT**: Se pone la clave foránea al valor definido como DEFAULT
+  * **RESTRICT**: Impide eliminar la fila referenciada (valor por defecto)
+* Con ninguna de estas acciones la base de datos puede quedar en un estado inconsistente
+ 
+#### Restricciones a nivel de tabla:
+
+| Tipo                                 | Descripción              | Ejemplo                                           |
+| ------------------------------------ | ------------------------ | ------------------------------------------------- |
+| **PRIMARY KEY (col1, col2)**         | Clave primaria compuesta | `PRIMARY KEY (id, nombre)`                        |
+| **UNIQUE (col1, col2)**              | Combinación única        | `UNIQUE (email, pais)`                            |
+| **CHECK (condición)**                | Condición general        | `CHECK (precio > 0 OR descuento IS NOT NULL)`     |
+| **FOREIGN KEY (col) REFERENCES ...** | Clave foránea explícita  | `FOREIGN KEY (artista_id) REFERENCES Artista(id)` |
+
+### Creación de índices
+
+
+``` sql
+CREATE UNIQUE INDEX index_name
+ON table_name ( column1, column2,...columnN);
+```
+
+### Borrado de tablas
+
+
+``` sql
+DROP TABLE table_name;
+```
+
+### Modificación de tablas
+
+
+``` sql
+ALTER TABLE table_name
+DROP INDEX index_name;
+
+ALTER TABLE table_name
+{ADD|DROP|MODIFY} column_name {data_ype};
+
+ALTER TABLE table_name RENAME TO new_table_name;
+```
+
+## Vistas
+
+Una vista es una **consulta guardada** que actúa como una tabla virtual. Facilita reutilizar consultas o simplificar código.
+
+* Creación de una vista
+
+
+``` sql
+CREATE [TEMP] VIEW [IF NOT EXISTS] view_name AS
+    SELECT...;
+```
+
+* Vistas temporales
+
+Al añadir "TEMP" a la creación de la vista, sólo existe durante la sesión actual.
+Se borra al desconectarse de la Base de Datos.
+
+* Eliminación de vistas
+
+Se puede eliminar una vista, tanto temporal como permanente:
+
+
+``` sql
+DROP VIEW view_name;
+```
+
+- Las vistas en SQLite **no almacenan datos**, solo la consulta.
+- Para hacer vistas modificables (actualizables) la consulta debe cumplir ciertas condiciones: una sola tabla, sin agregaciones.
+
+
+## Ejemplos de consultas SQL
+
+
+``` sql
 SELECT Nombre, Apellido1, Apellido2, Municipio, Provincia 
 FROM Cliente
 WHERE Municipio = 'Lugo'
@@ -244,8 +752,8 @@ WHERE IdProducto = 963
 
 DELETE Cliente
 WHERE Email = 'alexandregb@gmail.com'
-```
 
+```
 
 
 ## Conexión con bases de datos desde R 
@@ -275,12 +783,12 @@ datos, solamente el uso de SQL para extraer datos con el objetivo de ser analiza
 
 
 
-```r
+``` r
 library(sqldf)
 ```
 
 
-```r
+``` r
 sqldf('SELECT age, circumference FROM Orange WHERE Tree = 1 ORDER BY circumference ASC')
 ```
 
@@ -300,7 +808,7 @@ sqldf('SELECT age, circumference FROM Orange WHERE Tree = 1 ORDER BY circumferen
 El comando inicial es SELECT. SQL no es case-sensitive, por lo que esto va a funcionar:
 
 
-```r
+``` r
 sqldf("SELECT * FROM iris")
 sqldf("select * from iris")
 ```
@@ -308,14 +816,14 @@ sqldf("select * from iris")
 pero lo siguiente no va a funcionar (a menos que tengamos un objeto IRIS:
 
 
-```r
+``` r
 sqldf("SELECT * FROM IRIS")
 ```
 
 La sintaxis básica de SELECT es:
 
 
-```r
+``` r
 SELECT variable1, variable2 FROM data
 ```
 
@@ -324,7 +832,7 @@ SELECT variable1, variable2 FROM data
 Lo extrae todo
 
 
-```r
+``` r
 bod2 <- sqldf('SELECT * FROM BOD')
 ```
 
@@ -333,7 +841,7 @@ bod2 <- sqldf('SELECT * FROM BOD')
 Limita el número de resultados
 
 
-```r
+``` r
 sqldf('SELECT * FROM iris LIMIT 5')
 ```
 
@@ -351,12 +859,12 @@ sqldf('SELECT * FROM iris LIMIT 5')
 Ordena las variables
 
 
-```r
+``` r
 ORDER BY var1 {ASC/DESC}, var2 {ASC/DESC}
 ```
 
 
-```r
+``` r
 sqldf("SELECT * FROM Orange ORDER BY age ASC, circumference DESC LIMIT 5")
 ```
 
@@ -374,7 +882,7 @@ sqldf("SELECT * FROM Orange ORDER BY age ASC, circumference DESC LIMIT 5")
 Sentencias condicionales, donde se puede incorporar operadores lógicos AND y OR, expresando el orden de evaluación con paréntesis en caso de ser necesario.
 
 
-```r
+``` r
 sqldf('SELECT demand FROM BOD WHERE Time < 3')
 ```
 
@@ -385,7 +893,7 @@ sqldf('SELECT demand FROM BOD WHERE Time < 3')
 ```
 
 
-```r
+``` r
 sqldf('SELECT * FROM rock WHERE (peri > 5000 AND shape < .05) OR perm > 1000')
 ```
 
@@ -400,7 +908,7 @@ sqldf('SELECT * FROM rock WHERE (peri > 5000 AND shape < .05) OR perm > 1000')
 Y extendiendo su uso con IN o LIKE (es último sólo con %), pudiendo aplicárseles el NOT:
 
 
-```r
+``` r
 sqldf('SELECT * FROM BOD WHERE Time IN (1,7)')
 ```
 
@@ -411,7 +919,7 @@ sqldf('SELECT * FROM BOD WHERE Time IN (1,7)')
 ```
 
 
-```r
+``` r
 sqldf('SELECT * FROM BOD WHERE Time NOT IN (1,7)')
 ```
 
@@ -424,7 +932,7 @@ sqldf('SELECT * FROM BOD WHERE Time NOT IN (1,7)')
 ```
 
 
-```r
+``` r
 sqldf('SELECT * FROM chickwts WHERE feed LIKE "%bean" LIMIT 5')
 ```
 
@@ -438,7 +946,7 @@ sqldf('SELECT * FROM chickwts WHERE feed LIKE "%bean" LIMIT 5')
 ```
 
 
-```r
+``` r
 sqldf('SELECT * FROM chickwts WHERE feed NOT LIKE "%bean" LIMIT 5')
 ```
 
@@ -454,7 +962,10 @@ sqldf('SELECT * FROM chickwts WHERE feed NOT LIKE "%bean" LIMIT 5')
 
 ## Ejemplo Scopus data
 
-Ver ejemplo [*citan.zip*](data/citan.zip) y Apéndice \@ref(citan).
+Ver ejemplo [*citan.zip*](data/citan.zip) y paquete [CITAN](https://cran.r-project.org/web/packages/CITAN/index.html) (descontinuado).
+
+Las herramientas de este paquete realizan consultas SQL de forma continuada a una base de datos por lo que pueden resultar notablemente lentas.
+La recomendación es realizar el menor número de consultas posible y después operar en R:
 
 > “If your data fits in memory 
   there is no advantage to putting it in a database: 
@@ -471,7 +982,7 @@ Vamos a utilizar [RSQLite](https://cran.r-project.org/web/packages/RSQLite/index
 
 
 
-```r
+``` r
 library(DBI)
 
 # Create an ephemeral in-memory RSQLite database
@@ -486,7 +997,7 @@ dbListTables(con)
 
 
 
-```r
+``` r
 dbWriteTable(con, "mtcars", mtcars)
 dbListTables(con)
 ```
@@ -495,7 +1006,7 @@ dbListTables(con)
 ## [1] "mtcars"
 ```
 
-```r
+``` r
 dbListFields(con, "mtcars")
 ```
 
@@ -504,7 +1015,7 @@ dbListFields(con, "mtcars")
 ## [11] "carb"
 ```
 
-```r
+``` r
 dbReadTable(con, "mtcars")
 ```
 
@@ -544,7 +1055,7 @@ dbReadTable(con, "mtcars")
 ## 32 21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
 ```
 
-```r
+``` r
 # You can fetch all results:
 res <- dbSendQuery(con, "SELECT * FROM mtcars WHERE cyl = 4")
 dbFetch(res)
@@ -565,7 +1076,7 @@ dbFetch(res)
 ## 11 21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
 ```
 
-```r
+``` r
 dbClearResult(res)
 
 # Or a chunk at a time
@@ -582,7 +1093,7 @@ while(!dbHasCompleted(res)){
 ## [1] 1
 ```
 
-```r
+``` r
 # Clear the result
 dbClearResult(res)
 

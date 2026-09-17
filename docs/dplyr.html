@@ -4,23 +4,24 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4.2 Manipulación de datos con dplyr y tidyr | Tecnologías de Gestión y Manipulación de Datos</title>
+  <title>5.2 Manipulación de datos con dplyr y tidyr | Prácticas de Tecnologías de Gestión y Manipulación de Datos</title>
   <meta name="description" content="Prácticas de la asignatura de Tecnologías de Gestión de Datos del Máster en Técnicas Estadísticas." />
-  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.48 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4.2 Manipulación de datos con dplyr y tidyr | Tecnologías de Gestión y Manipulación de Datos" />
+  <meta property="og:title" content="5.2 Manipulación de datos con dplyr y tidyr | Prácticas de Tecnologías de Gestión y Manipulación de Datos" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Prácticas de la asignatura de Tecnologías de Gestión de Datos del Máster en Técnicas Estadísticas." />
   <meta name="github-repo" content="gltaboada/tgdbook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4.2 Manipulación de datos con dplyr y tidyr | Tecnologías de Gestión y Manipulación de Datos" />
+  <meta name="twitter:title" content="5.2 Manipulación de datos con dplyr y tidyr | Prácticas de Tecnologías de Gestión y Manipulación de Datos" />
   
   <meta name="twitter:description" content="Prácticas de la asignatura de Tecnologías de Gestión de Datos del Máster en Técnicas Estadísticas." />
   
 
 <meta name="author" content="Guillermo López Taboada (guillermo.lopez.taboada@udc.es)" />
+<meta name="author" content="Diego Darriba (diego.darriba@udc.es)" />
 <meta name="author" content="Rubén Fernández Casal (ruben.fcasal@udc.es)" />
 <meta name="author" content="Manuel Oviedo de la Fuente (manuel.oviedo@udc.es)" />
 
@@ -53,18 +54,19 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet" />
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="libs/datatables-binding-0.33/datatables.js"></script>
+<script src="libs/datatables-binding-0.34.0/datatables.js"></script>
 <link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
 <link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet" />
 <script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
-<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
 
 
 <style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -178,11 +180,11 @@ div.csl-indent {
 <li class="chapter" data-level="1.1" data-path="contenidos.html"><a href="contenidos.html"><i class="fa fa-check"></i><b>1.1</b> Contenidos</a></li>
 <li class="chapter" data-level="1.2" data-path="planificación-tentativa.html"><a href="planificación-tentativa.html"><i class="fa fa-check"></i><b>1.2</b> Planificación (tentativa)</a>
 <ul>
-<li class="chapter" data-level="1.2.1" data-path="planificación-tentativa.html"><a href="planificación-tentativa.html#evaluación"><i class="fa fa-check"></i><b>1.2.1</b> Evaluación</a></li>
+<li class="chapter" data-level="1.2.1" data-path="planificación-tentativa.html"><a href="planificación-tentativa.html#evaluaci%C3%B3n"><i class="fa fa-check"></i><b>1.2.1</b> Evaluación</a></li>
 </ul></li>
 <li class="chapter" data-level="1.3" data-path="fuentes-de-información.html"><a href="fuentes-de-información.html"><i class="fa fa-check"></i><b>1.3</b> Fuentes de información:</a>
 <ul>
-<li class="chapter" data-level="1.3.1" data-path="fuentes-de-información.html"><a href="fuentes-de-información.html#básica"><i class="fa fa-check"></i><b>1.3.1</b> Básica</a></li>
+<li class="chapter" data-level="1.3.1" data-path="fuentes-de-información.html"><a href="fuentes-de-información.html#b%C3%A1sica"><i class="fa fa-check"></i><b>1.3.1</b> Básica</a></li>
 <li class="chapter" data-level="1.3.2" data-path="fuentes-de-información.html"><a href="fuentes-de-información.html#complementaria"><i class="fa fa-check"></i><b>1.3.2</b> Complementaria:</a></li>
 </ul></li>
 </ul></li>
@@ -193,159 +195,178 @@ div.csl-indent {
 <li class="chapter" data-level="2.1.1" data-path="read.html"><a href="read.html#formato-de-datos-de-r"><i class="fa fa-check"></i><b>2.1.1</b> Formato de datos de R</a></li>
 <li class="chapter" data-level="2.1.2" data-path="read.html"><a href="read.html#acceso-a-datos-en-paquetes"><i class="fa fa-check"></i><b>2.1.2</b> Acceso a datos en paquetes</a></li>
 <li class="chapter" data-level="2.1.3" data-path="read.html"><a href="read.html#cap2-texto"><i class="fa fa-check"></i><b>2.1.3</b> Lectura de archivos de texto</a></li>
-<li class="chapter" data-level="2.1.4" data-path="read.html"><a href="read.html#importación-desde-spss"><i class="fa fa-check"></i><b>2.1.4</b> Importación desde SPSS</a></li>
-<li class="chapter" data-level="2.1.5" data-path="read.html"><a href="read.html#importación-desde-excel"><i class="fa fa-check"></i><b>2.1.5</b> Importación desde Excel</a></li>
+<li class="chapter" data-level="2.1.4" data-path="read.html"><a href="read.html#importaci%C3%B3n-desde-spss"><i class="fa fa-check"></i><b>2.1.4</b> Importación desde SPSS</a></li>
+<li class="chapter" data-level="2.1.5" data-path="read.html"><a href="read.html#importaci%C3%B3n-desde-excel"><i class="fa fa-check"></i><b>2.1.5</b> Importación desde Excel</a></li>
 <li class="chapter" data-level="2.1.6" data-path="read.html"><a href="read.html#cap2-exporta"><i class="fa fa-check"></i><b>2.1.6</b> Exportación de datos</a></li>
-<li class="chapter" data-level="2.1.7" data-path="read.html"><a href="read.html#python-julia-y-otros-lenguajes-de-programación"><i class="fa fa-check"></i><b>2.1.7</b> Python, Julia y otros lenguajes de programación</a></li>
+<li class="chapter" data-level="2.1.7" data-path="read.html"><a href="read.html#python-julia-y-otros-lenguajes-de-programaci%C3%B3n"><i class="fa fa-check"></i><b>2.1.7</b> Python, Julia y otros lenguajes de programación</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="manipulación-de-datos.html"><a href="manipulación-de-datos.html"><i class="fa fa-check"></i><b>2.2</b> Manipulación de datos</a>
+<li class="chapter" data-level="2.2" data-path="manip.html"><a href="manip.html"><i class="fa fa-check"></i><b>2.2</b> Manipulación de datos</a>
 <ul>
-<li class="chapter" data-level="2.2.1" data-path="manipulación-de-datos.html"><a href="manipulación-de-datos.html#operaciones-con-variables"><i class="fa fa-check"></i><b>2.2.1</b> Operaciones con variables</a></li>
-<li class="chapter" data-level="2.2.2" data-path="manipulación-de-datos.html"><a href="manipulación-de-datos.html#operaciones-con-casos"><i class="fa fa-check"></i><b>2.2.2</b> Operaciones con casos</a></li>
+<li class="chapter" data-level="2.2.1" data-path="manip.html"><a href="manip.html#operaciones-con-variables"><i class="fa fa-check"></i><b>2.2.1</b> Operaciones con variables</a></li>
+<li class="chapter" data-level="2.2.2" data-path="manip.html"><a href="manip.html#operaciones-con-casos"><i class="fa fa-check"></i><b>2.2.2</b> Operaciones con casos</a></li>
+<li class="chapter" data-level="2.2.3" data-path="manip.html"><a href="manip.html#missing"><i class="fa fa-check"></i><b>2.2.3</b> Datos faltantes</a></li>
+<li class="chapter" data-level="2.2.4" data-path="manip.html"><a href="manip.html#funciones-apply"><i class="fa fa-check"></i><b>2.2.4</b> Funciones <code>apply</code></a></li>
+<li class="chapter" data-level="2.2.5" data-path="manip.html"><a href="manip.html#generaci%C3%B3n-de-tablas"><i class="fa fa-check"></i><b>2.2.5</b> Generación de tablas</a></li>
+<li class="chapter" data-level="2.2.6" data-path="manip.html"><a href="manip.html#operaciones-con-tablas-de-datos"><i class="fa fa-check"></i><b>2.2.6</b> Operaciones con tablas de datos</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="missing.html"><a href="missing.html"><i class="fa fa-check"></i><b>2.3</b> Datos faltantes</a>
+<li class="chapter" data-level="2.3" data-path="ejemplo-wos-data.html"><a href="ejemplo-wos-data.html"><i class="fa fa-check"></i><b>2.3</b> Ejemplo WoS data</a></li>
+<li class="chapter" data-level="2.4" data-path="eficiencia-manipR.html"><a href="eficiencia-manipR.html"><i class="fa fa-check"></i><b>2.4</b> Eficiencia en R: preasignación, vectorización y desfases</a></li>
+<li class="chapter" data-level="2.5" data-path="resumen-manipR.html"><a href="resumen-manipR.html"><i class="fa fa-check"></i><b>2.5</b> Resumen: R base</a></li>
+<li class="chapter" data-level="2.6" data-path="ejercicios-manipR.html"><a href="ejercicios-manipR.html"><i class="fa fa-check"></i><b>2.6</b> Ejercicios</a>
 <ul>
-<li class="chapter" data-level="2.3.1" data-path="missing.html"><a href="missing.html#funciones-apply"><i class="fa fa-check"></i><b>2.3.1</b> Funciones <code>apply</code></a></li>
-<li class="chapter" data-level="2.3.2" data-path="missing.html"><a href="missing.html#tablas-para-informes"><i class="fa fa-check"></i><b>2.3.2</b> Tablas (para informes)</a></li>
-<li class="chapter" data-level="2.3.3" data-path="missing.html"><a href="missing.html#operaciones-con-tablas-de-datos"><i class="fa fa-check"></i><b>2.3.3</b> Operaciones con tablas de datos</a></li>
+<li class="chapter" data-level="2.6.1" data-path="ejercicios-manipR.html"><a href="ejercicios-manipR.html#ejercicio-1-incremento-salarial-empleados"><i class="fa fa-check"></i><b>2.6.1</b> Ejercicio 1: incremento salarial (<code>empleados</code>)</a></li>
+<li class="chapter" data-level="2.6.2" data-path="ejercicios-manipR.html"><a href="ejercicios-manipR.html#ejercicio-2-filtrado-y-selecci%C3%B3n-starwars"><i class="fa fa-check"></i><b>2.6.2</b> Ejercicio 2: Filtrado y selección (<code>starwars</code>)</a></li>
+<li class="chapter" data-level="2.6.3" data-path="ejercicios-manipR.html"><a href="ejercicios-manipR.html#ejercicio-3-creaci%C3%B3n-de-una-variable-y-categorizaci%C3%B3n"><i class="fa fa-check"></i><b>2.6.3</b> Ejercicio 3: Creación de una variable y categorización</a></li>
+<li class="chapter" data-level="2.6.4" data-path="ejercicios-manipR.html"><a href="ejercicios-manipR.html#ejercicio-4-resumen-y-agrupaci%C3%B3n"><i class="fa fa-check"></i><b>2.6.4</b> Ejercicio 4: Resumen y agrupación</a></li>
+<li class="chapter" data-level="2.6.5" data-path="ejercicios-manipR.html"><a href="ejercicios-manipR.html#ejercicio-5-uni%C3%B3n-de-tablas"><i class="fa fa-check"></i><b>2.6.5</b> Ejercicio 5: Unión de tablas</a></li>
+<li class="chapter" data-level="2.6.6" data-path="ejercicios-manipR.html"><a href="ejercicios-manipR.html#ejercicio-6-opcional-columnas-lista"><i class="fa fa-check"></i><b>2.6.6</b> Ejercicio 6 (opcional): columnas-lista</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="ejemplo-wos-data.html"><a href="ejemplo-wos-data.html"><i class="fa fa-check"></i><b>2.4</b> Ejemplo WoS data</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="introducción-al-lenguaje-sql.html"><a href="introducción-al-lenguaje-sql.html"><i class="fa fa-check"></i><b>3</b> Introducción al lenguaje SQL</a>
+<li class="chapter" data-level="3" data-path="introSQL.html"><a href="introSQL.html"><i class="fa fa-check"></i><b>3</b> Introducción al lenguaje SQL</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="bases-de-datos-relacionales.html"><a href="bases-de-datos-relacionales.html"><i class="fa fa-check"></i><b>3.1</b> Bases de Datos Relacionales</a>
 <ul>
 <li class="chapter" data-level="3.1.1" data-path="bases-de-datos-relacionales.html"><a href="bases-de-datos-relacionales.html#definiciones"><i class="fa fa-check"></i><b>3.1.1</b> Definiciones</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="sintaxis-sql.html"><a href="sintaxis-sql.html"><i class="fa fa-check"></i><b>3.2</b> Sintaxis SQL</a>
+<li class="chapter" data-level="3.2" data-path="restricciones.html"><a href="restricciones.html"><i class="fa fa-check"></i><b>3.2</b> Restricciones</a></li>
+<li class="chapter" data-level="3.3" data-path="sistemas-gestores-de-bases-de-datos-sgdb.html"><a href="sistemas-gestores-de-bases-de-datos-sgdb.html"><i class="fa fa-check"></i><b>3.3</b> Sistemas Gestores de Bases de Datos (SGDB)</a></li>
+<li class="chapter" data-level="3.4" data-path="sintaxis-sql.html"><a href="sintaxis-sql.html"><i class="fa fa-check"></i><b>3.4</b> Sintaxis SQL</a></li>
+<li class="chapter" data-level="3.5" data-path="cláusulas-básicas-de-sql.html"><a href="cláusulas-básicas-de-sql.html"><i class="fa fa-check"></i><b>3.5</b> Cláusulas básicas de SQL</a>
 <ul>
-<li class="chapter" data-level="3.2.1" data-path="sintaxis-sql.html"><a href="sintaxis-sql.html#extracción-sql-11-statements"><i class="fa fa-check"></i><b>3.2.1</b> Extracción SQL (11 statements)</a></li>
-<li class="chapter" data-level="3.2.2" data-path="sintaxis-sql.html"><a href="sintaxis-sql.html#crearactualizarborrar-tablas-sql-8-statements"><i class="fa fa-check"></i><b>3.2.2</b> Crear/Actualizar/Borrar tablas SQL (8 statements)</a></li>
-<li class="chapter" data-level="3.2.3" data-path="sintaxis-sql.html"><a href="sintaxis-sql.html#añadiractualizarborrar-tuplas-en-sql-3-statements"><i class="fa fa-check"></i><b>3.2.3</b> Añadir/Actualizar/Borrar tuplas en SQL (3 statements)</a></li>
-<li class="chapter" data-level="3.2.4" data-path="sintaxis-sql.html"><a href="sintaxis-sql.html#gestión-bases-de-datos-5-statements"><i class="fa fa-check"></i><b>3.2.4</b> Gestión Bases de Datos (5 statements)</a></li>
-<li class="chapter" data-level="3.2.5" data-path="sintaxis-sql.html"><a href="sintaxis-sql.html#ejemplos-de-consultas-sql"><i class="fa fa-check"></i><b>3.2.5</b> Ejemplos de consultas SQL</a></li>
+<li class="chapter" data-level="3.5.1" data-path="cláusulas-básicas-de-sql.html"><a href="cláusulas-básicas-de-sql.html#selecci%C3%B3n-de-campos"><i class="fa fa-check"></i><b>3.5.1</b> Selección de campos</a></li>
+<li class="chapter" data-level="3.5.2" data-path="cláusulas-básicas-de-sql.html"><a href="cláusulas-básicas-de-sql.html#n%C3%BAmero-de-filas-paginaci%C3%B3n"><i class="fa fa-check"></i><b>3.5.2</b> Número de filas (paginación)</a></li>
+<li class="chapter" data-level="3.5.3" data-path="cláusulas-básicas-de-sql.html"><a href="cláusulas-básicas-de-sql.html#filtrado-de-resultados"><i class="fa fa-check"></i><b>3.5.3</b> Filtrado de Resultados</a></li>
+<li class="chapter" data-level="3.5.4" data-path="cláusulas-básicas-de-sql.html"><a href="cláusulas-básicas-de-sql.html#ordenaci%C3%B3n-de-resultados"><i class="fa fa-check"></i><b>3.5.4</b> Ordenación de Resultados</a></li>
+<li class="chapter" data-level="3.5.5" data-path="cláusulas-básicas-de-sql.html"><a href="cláusulas-básicas-de-sql.html#uni%C3%B3n-de-tablas"><i class="fa fa-check"></i><b>3.5.5</b> Unión de tablas</a></li>
+<li class="chapter" data-level="3.5.6" data-path="cláusulas-básicas-de-sql.html"><a href="cláusulas-básicas-de-sql.html#agrupamiento"><i class="fa fa-check"></i><b>3.5.6</b> Agrupamiento</a></li>
+<li class="chapter" data-level="3.5.7" data-path="cláusulas-básicas-de-sql.html"><a href="cláusulas-básicas-de-sql.html#subconsultas-subqueries"><i class="fa fa-check"></i><b>3.5.7</b> Subconsultas (subqueries)</a></li>
+<li class="chapter" data-level="3.5.8" data-path="cláusulas-básicas-de-sql.html"><a href="cláusulas-básicas-de-sql.html#operaciones-con-conjuntos-de-resultados"><i class="fa fa-check"></i><b>3.5.8</b> Operaciones con conjuntos de resultados</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="conexión-con-bases-de-datos-desde-r.html"><a href="conexión-con-bases-de-datos-desde-r.html"><i class="fa fa-check"></i><b>3.3</b> Conexión con bases de datos desde R</a>
+<li class="chapter" data-level="3.6" data-path="gestión-de-datos.html"><a href="gestión-de-datos.html"><i class="fa fa-check"></i><b>3.6</b> Gestión de datos</a>
 <ul>
-<li class="chapter" data-level="3.3.1" data-path="conexión-con-bases-de-datos-desde-r.html"><a href="conexión-con-bases-de-datos-desde-r.html#introducción-a-sql-en-r"><i class="fa fa-check"></i><b>3.3.1</b> Introducción a SQL en R</a></li>
-<li class="chapter" data-level="3.3.2" data-path="conexión-con-bases-de-datos-desde-r.html"><a href="conexión-con-bases-de-datos-desde-r.html#el-paquete-sqldf"><i class="fa fa-check"></i><b>3.3.2</b> El paquete sqldf</a></li>
-<li class="chapter" data-level="3.3.3" data-path="conexión-con-bases-de-datos-desde-r.html"><a href="conexión-con-bases-de-datos-desde-r.html#sql-queries"><i class="fa fa-check"></i><b>3.3.3</b> SQL Queries</a></li>
+<li class="chapter" data-level="3.6.1" data-path="gestión-de-datos.html"><a href="gestión-de-datos.html#operaciones-crud"><i class="fa fa-check"></i><b>3.6.1</b> Operaciones CRUD</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="ejemplo-scopus-data.html"><a href="ejemplo-scopus-data.html"><i class="fa fa-check"></i><b>3.4</b> Ejemplo Scopus data</a></li>
-<li class="chapter" data-level="3.5" data-path="ejercicios-sql-con-rsqlite.html"><a href="ejercicios-sql-con-rsqlite.html"><i class="fa fa-check"></i><b>3.5</b> Ejercicios SQL con RSQLite</a>
+<li class="chapter" data-level="3.7" data-path="gestión-de-bases-de-datos.html"><a href="gestión-de-bases-de-datos.html"><i class="fa fa-check"></i><b>3.7</b> Gestión de Bases de Datos</a>
 <ul>
-<li class="chapter" data-level="3.5.1" data-path="ejercicios-sql-con-rsqlite.html"><a href="ejercicios-sql-con-rsqlite.html#setup-de-rsqlite"><i class="fa fa-check"></i><b>3.5.1</b> Setup de RSQLite</a></li>
+<li class="chapter" data-level="3.7.1" data-path="gestión-de-bases-de-datos.html"><a href="gestión-de-bases-de-datos.html#creaci%C3%B3n-de-una-base-de-datos"><i class="fa fa-check"></i><b>3.7.1</b> Creación de una base de datos</a></li>
+<li class="chapter" data-level="3.7.2" data-path="gestión-de-bases-de-datos.html"><a href="gestión-de-bases-de-datos.html#eliminaci%C3%B3n-de-una-base-de-datos"><i class="fa fa-check"></i><b>3.7.2</b> Eliminación de una base de datos</a></li>
+<li class="chapter" data-level="3.7.3" data-path="gestión-de-bases-de-datos.html"><a href="gestión-de-bases-de-datos.html#selecci%C3%B3n-de-base-de-datos"><i class="fa fa-check"></i><b>3.7.3</b> Selección de base de datos</a></li>
 </ul></li>
-<li class="chapter" data-level="3.6" data-path="práctica-1-sql.html"><a href="práctica-1-sql.html"><i class="fa fa-check"></i><b>3.6</b> Práctica 1: SQL</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="tidyverse.html"><a href="tidyverse.html"><i class="fa fa-check"></i><b>4</b> Manipulación de datos con tidyverse</a>
+<li class="chapter" data-level="3.8" data-path="gestión-de-tablas.html"><a href="gestión-de-tablas.html"><i class="fa fa-check"></i><b>3.8</b> Gestión de tablas</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="introTidyverse.html"><a href="introTidyverse.html"><i class="fa fa-check"></i><b>4.1</b> Introducción al ecosistema tidyverse</a>
-<ul>
-<li class="chapter" data-level="4.1.1" data-path="introTidyverse.html"><a href="introTidyverse.html#pipe"><i class="fa fa-check"></i><b>4.1.1</b> Operador <em>pipe</em> (redirección)</a></li>
-<li class="chapter" data-level="4.1.2" data-path="introTidyverse.html"><a href="introTidyverse.html#readr"><i class="fa fa-check"></i><b>4.1.2</b> Lectura y escritura de archivos de texto</a></li>
-<li class="chapter" data-level="4.1.3" data-path="introTidyverse.html"><a href="introTidyverse.html#writer"><i class="fa fa-check"></i><b>4.1.3</b> Escritura</a></li>
+<li class="chapter" data-level="3.8.1" data-path="gestión-de-tablas.html"><a href="gestión-de-tablas.html#creaci%C3%B3n-de-tablas"><i class="fa fa-check"></i><b>3.8.1</b> Creación de tablas</a></li>
+<li class="chapter" data-level="3.8.2" data-path="gestión-de-tablas.html"><a href="gestión-de-tablas.html#creaci%C3%B3n-de-%C3%ADndices"><i class="fa fa-check"></i><b>3.8.2</b> Creación de índices</a></li>
+<li class="chapter" data-level="3.8.3" data-path="gestión-de-tablas.html"><a href="gestión-de-tablas.html#borrado-de-tablas"><i class="fa fa-check"></i><b>3.8.3</b> Borrado de tablas</a></li>
+<li class="chapter" data-level="3.8.4" data-path="gestión-de-tablas.html"><a href="gestión-de-tablas.html#modificaci%C3%B3n-de-tablas"><i class="fa fa-check"></i><b>3.8.4</b> Modificación de tablas</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="dplyr.html"><a href="dplyr.html"><i class="fa fa-check"></i><b>4.2</b> Manipulación de datos con dplyr y tidyr</a>
+<li class="chapter" data-level="3.9" data-path="vistas.html"><a href="vistas.html"><i class="fa fa-check"></i><b>3.9</b> Vistas</a></li>
+<li class="chapter" data-level="3.10" data-path="ejemplos-de-consultas-sql.html"><a href="ejemplos-de-consultas-sql.html"><i class="fa fa-check"></i><b>3.10</b> Ejemplos de consultas SQL</a></li>
+<li class="chapter" data-level="3.11" data-path="conexión-con-bases-de-datos-desde-r.html"><a href="conexión-con-bases-de-datos-desde-r.html"><i class="fa fa-check"></i><b>3.11</b> Conexión con bases de datos desde R</a>
 <ul>
-<li class="chapter" data-level="4.2.1" data-path="dplyr.html"><a href="dplyr.html#dplyr-pkg"><i class="fa fa-check"></i><b>4.2.1</b> El paquete dplyr</a></li>
-<li class="chapter" data-level="4.2.2" data-path="dplyr.html"><a href="dplyr.html#dplyr-variables"><i class="fa fa-check"></i><b>4.2.2</b> Operaciones con variables (columnas)</a></li>
-<li class="chapter" data-level="4.2.3" data-path="dplyr.html"><a href="dplyr.html#dplyr-casos"><i class="fa fa-check"></i><b>4.2.3</b> Operaciones con casos (filas)</a></li>
-<li class="chapter" data-level="4.2.4" data-path="dplyr.html"><a href="dplyr.html#tidyr-missing"><i class="fa fa-check"></i><b>4.2.4</b> Datos faltantes</a></li>
+<li class="chapter" data-level="3.11.1" data-path="conexión-con-bases-de-datos-desde-r.html"><a href="conexión-con-bases-de-datos-desde-r.html#introducci%C3%B3n-a-sql-en-r"><i class="fa fa-check"></i><b>3.11.1</b> Introducción a SQL en R</a></li>
+<li class="chapter" data-level="3.11.2" data-path="conexión-con-bases-de-datos-desde-r.html"><a href="conexión-con-bases-de-datos-desde-r.html#el-paquete-sqldf"><i class="fa fa-check"></i><b>3.11.2</b> El paquete sqldf</a></li>
+<li class="chapter" data-level="3.11.3" data-path="conexión-con-bases-de-datos-desde-r.html"><a href="conexión-con-bases-de-datos-desde-r.html#sql-queries"><i class="fa fa-check"></i><b>3.11.3</b> SQL Queries</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="tidyr-pkg.html"><a href="tidyr-pkg.html"><i class="fa fa-check"></i><b>4.3</b> Herramientas tidyr</a></li>
-<li class="chapter" data-level="4.4" data-path="dplyr-join.html"><a href="dplyr-join.html"><i class="fa fa-check"></i><b>4.4</b> Operaciones con tablas de datos</a></li>
-<li class="chapter" data-level="4.5" data-path="dbplyr.html"><a href="dbplyr.html"><i class="fa fa-check"></i><b>4.5</b> Bases de datos con dplyr</a>
+<li class="chapter" data-level="3.12" data-path="ejemplo-scopus-data.html"><a href="ejemplo-scopus-data.html"><i class="fa fa-check"></i><b>3.12</b> Ejemplo Scopus data</a></li>
+<li class="chapter" data-level="3.13" data-path="ejercicios-sql-con-rsqlite.html"><a href="ejercicios-sql-con-rsqlite.html"><i class="fa fa-check"></i><b>3.13</b> Ejercicios SQL con RSQLite</a>
 <ul>
-<li class="chapter" data-level="4.5.1" data-path="dbplyr.html"><a href="dbplyr.html#ejemplos"><i class="fa fa-check"></i><b>4.5.1</b> Ejemplos</a></li>
+<li class="chapter" data-level="3.13.1" data-path="ejercicios-sql-con-rsqlite.html"><a href="ejercicios-sql-con-rsqlite.html#setup-de-rsqlite"><i class="fa fa-check"></i><b>3.13.1</b> Setup de RSQLite</a></li>
 </ul></li>
+<li class="chapter" data-level="3.14" data-path="práctica-1-sql.html"><a href="práctica-1-sql.html"><i class="fa fa-check"></i><b>3.14</b> Práctica 1: SQL</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="introducción-a-tecnologías-nosql.html"><a href="introducción-a-tecnologías-nosql.html"><i class="fa fa-check"></i><b>5</b> Introducción a Tecnologías NoSQL</a>
+<li class="chapter" data-level="4" data-path="introPython.html"><a href="introPython.html"><i class="fa fa-check"></i><b>4</b> Python</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="conceptos-y-tipos-de-bases-de-datos-nosql-documental-columnar-clavevalor-y-de-grafos.html"><a href="conceptos-y-tipos-de-bases-de-datos-nosql-documental-columnar-clavevalor-y-de-grafos.html"><i class="fa fa-check"></i><b>5.1</b> Conceptos y tipos de bases de datos NoSQL (documental, columnar, clave/valor y de grafos)</a>
+<li class="chapter" data-level="4.0.1" data-path="introPython.html"><a href="introPython.html#instalaci%C3%B3n"><i class="fa fa-check"></i><b>4.0.1</b> Instalación</a></li>
+<li class="chapter" data-level="4.1" data-path="introducción-a-python.html"><a href="introducción-a-python.html"><i class="fa fa-check"></i><b>4.1</b> Introducción a Python</a>
 <ul>
-<li class="chapter" data-level="5.1.1" data-path="conceptos-y-tipos-de-bases-de-datos-nosql-documental-columnar-clavevalor-y-de-grafos.html"><a href="conceptos-y-tipos-de-bases-de-datos-nosql-documental-columnar-clavevalor-y-de-grafos.html#características-de-las-bases-de-datos-nosql"><i class="fa fa-check"></i><b>5.1.1</b> Características de las bases de datos NoSQL</a></li>
-<li class="chapter" data-level="5.1.2" data-path="conceptos-y-tipos-de-bases-de-datos-nosql-documental-columnar-clavevalor-y-de-grafos.html"><a href="conceptos-y-tipos-de-bases-de-datos-nosql-documental-columnar-clavevalor-y-de-grafos.html#tipos-de-bases-de-datos-nosql"><i class="fa fa-check"></i><b>5.1.2</b> Tipos de Bases de Datos NoSQL</a></li>
-<li class="chapter" data-level="5.1.3" data-path="conceptos-y-tipos-de-bases-de-datos-nosql-documental-columnar-clavevalor-y-de-grafos.html"><a href="conceptos-y-tipos-de-bases-de-datos-nosql-documental-columnar-clavevalor-y-de-grafos.html#mongodb-nosql-documental"><i class="fa fa-check"></i><b>5.1.3</b> MongoDB: NoSQL documental</a></li>
-<li class="chapter" data-level="5.1.4" data-path="conceptos-y-tipos-de-bases-de-datos-nosql-documental-columnar-clavevalor-y-de-grafos.html"><a href="conceptos-y-tipos-de-bases-de-datos-nosql-documental-columnar-clavevalor-y-de-grafos.html#redis-nosql-key-value"><i class="fa fa-check"></i><b>5.1.4</b> Redis: NoSQL key-value</a></li>
-<li class="chapter" data-level="5.1.5" data-path="conceptos-y-tipos-de-bases-de-datos-nosql-documental-columnar-clavevalor-y-de-grafos.html"><a href="conceptos-y-tipos-de-bases-de-datos-nosql-documental-columnar-clavevalor-y-de-grafos.html#cassandra-nosql-columnar"><i class="fa fa-check"></i><b>5.1.5</b> Cassandra: NoSQL columnar</a></li>
-<li class="chapter" data-level="5.1.6" data-path="conceptos-y-tipos-de-bases-de-datos-nosql-documental-columnar-clavevalor-y-de-grafos.html"><a href="conceptos-y-tipos-de-bases-de-datos-nosql-documental-columnar-clavevalor-y-de-grafos.html#neo4j-nosql-grafos"><i class="fa fa-check"></i><b>5.1.6</b> Neo4j: NoSQL grafos</a></li>
-<li class="chapter" data-level="5.1.7" data-path="conceptos-y-tipos-de-bases-de-datos-nosql-documental-columnar-clavevalor-y-de-grafos.html"><a href="conceptos-y-tipos-de-bases-de-datos-nosql-documental-columnar-clavevalor-y-de-grafos.html#otros-search-engines"><i class="fa fa-check"></i><b>5.1.7</b> Otros: search engines</a></li>
+<li class="chapter" data-level="4.1.1" data-path="introducción-a-python.html"><a href="introducción-a-python.html#qu%C3%A9-es-python"><i class="fa fa-check"></i><b>4.1.1</b> ¿Qué es Python?</a></li>
+<li class="chapter" data-level="4.1.2" data-path="introducción-a-python.html"><a href="introducción-a-python.html#primeros-pasos-hola-mundo"><i class="fa fa-check"></i><b>4.1.2</b> Primeros pasos: Hola Mundo</a></li>
+<li class="chapter" data-level="4.1.3" data-path="introducción-a-python.html"><a href="introducción-a-python.html#sint%C3%A1xis-b%C3%A1sica"><i class="fa fa-check"></i><b>4.1.3</b> Sintáxis básica</a></li>
+<li class="chapter" data-level="4.1.4" data-path="introducción-a-python.html"><a href="introducción-a-python.html#librer%C3%ADas-populares"><i class="fa fa-check"></i><b>4.1.4</b> Librerías populares</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="conexión-de-r-a-mongodb.html"><a href="conexión-de-r-a-mongodb.html"><i class="fa fa-check"></i><b>5.2</b> Conexión de R a MongoDB</a></li>
-<li class="chapter" data-level="5.3" data-path="ejercicios-prácticos-con-mongodb.html"><a href="ejercicios-prácticos-con-mongodb.html"><i class="fa fa-check"></i><b>5.3</b> Ejercicios prácticos con MongoDB</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="tecnologías-para-el-tratamiendo-de-datos-masivos.html"><a href="tecnologías-para-el-tratamiendo-de-datos-masivos.html"><i class="fa fa-check"></i><b>6</b> Tecnologías para el Tratamiendo de Datos Masivos</a>
+<li class="chapter" data-level="4.2" data-path="python-y-sqlite.html"><a href="python-y-sqlite.html"><i class="fa fa-check"></i><b>4.2</b> Python y SQLite</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="introducción-al-aprendizaje-estadístico.html"><a href="introducción-al-aprendizaje-estadístico.html"><i class="fa fa-check"></i><b>6.1</b> Introducción al Aprendizaje Estadístico</a></li>
-<li class="chapter" data-level="6.2" data-path="tecnologías-big-data-hadoopspark-y-visualización.html"><a href="tecnologías-big-data-hadoopspark-y-visualización.html"><i class="fa fa-check"></i><b>6.2</b> Tecnologías Big Data (Hadoop/Spark y Visualización)</a>
-<ul>
-<li class="chapter" data-level="6.2.1" data-path="tecnologías-big-data-hadoopspark-y-visualización.html"><a href="tecnologías-big-data-hadoopspark-y-visualización.html#tecnologías-hadoop-spark-y-sparklyr"><i class="fa fa-check"></i><b>6.2.1</b> Tecnologías Hadoop, Spark, y Sparklyr</a></li>
-<li class="chapter" data-level="6.2.2" data-path="tecnologías-big-data-hadoopspark-y-visualización.html"><a href="tecnologías-big-data-hadoopspark-y-visualización.html#big-data-y-machine-learning"><i class="fa fa-check"></i><b>6.2.2</b> Big Data y Machine Learning</a></li>
-<li class="chapter" data-level="6.2.3" data-path="tecnologías-big-data-hadoopspark-y-visualización.html"><a href="tecnologías-big-data-hadoopspark-y-visualización.html#rattle-como-alternativa-a-rapidminer-en-r"><i class="fa fa-check"></i><b>6.2.3</b> Rattle como alternativa a RapidMiner en R</a></li>
-<li class="chapter" data-level="6.2.4" data-path="tecnologías-big-data-hadoopspark-y-visualización.html"><a href="tecnologías-big-data-hadoopspark-y-visualización.html#visualización-y-generación-de-cuadros-de-mando"><i class="fa fa-check"></i><b>6.2.4</b> Visualización y Generación de Cuadros de Mando</a></li>
+<li class="chapter" data-level="4.2.1" data-path="python-y-sqlite.html"><a href="python-y-sqlite.html#operaciones-de-inserci%C3%B3n-borrado-o-modificaci%C3%B3n-de-datos"><i class="fa fa-check"></i><b>4.2.1</b> Operaciones de inserción, borrado o modificación de datos</a></li>
+<li class="chapter" data-level="4.2.2" data-path="python-y-sqlite.html"><a href="python-y-sqlite.html#operaciones-de-consulta"><i class="fa fa-check"></i><b>4.2.2</b> Operaciones de consulta</a></li>
+<li class="chapter" data-level="4.2.3" data-path="python-y-sqlite.html"><a href="python-y-sqlite.html#usar-sqlite-con-pandas"><i class="fa fa-check"></i><b>4.2.3</b> Usar SQLite con Pandas</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="introducción-al-análisis-de-datos-masivos.html"><a href="introducción-al-análisis-de-datos-masivos.html"><i class="fa fa-check"></i><b>6.3</b> Introducción al Análisis de Datos Masivos</a></li>
-</ul></li>
-<li class="appendix"><span><b>Apendices</b></span></li>
-<li class="chapter" data-level="A" data-path="links.html"><a href="links.html"><i class="fa fa-check"></i><b>A</b> Enlaces</a>
+<li class="chapter" data-level="4.3" data-path="context-manager.html"><a href="context-manager.html"><i class="fa fa-check"></i><b>4.3</b> Context Manager</a>
 <ul>
-<li class="chapter" data-level="A.1" data-path="rstudio-links.html"><a href="rstudio-links.html"><i class="fa fa-check"></i><b>A.1</b> RStudio</a></li>
-<li class="chapter" data-level="A.2" data-path="bibliom-links.html"><a href="bibliom-links.html"><i class="fa fa-check"></i><b>A.2</b> Bibliometría</a></li>
+<li class="chapter" data-level="4.3.1" data-path="context-manager.html"><a href="context-manager.html#ejemplo-conexi%C3%B3n-sqlite"><i class="fa fa-check"></i><b>4.3.1</b> Ejemplo: conexión SQLite</a></li>
 </ul></li>
-<li class="chapter" data-level="B" data-path="scimetr.html"><a href="scimetr.html"><i class="fa fa-check"></i><b>B</b> El paquete scimetr</a>
+<li class="chapter" data-level="4.4" data-path="csv-en-python.html"><a href="csv-en-python.html"><i class="fa fa-check"></i><b>4.4</b> CSV en python</a>
 <ul>
-<li class="chapter" data-level="B.1" data-path="instalación.html"><a href="instalación.html"><i class="fa fa-check"></i><b>B.1</b> Instalación</a></li>
-<li class="chapter" data-level="B.2" data-path="carga-de-datos.html"><a href="carga-de-datos.html"><i class="fa fa-check"></i><b>B.2</b> Carga de datos</a>
-<ul>
-<li class="chapter" data-level="B.2.1" data-path="carga-de-datos.html"><a href="carga-de-datos.html#datos-de-ejemplo"><i class="fa fa-check"></i><b>B.2.1</b> Datos de ejemplo</a></li>
-<li class="chapter" data-level="B.2.2" data-path="carga-de-datos.html"><a href="carga-de-datos.html#cargar-datos-de-directorio"><i class="fa fa-check"></i><b>B.2.2</b> Cargar datos de directorio</a></li>
+<li class="chapter" data-level="4.4.1" data-path="csv-en-python.html"><a href="csv-en-python.html#la-librer%C3%ADa-csv"><i class="fa fa-check"></i><b>4.4.1</b> La librería <code>csv</code></a></li>
+<li class="chapter" data-level="4.4.2" data-path="csv-en-python.html"><a href="csv-en-python.html#trabajar-con-csv-usando-pandas"><i class="fa fa-check"></i><b>4.4.2</b> Trabajar con CSV usando <code>pandas</code></a></li>
+<li class="chapter" data-level="4.4.3" data-path="csv-en-python.html"><a href="csv-en-python.html#insertar-datos-en-sqlite-a-partir-de-csv"><i class="fa fa-check"></i><b>4.4.3</b> Insertar datos en SQLite a partir de CSV</a></li>
 </ul></li>
-<li class="chapter" data-level="B.3" data-path="sumarios.html"><a href="sumarios.html"><i class="fa fa-check"></i><b>B.3</b> Sumarios</a>
-<ul>
-<li class="chapter" data-level="B.3.1" data-path="sumarios.html"><a href="sumarios.html#sumario-summary.wos.db"><i class="fa fa-check"></i><b>B.3.1</b> Sumario <code>summary.wos.db()</code></a></li>
-<li class="chapter" data-level="B.3.2" data-path="sumarios.html"><a href="sumarios.html#sumario-por-años-summary_year"><i class="fa fa-check"></i><b>B.3.2</b> Sumario por años <code>summary_year()</code></a></li>
 </ul></li>
-<li class="chapter" data-level="B.4" data-path="gráficos.html"><a href="gráficos.html"><i class="fa fa-check"></i><b>B.4</b> Gráficos</a>
+<li class="chapter" data-level="5" data-path="tidyverse.html"><a href="tidyverse.html"><i class="fa fa-check"></i><b>5</b> Manipulación de datos con tidyverse</a>
 <ul>
-<li class="chapter" data-level="B.4.1" data-path="gráficos.html"><a href="gráficos.html#gráficos-de-la-base-de-datos-plot.wos.db"><i class="fa fa-check"></i><b>B.4.1</b> Gráficos de la base de datos <code>plot.wos.db()</code></a></li>
-<li class="chapter" data-level="B.4.2" data-path="gráficos.html"><a href="gráficos.html#gráficos-sumario-plot.summary.wos.db"><i class="fa fa-check"></i><b>B.4.2</b> Gráficos sumario <code>plot.summary.wos.db()</code></a></li>
-<li class="chapter" data-level="B.4.3" data-path="gráficos.html"><a href="gráficos.html#gráficos-sumario-por-años-plot.summary.year"><i class="fa fa-check"></i><b>B.4.3</b> Gráficos sumario por años <code>plot.summary.year()</code></a></li>
-</ul></li>
-<li class="chapter" data-level="B.5" data-path="filtrado-1.html"><a href="filtrado-1.html"><i class="fa fa-check"></i><b>B.5</b> Filtrado</a>
+<li class="chapter" data-level="5.1" data-path="introTidyverse.html"><a href="introTidyverse.html"><i class="fa fa-check"></i><b>5.1</b> Introducción al ecosistema tidyverse</a>
 <ul>
-<li class="chapter" data-level="B.5.1" data-path="filtrado-1.html"><a href="filtrado-1.html#funciones-get"><i class="fa fa-check"></i><b>B.5.1</b> Funciones get</a></li>
-<li class="chapter" data-level="B.5.2" data-path="filtrado-1.html"><a href="filtrado-1.html#obtener-documentos-de-autores-revistas"><i class="fa fa-check"></i><b>B.5.2</b> Obtener documentos (de autores, revistas, …)</a></li>
-<li class="chapter" data-level="B.5.3" data-path="filtrado-1.html"><a href="filtrado-1.html#sumarios-filtrados"><i class="fa fa-check"></i><b>B.5.3</b> Sumarios filtrados</a></li>
+<li class="chapter" data-level="5.1.1" data-path="introTidyverse.html"><a href="introTidyverse.html#pipe"><i class="fa fa-check"></i><b>5.1.1</b> Operador <em>pipe</em> (redirección)</a></li>
+<li class="chapter" data-level="5.1.2" data-path="introTidyverse.html"><a href="introTidyverse.html#readr"><i class="fa fa-check"></i><b>5.1.2</b> Lectura y escritura de archivos de texto</a></li>
+<li class="chapter" data-level="5.1.3" data-path="introTidyverse.html"><a href="introTidyverse.html#writer"><i class="fa fa-check"></i><b>5.1.3</b> Escritura</a></li>
 </ul></li>
-<li class="chapter" data-level="B.6" data-path="indices-de-autores.html"><a href="indices-de-autores.html"><i class="fa fa-check"></i><b>B.6</b> Indices de autores</a></li>
-</ul></li>
-<li class="chapter" data-level="C" data-path="citan.html"><a href="citan.html"><i class="fa fa-check"></i><b>C</b> El paquete CITAN</a>
+<li class="chapter" data-level="5.2" data-path="dplyr.html"><a href="dplyr.html"><i class="fa fa-check"></i><b>5.2</b> Manipulación de datos con dplyr y tidyr</a>
 <ul>
-<li class="chapter" data-level="C.1" data-path="creación-de-la-base-de-datos.html"><a href="creación-de-la-base-de-datos.html"><i class="fa fa-check"></i><b>C.1</b> Creación de la base de datos</a>
-<ul>
-<li class="chapter" data-level="C.1.1" data-path="creación-de-la-base-de-datos.html"><a href="creación-de-la-base-de-datos.html#primera-ejecución-creación-del-modelo-de-db"><i class="fa fa-check"></i><b>C.1.1</b> Primera ejecución: Creación del modelo de DB</a></li>
-<li class="chapter" data-level="C.1.2" data-path="creación-de-la-base-de-datos.html"><a href="creación-de-la-base-de-datos.html#incorporar-nuevos-datos"><i class="fa fa-check"></i><b>C.1.2</b> Incorporar nuevos datos</a></li>
+<li class="chapter" data-level="5.2.1" data-path="dplyr.html"><a href="dplyr.html#dplyr-pkg"><i class="fa fa-check"></i><b>5.2.1</b> El paquete dplyr</a></li>
+<li class="chapter" data-level="5.2.2" data-path="dplyr.html"><a href="dplyr.html#dplyr-variables"><i class="fa fa-check"></i><b>5.2.2</b> Operaciones con variables (columnas)</a></li>
+<li class="chapter" data-level="5.2.3" data-path="dplyr.html"><a href="dplyr.html#dplyr-casos"><i class="fa fa-check"></i><b>5.2.3</b> Operaciones con casos (filas)</a></li>
+<li class="chapter" data-level="5.2.4" data-path="dplyr.html"><a href="dplyr.html#tidyr-missing"><i class="fa fa-check"></i><b>5.2.4</b> Datos faltantes</a></li>
 </ul></li>
-<li class="chapter" data-level="C.2" data-path="extraer-información-de-la-bd.html"><a href="extraer-información-de-la-bd.html"><i class="fa fa-check"></i><b>C.2</b> Extraer información de la BD</a>
+<li class="chapter" data-level="5.3" data-path="tidyr-pkg.html"><a href="tidyr-pkg.html"><i class="fa fa-check"></i><b>5.3</b> Herramientas tidyr</a></li>
+<li class="chapter" data-level="5.4" data-path="dplyr-join.html"><a href="dplyr-join.html"><i class="fa fa-check"></i><b>5.4</b> Operaciones con tablas de datos</a></li>
+<li class="chapter" data-level="5.5" data-path="dbplyr.html"><a href="dbplyr.html"><i class="fa fa-check"></i><b>5.5</b> Bases de datos con dplyr</a>
 <ul>
-<li class="chapter" data-level="C.2.1" data-path="extraer-información-de-la-bd.html"><a href="extraer-información-de-la-bd.html#estadísticos-descriptivos"><i class="fa fa-check"></i><b>C.2.1</b> Estadísticos descriptivos</a></li>
-<li class="chapter" data-level="C.2.2" data-path="extraer-información-de-la-bd.html"><a href="extraer-información-de-la-bd.html#otra-información"><i class="fa fa-check"></i><b>C.2.2</b> Otra información</a></li>
+<li class="chapter" data-level="5.5.1" data-path="dbplyr.html"><a href="dbplyr.html#ejemplos"><i class="fa fa-check"></i><b>5.5.1</b> Ejemplos</a></li>
 </ul></li>
-<li class="chapter" data-level="C.3" data-path="cerrar-conexión.html"><a href="cerrar-conexión.html"><i class="fa fa-check"></i><b>C.3</b> Cerrar conexión</a></li>
-</ul></li>
-<li class="chapter" data-level="D" data-path="instalación-de-r.html"><a href="instalación-de-r.html"><i class="fa fa-check"></i><b>D</b> Instalación de R</a>
+<li class="chapter" data-level="5.6" data-path="eficiencia-tidyverse.html"><a href="eficiencia-tidyverse.html"><i class="fa fa-check"></i><b>5.6</b> Eficiencia y desfases con dplyr</a></li>
+<li class="chapter" data-level="5.7" data-path="resumen-tidyverse.html"><a href="resumen-tidyverse.html"><i class="fa fa-check"></i><b>5.7</b> Resumen: dplyr/tidyr y R base</a></li>
+<li class="chapter" data-level="5.8" data-path="ejercicios-tidyverse.html"><a href="ejercicios-tidyverse.html"><i class="fa fa-check"></i><b>5.8</b> Ejercicios</a>
 <ul>
-<li class="chapter" data-level="D.1" data-path="instalación-de-r-en-windows.html"><a href="instalación-de-r-en-windows.html"><i class="fa fa-check"></i><b>D.1</b> Instalación de R en Windows</a>
-<ul>
-<li class="chapter" data-level="D.1.1" data-path="instalación-de-r-en-windows.html"><a href="instalación-de-r-en-windows.html#asistente-de-instalación"><i class="fa fa-check"></i><b>D.1.1</b> Asistente de instalación</a></li>
-<li class="chapter" data-level="D.1.2" data-path="instalación-de-r-en-windows.html"><a href="instalación-de-r-en-windows.html#instalación-de-paquetes"><i class="fa fa-check"></i><b>D.1.2</b> Instalación de paquetes</a></li>
+<li class="chapter" data-level="5.8.1" data-path="ejercicios-tidyverse.html"><a href="ejercicios-tidyverse.html#ejercicio-1-incremento-salarial-empleados-1"><i class="fa fa-check"></i><b>5.8.1</b> Ejercicio 1: incremento salarial (<code>empleados</code>)</a></li>
+<li class="chapter" data-level="5.8.2" data-path="ejercicios-tidyverse.html"><a href="ejercicios-tidyverse.html#ejercicio-2-filtrado-y-selecci%C3%B3n-starwars-1"><i class="fa fa-check"></i><b>5.8.2</b> Ejercicio 2: Filtrado y selección (<code>starwars</code>)</a></li>
+<li class="chapter" data-level="5.8.3" data-path="ejercicios-tidyverse.html"><a href="ejercicios-tidyverse.html#ejercicio-3-creaci%C3%B3n-de-una-variable-y-categorizaci%C3%B3n-1"><i class="fa fa-check"></i><b>5.8.3</b> Ejercicio 3: Creación de una variable y categorización</a></li>
+<li class="chapter" data-level="5.8.4" data-path="ejercicios-tidyverse.html"><a href="ejercicios-tidyverse.html#ejercicio-4-resumen-y-agrupaci%C3%B3n-1"><i class="fa fa-check"></i><b>5.8.4</b> Ejercicio 4: Resumen y agrupación</a></li>
+<li class="chapter" data-level="5.8.5" data-path="ejercicios-tidyverse.html"><a href="ejercicios-tidyverse.html#ejercicio-5-uni%C3%B3n-de-tablas-1"><i class="fa fa-check"></i><b>5.8.5</b> Ejercicio 5: Unión de tablas</a></li>
+<li class="chapter" data-level="5.8.6" data-path="ejercicios-tidyverse.html"><a href="ejercicios-tidyverse.html#ejercicio-6-opcional-columnas-lista-1"><i class="fa fa-check"></i><b>5.8.6</b> Ejercicio 6 (opcional): columnas-lista</a></li>
 </ul></li>
-<li class="chapter" data-level="D.2" data-path="instalación-en-mac-os-x.html"><a href="instalación-en-mac-os-x.html"><i class="fa fa-check"></i><b>D.2</b> Instalación en Mac OS X</a></li>
-<li class="chapter" data-level="D.3" data-path="instalación-opcional-de-un-entorno-o-editor-de-comandos.html"><a href="instalación-opcional-de-un-entorno-o-editor-de-comandos.html"><i class="fa fa-check"></i><b>D.3</b> Instalación (opcional) de un entorno o editor de comandos</a>
-<ul>
-<li class="chapter" data-level="D.3.1" data-path="instalación-opcional-de-un-entorno-o-editor-de-comandos.html"><a href="instalación-opcional-de-un-entorno-o-editor-de-comandos.html#opciones-adicionales"><i class="fa fa-check"></i><b>D.3.1</b> Opciones adicionales</a></li>
 </ul></li>
+<li class="chapter" data-level="6" data-path="introducción-a-tecnologías-nosql.html"><a href="introducción-a-tecnologías-nosql.html"><i class="fa fa-check"></i><b>6</b> Introducción a Tecnologías NoSQL</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="conceptos-y-tipos-de-bases-de-datos-nosql-documental-columnar-clavevalor-y-de-grafos.html"><a href="conceptos-y-tipos-de-bases-de-datos-nosql-documental-columnar-clavevalor-y-de-grafos.html"><i class="fa fa-check"></i><b>6.1</b> Conceptos y tipos de bases de datos NoSQL (documental, columnar, clave/valor y de grafos)</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="conceptos-y-tipos-de-bases-de-datos-nosql-documental-columnar-clavevalor-y-de-grafos.html"><a href="conceptos-y-tipos-de-bases-de-datos-nosql-documental-columnar-clavevalor-y-de-grafos.html#caracter%C3%ADsticas-de-las-bases-de-datos-nosql"><i class="fa fa-check"></i><b>6.1.1</b> Características de las bases de datos NoSQL</a></li>
+<li class="chapter" data-level="6.1.2" data-path="conceptos-y-tipos-de-bases-de-datos-nosql-documental-columnar-clavevalor-y-de-grafos.html"><a href="conceptos-y-tipos-de-bases-de-datos-nosql-documental-columnar-clavevalor-y-de-grafos.html#tipos-de-bases-de-datos-nosql"><i class="fa fa-check"></i><b>6.1.2</b> Tipos de Bases de Datos NoSQL</a></li>
+<li class="chapter" data-level="6.1.3" data-path="conceptos-y-tipos-de-bases-de-datos-nosql-documental-columnar-clavevalor-y-de-grafos.html"><a href="conceptos-y-tipos-de-bases-de-datos-nosql-documental-columnar-clavevalor-y-de-grafos.html#mongodb-nosql-documental"><i class="fa fa-check"></i><b>6.1.3</b> MongoDB: NoSQL documental</a></li>
+<li class="chapter" data-level="6.1.4" data-path="conceptos-y-tipos-de-bases-de-datos-nosql-documental-columnar-clavevalor-y-de-grafos.html"><a href="conceptos-y-tipos-de-bases-de-datos-nosql-documental-columnar-clavevalor-y-de-grafos.html#redis-nosql-key-value"><i class="fa fa-check"></i><b>6.1.4</b> Redis: NoSQL key-value</a></li>
+<li class="chapter" data-level="6.1.5" data-path="conceptos-y-tipos-de-bases-de-datos-nosql-documental-columnar-clavevalor-y-de-grafos.html"><a href="conceptos-y-tipos-de-bases-de-datos-nosql-documental-columnar-clavevalor-y-de-grafos.html#cassandra-nosql-columnar"><i class="fa fa-check"></i><b>6.1.5</b> Cassandra: NoSQL columnar</a></li>
+<li class="chapter" data-level="6.1.6" data-path="conceptos-y-tipos-de-bases-de-datos-nosql-documental-columnar-clavevalor-y-de-grafos.html"><a href="conceptos-y-tipos-de-bases-de-datos-nosql-documental-columnar-clavevalor-y-de-grafos.html#neo4j-nosql-grafos"><i class="fa fa-check"></i><b>6.1.6</b> Neo4j: NoSQL grafos</a></li>
+<li class="chapter" data-level="6.1.7" data-path="conceptos-y-tipos-de-bases-de-datos-nosql-documental-columnar-clavevalor-y-de-grafos.html"><a href="conceptos-y-tipos-de-bases-de-datos-nosql-documental-columnar-clavevalor-y-de-grafos.html#otros-search-engines"><i class="fa fa-check"></i><b>6.1.7</b> Otros: search engines</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="conexión-de-r-a-mongodb.html"><a href="conexión-de-r-a-mongodb.html"><i class="fa fa-check"></i><b>6.2</b> Conexión de R a MongoDB</a></li>
+<li class="chapter" data-level="6.3" data-path="ejercicios-prácticos-con-mongodb.html"><a href="ejercicios-prácticos-con-mongodb.html"><i class="fa fa-check"></i><b>6.3</b> Ejercicios prácticos con MongoDB</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="tecnologías-para-el-tratamiendo-de-datos-masivos.html"><a href="tecnologías-para-el-tratamiendo-de-datos-masivos.html"><i class="fa fa-check"></i><b>7</b> Tecnologías para el Tratamiendo de Datos Masivos</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="intro-AE.html"><a href="intro-AE.html"><i class="fa fa-check"></i><b>7.1</b> Introducción al Aprendizaje Estadístico</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="intro-AE.html"><a href="intro-AE.html#aprendizaje-estad%C3%ADstico-vs.-aprendizaje-autom%C3%A1tico"><i class="fa fa-check"></i><b>7.1.1</b> Aprendizaje estadístico vs. aprendizaje automático</a></li>
+<li class="chapter" data-level="7.1.2" data-path="intro-AE.html"><a href="intro-AE.html#m%C3%A9todos-de-aprendizaje-estad%C3%ADstico"><i class="fa fa-check"></i><b>7.1.2</b> Métodos de aprendizaje estadístico</a></li>
+<li class="chapter" data-level="7.1.3" data-path="intro-AE.html"><a href="intro-AE.html#const-eval"><i class="fa fa-check"></i><b>7.1.3</b> Construcción y evaluación de los modelos</a></li>
+<li class="chapter" data-level="7.1.4" data-path="intro-AE.html"><a href="intro-AE.html#clasificacion"><i class="fa fa-check"></i><b>7.1.4</b> Clasificación</a></li>
+<li class="chapter" data-level="7.1.5" data-path="intro-AE.html"><a href="intro-AE.html#analisis-modelos"><i class="fa fa-check"></i><b>7.1.5</b> Análisis e interpretación de los modelos</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="tecnologías-big-data-hadoopspark-y-visualización.html"><a href="tecnologías-big-data-hadoopspark-y-visualización.html"><i class="fa fa-check"></i><b>7.2</b> Tecnologías Big Data (Hadoop/Spark y Visualización)</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="tecnologías-big-data-hadoopspark-y-visualización.html"><a href="tecnologías-big-data-hadoopspark-y-visualización.html#tecnolog%C3%ADas-hadoop-spark-y-sparklyr"><i class="fa fa-check"></i><b>7.2.1</b> Tecnologías Hadoop, Spark, y Sparklyr</a></li>
+<li class="chapter" data-level="7.2.2" data-path="tecnologías-big-data-hadoopspark-y-visualización.html"><a href="tecnologías-big-data-hadoopspark-y-visualización.html#big-data-y-machine-learning"><i class="fa fa-check"></i><b>7.2.2</b> Big Data y Machine Learning</a></li>
+<li class="chapter" data-level="7.2.3" data-path="tecnologías-big-data-hadoopspark-y-visualización.html"><a href="tecnologías-big-data-hadoopspark-y-visualización.html#rattle-como-alternativa-a-rapidminer-en-r"><i class="fa fa-check"></i><b>7.2.3</b> Rattle como alternativa a RapidMiner en R</a></li>
+<li class="chapter" data-level="7.2.4" data-path="tecnologías-big-data-hadoopspark-y-visualización.html"><a href="tecnologías-big-data-hadoopspark-y-visualización.html#visualizaci%C3%B3n-y-generaci%C3%B3n-de-cuadros-de-mando"><i class="fa fa-check"></i><b>7.2.4</b> Visualización y Generación de Cuadros de Mando</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="introducción-al-análisis-de-datos-masivos.html"><a href="introducción-al-análisis-de-datos-masivos.html"><i class="fa fa-check"></i><b>7.3</b> Introducción al Análisis de Datos Masivos</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
@@ -359,7 +380,7 @@ div.csl-indent {
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Tecnologías de Gestión y Manipulación de Datos</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Prácticas de Tecnologías de Gestión y Manipulación de Datos</a>
           </h1>
         </div>
 
@@ -367,18 +388,15 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="dplyr" class="section level2 hasAnchor" number="4.2">
-<h2><span class="header-section-number">4.2</span> Manipulación de datos con dplyr y tidyr<a href="dplyr.html#dplyr" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<!--
-# Introducción  {#dplyr}
--->
-<p>En esta sección se realiza una breve introducción al paquete <a href="https://dplyr.tidyverse.org"><code>dplyr</code></a> y se comentan algunas de las utilidades del paquete <a href="https://tidyr.tidyverse.org"><code>tidyr</code></a> que pueden resultar de interés<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>.</p>
+<div id="dplyr" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Manipulación de datos con dplyr y tidyr<a href="dplyr.html#dplyr" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>En esta sección se realiza una breve introducción al paquete <a href="https://dplyr.tidyverse.org"><code>dplyr</code></a> y se comentan algunas de las utilidades del paquete <a href="https://tidyr.tidyverse.org"><code>tidyr</code></a> que pueden resultar de interés<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>.</p>
 <p>La referencia recomendada para iniciarse en esta herramienta es el Capítulo <a href="http://r4ds.had.co.nz/transform.html">5 Data transformation</a> de
 <a href="http://r4ds.had.co.nz">R for Data Science</a>.
 También puede resultar de utilidad la viñeta del paquete <a href="https://dplyr.tidyverse.org/articles/dplyr.html">Introduction to dplyr</a> o la <a href="https://posit.co/wp-content/uploads/2022/10/data-transformation-1.pdf">chuleta</a> (menú de RStudio <em>Help &gt; Cheat Sheets &gt; Data Transformation with dplyr</em>).</p>
-<div id="dplyr-pkg" class="section level3 hasAnchor" number="4.2.1">
-<h3><span class="header-section-number">4.2.1</span> El paquete dplyr<a href="dplyr.html#dplyr-pkg" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="dplyr.html#cb229-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
+<div id="dplyr-pkg" class="section level3 hasAnchor" number="5.2.1">
+<h3><span class="header-section-number">5.2.1</span> El paquete dplyr<a href="dplyr.html#dplyr-pkg" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="dplyr.html#cb344-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
 <p>La principal ventaja de <a href="https://dplyr.tidyverse.org/index.html"><code>dplyr</code></a> es que permite trabajar (de la misma forma) con datos en distintos formatos:</p>
 <ul>
 <li><p><code>data.frame</code>, <a href="https://tibble.tidyverse.org/"><code>tibble</code></a>.</p></li>
@@ -387,12 +405,12 @@ También puede resultar de utilidad la viñeta del paquete <a href="https://dply
 <li><p>bases de datos relacionales (lenguaje SQL, locales o remotas); extensión <a href="https://dbplyr.tidyverse.org"><code>dbplyr</code></a>.</p></li>
 <li><p>grandes volúmenes de datos (incluso almacenados en múltiples servidores; ecosistema <a href="http://hadoop.apache.org/">Hadoop</a>/<a href="https://spark.apache.org/">Spark</a>): extensión <a href="https://spark.rstudio.com"><code>sparklyr</code></a> (ver menú de RStudio <em>Help &gt; Cheat Sheets &gt; Interfacing Spark with sparklyr</em>).</p></li>
 </ul>
-<p>El paquete dplyr permite sustituir operaciones con funciones base de R (como <a href="NA"><code>subset</code></a>, <a href="NA"><code>split</code></a>, <a href="NA"><code>apply</code></a>, <a href="NA"><code>sapply</code></a>, <a href="NA"><code>lapply</code></a>, <a href="NA"><code>tapply</code></a>, <a href="NA"><code>aggregate</code></a>…) por una “gramática” más sencilla para la manipulación de datos.
+<p>El paquete dplyr permite sustituir operaciones con funciones base de R (como <a href="https://www.rdocumentation.org/search?q=subset"><code>subset</code></a>, <a href="https://www.rdocumentation.org/search?q=split"><code>split</code></a>, <a href="https://www.rdocumentation.org/search?q=apply"><code>apply</code></a>, <a href="https://www.rdocumentation.org/search?q=sapply"><code>sapply</code></a>, <a href="https://www.rdocumentation.org/search?q=lapply"><code>lapply</code></a>, <a href="https://www.rdocumentation.org/search?q=tapply"><code>tapply</code></a>, <a href="https://www.rdocumentation.org/search?q=aggregate"><code>aggregate</code></a>…) por una “gramática” más sencilla para la manipulación de datos.
 En lugar de operar sobre vectores como la mayoría de las funciones base,
 opera sobre conjuntos de datos (de forma que es compatible con el operador <code>%&gt;%</code>).
 Los principales “verbos” (funciones) son:</p>
 <ul>
-<li><p><a href="https://dplyr.tidyverse.org/reference/select.html"><code>select()</code></a>: seleccionar variables (ver también <a href="https://dplyr.tidyverse.org/reference/rename.html"><code>rename</code></a>, <a href="https://dplyr.tidyverse.org/reference/rename.html"><code>relocate</code></a>, <a href="https://dplyr.tidyverse.org/reference/rename.html"><code>pull</code></a>).</p></li>
+<li><p><a href="https://dplyr.tidyverse.org/reference/select.html"><code>select()</code></a>: seleccionar variables (ver también <a href="https://dplyr.tidyverse.org/reference/rename.html"><code>rename</code></a>, <a href="https://dplyr.tidyverse.org/reference/relocate.html"><code>relocate</code></a>, <a href="https://dplyr.tidyverse.org/reference/pull.html"><code>pull</code></a>).</p></li>
 <li><p><a href="https://dplyr.tidyverse.org/reference/mutate.html"><code>mutate()</code></a>: crear variables (ver también <code>transmute()</code>).</p></li>
 <li><p><a href="https://dplyr.tidyverse.org/reference/filter.html"><code>filter()</code></a>: seleccionar casos/filas (ver también <code>slice()</code>).</p></li>
 <li><p><a href="https://dplyr.tidyverse.org/reference/arrange.html"><code>arrange()</code></a>: ordenar casos/filas.</p></li>
@@ -403,16 +421,16 @@ Los principales “verbos” (funciones) son:</p>
 Realmente las componentes también pueden ser listas de la misma longitud y, por tanto, podemos almacenar casi cualquier estructura de datos en un <code>data.frame</code>.</p>
 <p>En la primera parte de este capítulo consideraremos solo <code>data.frame</code> por comodidad.
 Emplearemos como ejemplo los datos de empleados de banca almacenados en el fichero <em>empleados.RData</em> (y supondremos que estamos interesados en estudiar si hay discriminación por cuestión de sexo o raza).</p>
-<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="dplyr.html#cb230-1" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;data/empleados.RData&quot;</span>)</span>
-<span id="cb230-2"><a href="dplyr.html#cb230-2" tabindex="-1"></a><span class="fu">attr</span>(empleados, <span class="st">&quot;variable.labels&quot;</span>) <span class="ot">&lt;-</span> <span class="cn">NULL</span>                  </span></code></pre></div>
-<p>En la Sección <a href="dbplyr.html#dbplyr">4.5</a> final emplearemos una base de datos relacional como ejemplo.</p>
+<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="dplyr.html#cb345-1" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;data/empleados.RData&quot;</span>)</span>
+<span id="cb345-2"><a href="dplyr.html#cb345-2" tabindex="-1"></a><span class="fu">attr</span>(empleados, <span class="st">&quot;variable.labels&quot;</span>) <span class="ot">&lt;-</span> <span class="cn">NULL</span>                  </span></code></pre></div>
+<p>En la Sección <a href="dbplyr.html#dbplyr">5.5</a> final emplearemos una base de datos relacional como ejemplo.</p>
 </div>
-<div id="dplyr-variables" class="section level3 hasAnchor" number="4.2.2">
-<h3><span class="header-section-number">4.2.2</span> Operaciones con variables (columnas)<a href="dplyr.html#dplyr-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="dplyr-variables" class="section level3 hasAnchor" number="5.2.2">
+<h3><span class="header-section-number">5.2.2</span> Operaciones con variables (columnas)<a href="dplyr.html#dplyr-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Podemos <strong>seleccionar variables con <a href="https://dplyr.tidyverse.org/reference/select.html"><code>select()</code></a></strong>:</p>
-<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="dplyr.html#cb231-1" tabindex="-1"></a>emplea2 <span class="ot">&lt;-</span> empleados <span class="sc">%&gt;%</span> <span class="fu">select</span>(id, sexo, minoria, tiempemp, </span>
-<span id="cb231-2"><a href="dplyr.html#cb231-2" tabindex="-1"></a>                                salini, salario)</span>
-<span id="cb231-3"><a href="dplyr.html#cb231-3" tabindex="-1"></a><span class="fu">head</span>(emplea2)</span></code></pre></div>
+<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="dplyr.html#cb346-1" tabindex="-1"></a>emplea2 <span class="ot">&lt;-</span> empleados <span class="sc">%&gt;%</span> <span class="fu">select</span>(id, sexo, minoria, tiempemp, </span>
+<span id="cb346-2"><a href="dplyr.html#cb346-2" tabindex="-1"></a>                                salini, salario)</span>
+<span id="cb346-3"><a href="dplyr.html#cb346-3" tabindex="-1"></a><span class="fu">head</span>(emplea2)</span></code></pre></div>
 <pre><code>##   id   sexo minoria tiempemp salini salario
 ## 1  1 Hombre      No       98  27000   57000
 ## 2  2 Hombre      No       98  18750   40200
@@ -421,7 +439,7 @@ Emplearemos como ejemplo los datos de empleados de banca almacenados en el fiche
 ## 5  5 Hombre      No       98  21000   45000
 ## 6  6 Hombre      No       98  13500   32100</code></pre>
 <p>Se puede cambiar el nombre (ver también <a href="https://dplyr.tidyverse.org/reference/rename.html"><code>rename()</code></a>):</p>
-<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="dplyr.html#cb233-1" tabindex="-1"></a>empleados <span class="sc">%&gt;%</span> <span class="fu">select</span>(sexo, <span class="at">noblanca =</span> minoria, salario) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="dplyr.html#cb348-1" tabindex="-1"></a>empleados <span class="sc">%&gt;%</span> <span class="fu">select</span>(sexo, <span class="at">noblanca =</span> minoria, salario) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
 <pre><code>##     sexo noblanca salario
 ## 1 Hombre       No   57000
 ## 2 Hombre       No   40200
@@ -430,7 +448,7 @@ Emplearemos como ejemplo los datos de empleados de banca almacenados en el fiche
 ## 5 Hombre       No   45000
 ## 6 Hombre       No   32100</code></pre>
 <p>Se pueden emplear los nombres de variables como índices:</p>
-<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="dplyr.html#cb235-1" tabindex="-1"></a>empleados <span class="sc">%&gt;%</span> <span class="fu">select</span>(sexo<span class="sc">:</span>salario) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="dplyr.html#cb350-1" tabindex="-1"></a>empleados <span class="sc">%&gt;%</span> <span class="fu">select</span>(sexo<span class="sc">:</span>salario) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
 <pre><code>##     sexo    fechnac educ         catlab salario
 ## 1 Hombre 1952-02-03   15      Directivo   57000
 ## 2 Hombre 1958-05-23   16 Administrativo   40200
@@ -438,8 +456,8 @@ Emplearemos como ejemplo los datos de empleados de banca almacenados en el fiche
 ## 4  Mujer 1947-04-15    8 Administrativo   21900
 ## 5 Hombre 1955-02-09   15 Administrativo   45000
 ## 6 Hombre 1958-08-22   15 Administrativo   32100</code></pre>
-<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="dplyr.html#cb237-1" tabindex="-1"></a><span class="co"># empleados %&gt;% select(-(sexo:salario)) %&gt;% head()</span></span>
-<span id="cb237-2"><a href="dplyr.html#cb237-2" tabindex="-1"></a>empleados <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">!</span>(sexo<span class="sc">:</span>salario)) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="dplyr.html#cb352-1" tabindex="-1"></a><span class="co"># empleados %&gt;% select(-(sexo:salario)) %&gt;% head()</span></span>
+<span id="cb352-2"><a href="dplyr.html#cb352-2" tabindex="-1"></a>empleados <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">!</span>(sexo<span class="sc">:</span>salario)) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
 <pre><code>##   id salini tiempemp expprev minoria     sexoraza
 ## 1  1  27000       98     144      No Blanca varón
 ## 2  2  18750       98      36      No Blanca varón
@@ -455,7 +473,7 @@ Emplearemos como ejemplo los datos de empleados de banca almacenados en el fiche
 <li><p><a href="https://tidyselect.r-lib.org/reference/where.html"><code>where()</code></a>: a partir de una función (e.g. <code>where(is.numeric)</code>)</p></li>
 </ul>
 <p>Por ejemplo:</p>
-<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="dplyr.html#cb239-1" tabindex="-1"></a>empleados <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">&quot;s&quot;</span>)) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="dplyr.html#cb354-1" tabindex="-1"></a>empleados <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">&quot;s&quot;</span>)) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
 <pre><code>##     sexo salario salini     sexoraza
 ## 1 Hombre   57000  27000 Blanca varón
 ## 2 Hombre   40200  18750 Blanca varón
@@ -464,9 +482,9 @@ Emplearemos como ejemplo los datos de empleados de banca almacenados en el fiche
 ## 5 Hombre   45000  21000 Blanca varón
 ## 6 Hombre   32100  13500 Blanca varón</code></pre>
 <p>Podemos <strong>crear variables con <a href="https://dplyr.tidyverse.org/reference/mutate.html"><code>mutate()</code></a></strong>:</p>
-<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="dplyr.html#cb241-1" tabindex="-1"></a>emplea2 <span class="sc">%&gt;%</span> </span>
-<span id="cb241-2"><a href="dplyr.html#cb241-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">incsal =</span> salario <span class="sc">-</span> salini, <span class="at">tsal =</span> incsal<span class="sc">/</span>tiempemp) <span class="sc">%&gt;%</span> </span>
-<span id="cb241-3"><a href="dplyr.html#cb241-3" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="dplyr.html#cb356-1" tabindex="-1"></a>emplea2 <span class="sc">%&gt;%</span> </span>
+<span id="cb356-2"><a href="dplyr.html#cb356-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">incsal =</span> salario <span class="sc">-</span> salini, <span class="at">tsal =</span> incsal<span class="sc">/</span>tiempemp) <span class="sc">%&gt;%</span> </span>
+<span id="cb356-3"><a href="dplyr.html#cb356-3" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div>
 <pre><code>##   id   sexo minoria tiempemp salini salario incsal      tsal
 ## 1  1 Hombre      No       98  27000   57000  30000 306.12245
 ## 2  2 Hombre      No       98  18750   40200  21450 218.87755
@@ -475,27 +493,22 @@ Emplearemos como ejemplo los datos de empleados de banca almacenados en el fiche
 ## 5  5 Hombre      No       98  21000   45000  24000 244.89796
 ## 6  6 Hombre      No       98  13500   32100  18600 189.79592</code></pre>
 </div>
-<div id="dplyr-casos" class="section level3 hasAnchor" number="4.2.3">
-<h3><span class="header-section-number">4.2.3</span> Operaciones con casos (filas)<a href="dplyr.html#dplyr-casos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="dplyr-casos" class="section level3 hasAnchor" number="5.2.3">
+<h3><span class="header-section-number">5.2.3</span> Operaciones con casos (filas)<a href="dplyr.html#dplyr-casos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Podemos <strong>seleccionar casos con <a href="https://dplyr.tidyverse.org/reference/filter.html"><code>filter()</code></a></strong>:</p>
-<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="dplyr.html#cb243-1" tabindex="-1"></a>emplea2 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(sexo <span class="sc">==</span> <span class="st">&quot;Mujer&quot;</span>, minoria <span class="sc">==</span> <span class="st">&quot;Sí&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
-<pre><code>##   id  sexo minoria tiempemp salini salario
-## 1 14 Mujer      Sí       98  16800   35100
-## 2 23 Mujer      Sí       97  11100   24000
-## 3 24 Mujer      Sí       97   9000   16950
-## 4 25 Mujer      Sí       97   9000   21150
-## 5 40 Mujer      Sí       96   9000   19200
-## 6 41 Mujer      Sí       96  11550   23550</code></pre>
+<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="dplyr.html#cb358-1" tabindex="-1"></a>emplea2 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(sexo <span class="sc">==</span> <span class="st">&quot;Mujer&quot;</span>, minoria <span class="sc">==</span> <span class="st">&quot;Sí&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
+<pre><code>## [1] id       sexo     minoria  tiempemp salini   salario 
+## &lt;0 rows&gt; (o 0- extensión row.names)</code></pre>
 <p>Podemos <strong>reordenar casos con <a href="https://dplyr.tidyverse.org/reference/arrange.html"><code>arrange()</code></a></strong>:</p>
-<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="dplyr.html#cb245-1" tabindex="-1"></a>emplea2 <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(salario) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="dplyr.html#cb360-1" tabindex="-1"></a>emplea2 <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(salario) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
 <pre><code>##    id  sexo minoria tiempemp salini salario
 ## 1 378 Mujer      No       70  10200   15750
 ## 2 338 Mujer      No       74  10200   15900
 ## 3  90 Mujer      No       92   9750   16200
 ## 4 224 Mujer      No       82  10200   16200
 ## 5 411 Mujer      No       68  10200   16200
-## 6 448 Mujer      Sí       66  10200   16350</code></pre>
-<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="dplyr.html#cb247-1" tabindex="-1"></a>emplea2 <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(salini), salario) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
+## 6 448 Mujer   S\xed       66  10200   16350</code></pre>
+<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="dplyr.html#cb362-1" tabindex="-1"></a>emplea2 <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(salini), salario) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
 <pre><code>##    id   sexo minoria tiempemp salini salario
 ## 1  29 Hombre      No       96  79980  135000
 ## 2 343 Hombre      No       73  60000  103500
@@ -504,56 +517,56 @@ Emplearemos como ejemplo los datos de empleados de banca almacenados en el fiche
 ## 5 431 Hombre      No       66  45000   86250
 ## 6  32 Hombre      No       96  45000  110625</code></pre>
 <p>Podemos <strong>resumir valores con <a href="https://dplyr.tidyverse.org/reference/summarise.html"><code>summarise()</code></a></strong>:</p>
-<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="dplyr.html#cb249-1" tabindex="-1"></a>empleados <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">sal.med =</span> <span class="fu">mean</span>(salario), <span class="at">n =</span> <span class="fu">n</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="dplyr.html#cb364-1" tabindex="-1"></a>empleados <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">sal.med =</span> <span class="fu">mean</span>(salario), <span class="at">n =</span> <span class="fu">n</span>())</span></code></pre></div>
 <pre><code>##    sal.med   n
 ## 1 34419.57 474</code></pre>
 <p>Para realizar <strong>operaciones con múltiples variables podemos emplear <a href="https://dplyr.tidyverse.org/reference/across.html"><code>across()</code></a></strong> (admite selección de variables <a href="https://tidyselect.r-lib.org"><code>tidyselect</code></a>):</p>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="dplyr.html#cb251-1" tabindex="-1"></a>empleados <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), mean), <span class="at">n =</span> <span class="fu">n</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="dplyr.html#cb366-1" tabindex="-1"></a>empleados <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), mean), <span class="at">n =</span> <span class="fu">n</span>())</span></code></pre></div>
 <pre><code>##      id     educ  salario   salini tiempemp  expprev   n
 ## 1 237.5 13.49156 34419.57 17016.09  81.1097 95.86076 474</code></pre>
-<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="dplyr.html#cb253-1" tabindex="-1"></a><span class="co"># empleados %&gt;% summarise(across(where(is.numeric) &amp; !id, mean), n = n())</span></span></code></pre></div>
+<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="dplyr.html#cb368-1" tabindex="-1"></a><span class="co"># empleados %&gt;% summarise(across(where(is.numeric) &amp; !id, mean), n = n())</span></span></code></pre></div>
 <p>NOTA: Esta función sustituye a las “variantes de ámbito” <code>_at()</code>, <code>_if()</code> y <code>_all()</code> de versiones anteriores de dplyr (como <code>summarise_at()</code>, <code>summarise_if()</code>, <code>summarise_all()</code>, <code>mutate_at()</code>, <code>mutate_if()</code>…) y también el uso de <code>vars()</code>.
 En el caso de <code>filter()</code> se puede emplear <a href="https://dplyr.tidyverse.org/reference/across.html"><code>if_any()</code></a> e <a href="https://dplyr.tidyverse.org/reference/across.html"><code>if_all()</code></a>.</p>
 <p>Podemos <strong>agrupar casos con <a href="https://dplyr.tidyverse.org/reference/group_by.html"><code>group_by()</code></a></strong>:</p>
-<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="dplyr.html#cb254-1" tabindex="-1"></a>empleados <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(sexo, minoria) <span class="sc">%&gt;%</span> </span>
-<span id="cb254-2"><a href="dplyr.html#cb254-2" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">sal.med =</span> <span class="fu">mean</span>(salario), <span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb254-3"><a href="dplyr.html#cb254-3" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span></code></pre></div>
-<pre><code>## # A tibble: 4 x 4
+<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="dplyr.html#cb369-1" tabindex="-1"></a>empleados <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(sexo, minoria) <span class="sc">%&gt;%</span> </span>
+<span id="cb369-2"><a href="dplyr.html#cb369-2" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">sal.med =</span> <span class="fu">mean</span>(salario), <span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb369-3"><a href="dplyr.html#cb369-3" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 4
 ##   sexo   minoria sal.med     n
 ##   &lt;fct&gt;  &lt;fct&gt;     &lt;dbl&gt; &lt;int&gt;
 ## 1 Hombre No       44475.   194
-## 2 Hombre Sí       32246.    64
+## 2 Hombre S�       32246.    64
 ## 3 Mujer  No       26707.   176
-## 4 Mujer  Sí       23062.    40</code></pre>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="dplyr.html#cb256-1" tabindex="-1"></a>empleados <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(sexo, minoria) <span class="sc">%&gt;%</span> </span>
-<span id="cb256-2"><a href="dplyr.html#cb256-2" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">sal.med =</span> <span class="fu">mean</span>(salario), <span class="at">n =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">&quot;drop&quot;</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 4 x 4
+## 4 Mujer  S�       23062.    40</code></pre>
+<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="dplyr.html#cb371-1" tabindex="-1"></a>empleados <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(sexo, minoria) <span class="sc">%&gt;%</span> </span>
+<span id="cb371-2"><a href="dplyr.html#cb371-2" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">sal.med =</span> <span class="fu">mean</span>(salario), <span class="at">n =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">&quot;drop&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 4
 ##   sexo   minoria sal.med     n
 ##   &lt;fct&gt;  &lt;fct&gt;     &lt;dbl&gt; &lt;int&gt;
 ## 1 Hombre No       44475.   194
-## 2 Hombre Sí       32246.    64
+## 2 Hombre S�       32246.    64
 ## 3 Mujer  No       26707.   176
-## 4 Mujer  Sí       23062.    40</code></pre>
-<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="dplyr.html#cb258-1" tabindex="-1"></a><span class="co"># dplyr &gt;= 1.1.0 # packageVersion(&quot;dplyr&quot;)</span></span>
-<span id="cb258-2"><a href="dplyr.html#cb258-2" tabindex="-1"></a><span class="co"># empleados %&gt;% summarise(sal.med = mean(salario), n = n(), </span></span>
-<span id="cb258-3"><a href="dplyr.html#cb258-3" tabindex="-1"></a><span class="co">#                         .by = c(sexo, minoria))</span></span></code></pre></div>
+## 4 Mujer  S�       23062.    40</code></pre>
+<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="dplyr.html#cb373-1" tabindex="-1"></a><span class="co"># dplyr &gt;= 1.1.0 # packageVersion(&quot;dplyr&quot;)</span></span>
+<span id="cb373-2"><a href="dplyr.html#cb373-2" tabindex="-1"></a><span class="co"># empleados %&gt;% summarise(sal.med = mean(salario), n = n(), </span></span>
+<span id="cb373-3"><a href="dplyr.html#cb373-3" tabindex="-1"></a><span class="co">#                         .by = c(sexo, minoria))</span></span></code></pre></div>
 <p>Por defecto la agrupación se mantiene para el resto de operaciones, habría que emplear <code>ungroup()</code> (o el argumento <code>.groups = "drop"</code>) para eliminarla (se puede emplear <code>group_vars()</code> o <code>str()</code> para ver la agrupación).
 Desde dplyr 1.1.0 (2023-01-29) está disponible un parámetro <code>.by/by</code> en <code>mutate()</code>, <code>summarise()</code>, <code>filter()</code> y <code>slice()</code> como alternativa a agrupar y desagrupar posteriormente.
 Para más detalles ver <a href="https://dplyr.tidyverse.org/reference/dplyr_by.html">Per-operation grouping with .by/by</a>.</p>
 </div>
-<div id="tidyr-missing" class="section level3 hasAnchor" number="4.2.4">
-<h3><span class="header-section-number">4.2.4</span> Datos faltantes<a href="dplyr.html#tidyr-missing" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Continuamos con el ejemplo de la Sección @ref{missing}.
+<div id="tidyr-missing" class="section level3 hasAnchor" number="5.2.4">
+<h3><span class="header-section-number">5.2.4</span> Datos faltantes<a href="dplyr.html#tidyr-missing" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Continuamos con el ejemplo de la Sección <a href="manip.html#missing">2.2.3</a>.
 <em>tidyverse</em> dispone de muchas herramientas para el tratamiento de los datos faltantes.</p>
-<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="dplyr.html#cb259-1" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;airquality&quot;</span>)</span>
-<span id="cb259-2"><a href="dplyr.html#cb259-2" tabindex="-1"></a>datos <span class="ot">&lt;-</span> airquality</span>
-<span id="cb259-3"><a href="dplyr.html#cb259-3" tabindex="-1"></a><span class="fu">library</span>(visdat)</span>
-<span id="cb259-4"><a href="dplyr.html#cb259-4" tabindex="-1"></a><span class="fu">vis_dat</span>(airquality)</span>
-<span id="cb259-5"><a href="dplyr.html#cb259-5" tabindex="-1"></a><span class="co"># vis_miss(airquality)</span></span></code></pre></div>
+<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb374-1"><a href="dplyr.html#cb374-1" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;airquality&quot;</span>)</span>
+<span id="cb374-2"><a href="dplyr.html#cb374-2" tabindex="-1"></a>datos <span class="ot">&lt;-</span> airquality</span>
+<span id="cb374-3"><a href="dplyr.html#cb374-3" tabindex="-1"></a><span class="fu">library</span>(visdat)</span>
+<span id="cb374-4"><a href="dplyr.html#cb374-4" tabindex="-1"></a><span class="fu">vis_dat</span>(airquality)</span>
+<span id="cb374-5"><a href="dplyr.html#cb374-5" tabindex="-1"></a><span class="co"># vis_miss(airquality)</span></span></code></pre></div>
 <p>Visualización (amigable) de la estrutura de datos:</p>
-<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="dplyr.html#cb260-1" tabindex="-1"></a><span class="fu">library</span>(naniar)</span>
-<span id="cb260-2"><a href="dplyr.html#cb260-2" tabindex="-1"></a><span class="fu">bind_shadow</span>(airquality)</span></code></pre></div>
-<pre><code>## # A tibble: 153 x 12
+<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="dplyr.html#cb375-1" tabindex="-1"></a><span class="fu">library</span>(naniar)</span>
+<span id="cb375-2"><a href="dplyr.html#cb375-2" tabindex="-1"></a><span class="fu">bind_shadow</span>(airquality)</span></code></pre></div>
+<pre><code>## # A tibble: 153 × 12
 ##    Ozone Solar.R  Wind  Temp Month   Day Ozone_NA Solar.R_NA Wind_NA Temp_NA
 ##    &lt;int&gt;   &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;      &lt;fct&gt;   &lt;fct&gt;  
 ##  1    41     190   7.4    67     5     1 !NA      !NA        !NA     !NA    
@@ -566,33 +579,33 @@ Para más detalles ver <a href="https://dplyr.tidyverse.org/reference/dplyr_by.h
 ##  8    19      99  13.8    59     5     8 !NA      !NA        !NA     !NA    
 ##  9     8      19  20.1    61     5     9 !NA      !NA        !NA     !NA    
 ## 10    NA     194   8.6    69     5    10 NA       !NA        !NA     !NA    
-## # i 143 more rows
-## # i 2 more variables: Month_NA &lt;fct&gt;, Day_NA &lt;fct&gt;</code></pre>
-<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="dplyr.html#cb262-1" tabindex="-1"></a><span class="co"># nabular(airquality)</span></span></code></pre></div>
+## # ℹ 143 more rows
+## # ℹ 2 more variables: Month_NA &lt;fct&gt;, Day_NA &lt;fct&gt;</code></pre>
+<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb377-1"><a href="dplyr.html#cb377-1" tabindex="-1"></a><span class="co"># nabular(airquality)</span></span></code></pre></div>
 <p>Distribución por variables de los datos faltantes:</p>
-<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="dplyr.html#cb263-1" tabindex="-1"></a><span class="fu">miss_var_table</span>(airquality) </span></code></pre></div>
-<pre><code>## # A tibble: 3 x 3
+<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="dplyr.html#cb378-1" tabindex="-1"></a><span class="fu">miss_var_table</span>(airquality) </span></code></pre></div>
+<pre><code>## # A tibble: 3 × 3
 ##   n_miss_in_var n_vars pct_vars
 ##           &lt;int&gt;  &lt;int&gt;    &lt;dbl&gt;
 ## 1             0      4     66.7
 ## 2             7      1     16.7
 ## 3            37      1     16.7</code></pre>
-<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="dplyr.html#cb265-1" tabindex="-1"></a><span class="fu">prop_miss_case</span>(airquality)</span></code></pre></div>
+<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="dplyr.html#cb380-1" tabindex="-1"></a><span class="fu">prop_miss_case</span>(airquality)</span></code></pre></div>
 <pre><code>## [1] 0.2745098</code></pre>
-<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="dplyr.html#cb267-1" tabindex="-1"></a><span class="fu">gg_miss_upset</span>(airquality) </span></code></pre></div>
-<p><img src="04-dplyr_files/figure-html/unnamed-chunk-23-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb382-1"><a href="dplyr.html#cb382-1" tabindex="-1"></a><span class="fu">gg_miss_upset</span>(airquality) </span></code></pre></div>
+<p><img src="05-dplyr_files/figure-html/unnamed-chunk-23-1.png" alt="" width="80%" style="display: block; margin: auto;" /></p>
 <p>Distribución conjunta de los valores faltantes para la radiación solar y ozono:</p>
-<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="dplyr.html#cb268-1" tabindex="-1"></a><span class="fu">library</span>(naniar)</span>
-<span id="cb268-2"><a href="dplyr.html#cb268-2" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb268-3"><a href="dplyr.html#cb268-3" tabindex="-1"></a><span class="fu">ggplot</span>(airquality, </span>
-<span id="cb268-4"><a href="dplyr.html#cb268-4" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Solar.R, </span>
-<span id="cb268-5"><a href="dplyr.html#cb268-5" tabindex="-1"></a>           <span class="at">y =</span> Ozone)) <span class="sc">+</span> </span>
-<span id="cb268-6"><a href="dplyr.html#cb268-6" tabindex="-1"></a>  <span class="fu">geom_miss_point</span>()</span></code></pre></div>
-<p><img src="04-dplyr_files/figure-html/unnamed-chunk-24-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="dplyr.html#cb383-1" tabindex="-1"></a><span class="fu">library</span>(naniar)</span>
+<span id="cb383-2"><a href="dplyr.html#cb383-2" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb383-3"><a href="dplyr.html#cb383-3" tabindex="-1"></a><span class="fu">ggplot</span>(airquality, </span>
+<span id="cb383-4"><a href="dplyr.html#cb383-4" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Solar.R, </span>
+<span id="cb383-5"><a href="dplyr.html#cb383-5" tabindex="-1"></a>           <span class="at">y =</span> Ozone)) <span class="sc">+</span> </span>
+<span id="cb383-6"><a href="dplyr.html#cb383-6" tabindex="-1"></a>  <span class="fu">geom_miss_point</span>()</span></code></pre></div>
+<p><img src="05-dplyr_files/figure-html/unnamed-chunk-24-1.png" alt="" width="80%" style="display: block; margin: auto;" /></p>
 <p>Distribución mensual de los valores faltantes:</p>
-<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="dplyr.html#cb269-1" tabindex="-1"></a><span class="co"># gg_miss_var(airquality)</span></span>
-<span id="cb269-2"><a href="dplyr.html#cb269-2" tabindex="-1"></a><span class="fu">gg_miss_var</span>(airquality, <span class="at">facet =</span> Month)</span></code></pre></div>
-<p><img src="04-dplyr_files/figure-html/unnamed-chunk-25-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb384-1"><a href="dplyr.html#cb384-1" tabindex="-1"></a><span class="co"># gg_miss_var(airquality)</span></span>
+<span id="cb384-2"><a href="dplyr.html#cb384-2" tabindex="-1"></a><span class="fu">gg_miss_var</span>(airquality, <span class="at">facet =</span> Month)</span></code></pre></div>
+<p><img src="05-dplyr_files/figure-html/unnamed-chunk-25-1.png" alt="" width="80%" style="display: block; margin: auto;" /></p>
 <!--
 library(dplyr)
 gg_miss_upset(pen) # Relacioese entre las variables en los datos ausentes
@@ -615,12 +628,40 @@ Future development
 Make naniar work with big data tools like sparklyr, and sparklingwater.
 Provide tools for assessing goodness of fit for classical approaches of MCAR, MAR, and MNAR (graphical inference from nullabor package)
 -->
+<p>Antes de decidir cómo tratar los valores faltantes conviene tener en cuenta por qué faltan, ya que no todos los mecanismos son igual de “inofensivos”:</p>
+<ul>
+<li><strong>MCAR</strong> (<em>missing completely at random</em>): la probabilidad de que falte un valor no depende ni de los datos observados ni de los no observados (p. ej. un fallo aleatorio del sensor). Es el caso más favorable.</li>
+<li><strong>MAR</strong> (<em>missing at random</em>): la probabilidad de que falte depende de otras variables observadas, pero no del propio valor ausente (p. ej. un sensor que falla más en ciertos meses).</li>
+<li><strong>MNAR</strong> (<em>missing not at random</em>): la probabilidad de que falte depende del propio valor no observado (p. ej. valores muy altos de un contaminante que saturan y estropean el sensor). Es el caso más problemático: ignorar estos datos puede sesgar el análisis.</li>
+</ul>
+<p>Una vez localizados y entendidos los valores faltantes, una opción sencilla es la <strong>imputación</strong>, es decir, sustituirlos por un valor “razonable” en lugar de eliminar la fila. Con <a href="https://tidyr.tidyverse.org/reference/replace_na.html"><code>replace_na()</code></a> se puede imputar, por ejemplo, con la media de cada variable:</p>
+<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="dplyr.html#cb385-1" tabindex="-1"></a>airquality <span class="sc">%&gt;%</span></span>
+<span id="cb385-2"><a href="dplyr.html#cb385-2" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb385-3"><a href="dplyr.html#cb385-3" tabindex="-1"></a>    <span class="at">Ozone =</span> tidyr<span class="sc">::</span><span class="fu">replace_na</span>(<span class="fu">as.numeric</span>(Ozone), <span class="fu">mean</span>(Ozone, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)),</span>
+<span id="cb385-4"><a href="dplyr.html#cb385-4" tabindex="-1"></a>    <span class="at">Solar.R =</span> tidyr<span class="sc">::</span><span class="fu">replace_na</span>(<span class="fu">as.numeric</span>(Solar.R), <span class="fu">mean</span>(Solar.R, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb385-5"><a href="dplyr.html#cb385-5" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb385-6"><a href="dplyr.html#cb385-6" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code></pre></div>
+<pre><code>##      Ozone           Solar.R           Wind             Temp      
+##  Min.   :  1.00   Min.   :  7.0   Min.   : 1.700   Min.   :56.00  
+##  1st Qu.: 21.00   1st Qu.:120.0   1st Qu.: 7.400   1st Qu.:72.00  
+##  Median : 42.13   Median :194.0   Median : 9.700   Median :79.00  
+##  Mean   : 42.13   Mean   :185.9   Mean   : 9.958   Mean   :77.88  
+##  3rd Qu.: 46.00   3rd Qu.:256.0   3rd Qu.:11.500   3rd Qu.:85.00  
+##  Max.   :168.00   Max.   :334.0   Max.   :20.700   Max.   :97.00  
+##      Month            Day      
+##  Min.   :5.000   Min.   : 1.0  
+##  1st Qu.:6.000   1st Qu.: 8.0  
+##  Median :7.000   Median :16.0  
+##  Mean   :6.993   Mean   :15.8  
+##  3rd Qu.:8.000   3rd Qu.:23.0  
+##  Max.   :9.000   Max.   :31.0</code></pre>
+<p>Esta imputación simple (con la media, la mediana o el último valor válido, <a href="https://tidyr.tidyverse.org/reference/fill.html"><code>fill()</code></a>) es rápida pero <strong>reduce artificialmente la variabilidad</strong> de los datos y puede introducir sesgo si el mecanismo no es MCAR. Para conjuntos de datos más exigentes existen paquetes especializados en imputación múltiple, como <a href="https://cran.r-project.org/package=mice"><code>mice</code></a> o <a href="https://cran.r-project.org/package=missForest"><code>missForest</code></a>, que quedan fuera del alcance de esta introducción.</p>
 </div>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="5">
-<li id="fn5"><p>Otra alternativa (más rápida) es <a href="https://rdatatable.gitlab.io/data.table"><code>data.table</code></a> pero en versiones recientes ya se puede emplear desde <code>dplyr</code>, como se comenta más adelante.<a href="dplyr.html#fnref5" class="footnote-back">↩︎</a></p></li>
+<ol start="6">
+<li id="fn6"><p>Otra alternativa (más rápida) es <a href="https://rdatatable.gitlab.io/data.table"><code>data.table</code></a> pero en versiones recientes ya se puede emplear desde <code>dplyr</code>, como se comenta más adelante.<a href="dplyr.html#fnref6" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -643,42 +684,42 @@ Provide tools for assessing goodness of fit for classical approaches of MCAR, MA
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": true,
-"facebook": false,
-"twitter": false,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": "https://github.com/gltaboada/tgdbook/edit/master/04-dplyr.Rmd",
-"text": "Edit"
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["Practicas_de_TGD.pdf"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-}
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/gltaboada/tgdbook/edit/master/05-dplyr.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["Practicas_de_TGD.pdf"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
 });
 });
 </script>

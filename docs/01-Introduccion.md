@@ -12,7 +12,7 @@ La información relevante de la materia está disponible en la guía docente y l
 
 En particular, los resultados de aprendizaje son:
 
-* Manejar de forma autónoma y solvente el software necesario para acceder a conjuntos de datos en entornos profesionales y/o en la nube.	
+* Manejar de forma autónoma y solvente el software necesario para acceder a conjuntos de datos en entornos profesionales y/o en la nube.
 
 * Saber gestionar conjuntos de datos masivos en un entorno multidisciplinar que permita la participación en proyectos profesionales complejos que requieran el uso de técnicas estadísticas.	
 
@@ -36,26 +36,26 @@ En particular, los resultados de aprendizaje son:
 ## Planificación (tentativa)
 
 La impartición de los contenidos durante el curso dependerá de los conocimientos de partida y la asimilación de los 
-conceptos. Para completar nuestra visión de los conocimientos previos os requerimos completar este formulario en la primera sesión de clase: https://forms.gle/EbbBNeXTpk8MK1C76
-
-- Semana 1 (3/11): Presentación e introducción a Tema 1 y SQL.
-
-- Semana 2 (6, 8, 9, 10/11): Tema 1 y SQL. Seminario Manipulación de datos con dplyr (8 y 9). Ejercicios SQL (11)
-
-- Semana 3 (13, 15 y 16/11):  Ejercicios SQL (13). Tema 2: NoSQL y Seminario tratamiento de texto (CSV, excel, Json) y open data. 
-
-- Semana 4 (20, 22, 23 y 24/11): Tema 3: Conceptos de Big Data y datos masivos. Introducción al Aprendizaje Estadístico.
-
-- Semana 5 (27, 29, 30 y 1/12): Tema 3: Tutorial de sparklyr, seminario de visualización y aplicaciones de datos masivos
-
-- Semana 6 (4/12) Tema 3: Prácticas sparklyr
-
-- Semana 7 (11, 13, 14 y 15/12) Tema 3: Prácticas sparklyr. 
-
-- Semana 8 (18, 20, 21 y 22/12) Revisión prácticas, dudas de cara a examen, backup. 
+conceptos. Para completar nuestra visión de los conocimientos previos os requerimos completar este formulario en la primera sesión de clase: https://forms.gle/D5bhiLLBUFuh6k1n8 
 
 
-Examen 22/1 4pm. 
+- Semana 1 (20/10) : 21/10 - Presentación
+
+- Semana 2 (27/10) : 28 y 30/10 - Tema 1 - SQL
+
+- Semana 3 (03/11) : 04 y 06/11 - Seminario dplyr
+
+- Semana 4 (10/11) : 11, 13 y 14/11 - Tema 1 - SQL
+
+- Semana 5 (17/11) : 18, 20/11 - Tema 1 - SQL. + 21/11 - Seminario texto proc. (CSV, excel, Json) y open data 
+
+- Semana 6 (24/11) : 25/11 - Tema 2 NOSQL + 27 y 28/11 - Tema 3 Big Data
+
+- Semana 7 (1/12) : 2, 4 y 5/12 Tema 3 Big Data.
+
+- Semana 8 (8/12) : 9 y 11/12 - Intro a AE + 12/12 Tutoría práctica ML.
+
+- Semana 9 (15/12) : 16, 18 y 19/12 - Clases de paso / tutorías de cara a examen.
 
 
 <!-- Curso 2019-2020
@@ -133,14 +133,16 @@ Asimilación práctica de materia: Asimilación y comprensión de los conocimien
 * Rubén Fernández Casal ([R Machinery](https://rubenfcasal.github.io)):
 
     - [Introducción al Análisis de Datos con R ](https://rubenfcasal.github.io/intror)
-      (con Javier Roca y Julián Costa)
+      (con Javier Roca, Julián Costa y Manuel Oviedo)
     
     - [Ayuda y Recursos para el Aprendizaje de R ](https://rubenfcasal.github.io/post/ayuda-y-recursos-para-el-aprendizaje-de-r)
     
+    - [Notas de Programación en R](https://rubenfcasal.github.io/book_notasr)
+    
+        [Capítulo introducción a Rmarkdown ](https://rubenfcasal.github.io/bookdown_intro/rmarkdown.html) 
+    
     - [Escritura de libros con el paquete bookdown ](https://rubenfcasal.github.io/bookdown_intro)
       (con Tomás Cotos)
-    
-    - [Apéndice introducción a Rmarkdown ](https://rubenfcasal.github.io/bookdown_intro/rmarkdown.html) 
     
     - [Pesentación análisis de datos con R ](https://rubenfcasal.github.io/post/presentaciones/AnalisisDatosR.pdf)
 

@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1.2 Planificación (tentativa) | Prácticas de Tecnologías de Gestión y Manipulación de Datos</title>
+  <title>4.1 Introducción a Python | Prácticas de Tecnologías de Gestión y Manipulación de Datos</title>
   <meta name="description" content="Prácticas de la asignatura de Tecnologías de Gestión de Datos del Máster en Técnicas Estadísticas." />
   <meta name="generator" content="bookdown 0.48 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1.2 Planificación (tentativa) | Prácticas de Tecnologías de Gestión y Manipulación de Datos" />
+  <meta property="og:title" content="4.1 Introducción a Python | Prácticas de Tecnologías de Gestión y Manipulación de Datos" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Prácticas de la asignatura de Tecnologías de Gestión de Datos del Máster en Técnicas Estadísticas." />
   <meta name="github-repo" content="gltaboada/tgdbook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1.2 Planificación (tentativa) | Prácticas de Tecnologías de Gestión y Manipulación de Datos" />
+  <meta name="twitter:title" content="4.1 Introducción a Python | Prácticas de Tecnologías de Gestión y Manipulación de Datos" />
   
   <meta name="twitter:description" content="Prácticas de la asignatura de Tecnologías de Gestión de Datos del Máster en Técnicas Estadísticas." />
   
@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="contenidos.html"/>
-<link rel="next" href="fuentes-de-información.html"/>
+<link rel="prev" href="introPython.html"/>
+<link rel="next" href="python-y-sqlite.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -388,76 +388,381 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="planificación-tentativa" class="section level2 hasAnchor" number="1.2">
-<h2><span class="header-section-number">1.2</span> Planificación (tentativa)<a href="planificación-tentativa.html#planificaci%C3%B3n-tentativa" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>La impartición de los contenidos durante el curso dependerá de los conocimientos de partida y la asimilación de los
-conceptos. Para completar nuestra visión de los conocimientos previos os requerimos completar este formulario en la primera sesión de clase: <a href="https://forms.gle/D5bhiLLBUFuh6k1n8" class="uri">https://forms.gle/D5bhiLLBUFuh6k1n8</a></p>
+<div id="introducción-a-python" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Introducción a Python<a href="introducción-a-python.html#introducci%C3%B3n-a-python" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="qué-es-python" class="section level3 hasAnchor" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> ¿Qué es Python?<a href="introducción-a-python.html#qu%C3%A9-es-python" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Python es un lenguaje creado por Guido van Rossum en 1991.<br />
+Se destaca por:</p>
 <ul>
-<li><p>Semana 1 (20/10) : 21/10 - Presentación</p></li>
-<li><p>Semana 2 (27/10) : 28 y 30/10 - Tema 1 - SQL</p></li>
-<li><p>Semana 3 (03/11) : 04 y 06/11 - Seminario dplyr</p></li>
-<li><p>Semana 4 (10/11) : 11, 13 y 14/11 - Tema 1 - SQL</p></li>
-<li><p>Semana 5 (17/11) : 18, 20/11 - Tema 1 - SQL. + 21/11 - Seminario texto proc. (CSV, excel, Json) y open data</p></li>
-<li><p>Semana 6 (24/11) : 25/11 - Tema 2 NOSQL + 27 y 28/11 - Tema 3 Big Data</p></li>
-<li><p>Semana 7 (1/12) : 2, 4 y 5/12 Tema 3 Big Data.</p></li>
-<li><p>Semana 8 (8/12) : 9 y 11/12 - Intro a AE + 12/12 Tutoría práctica ML.</p></li>
-<li><p>Semana 9 (15/12) : 16, 18 y 19/12 - Clases de paso / tutorías de cara a examen.</p></li>
+<li><strong>Sintaxis clara y legible</strong></li>
+<li><strong>Tipado dinámico</strong></li>
+<li><strong>Amplia biblioteca estándar</strong></li>
+<li><strong>Gran ecosistema de paquetes</strong></li>
+<li><strong>Multiplataforma</strong></li>
 </ul>
-<!-- Curso 2019-2020
-
-- Clase 1 (12/9-R): Seminario R (Manipulación de datos con el paquete base de R)
-
-- Clase 2 (19/9): Tema 1: Conceptos de bases de datos
-
-- Clase 3 (26/9): Tema 1: Introducción a SQL
-
-- Clase 4 (3/10-R): Seminario dplyr (Manipulación de datos con el paquete dplyr)
-
-- Clase 5 (10/10): Jornada usuarios R Galicia (cubre objetivos de Seminario aplicaciones Big Data en investigación e industria)
-
-- Clase 6 (17/10): Tema 1: Ejercicios prácticos de Entidad-relación y SQL
-
-- Clase 7 (24/10): Tema 2: Introducción a NoSQL
-
-- Clase 8 (31/10):  Tema 1: Continuación de ejercicios prácticos SQL
-
-- Clase 9 (7/11):  Tema 2: Ejercicios prácticos de NoSQL
-
-- Clase 10 (14/11):   Seminario visualización con power BI
-
-- Clase 11 (21/11):  Tema 3: Ecosistema Big Data (Hadoop, Spark)
-
-- Clase 12 (28/11):  Tecnologías Big Data (Rspark/sparklyr) + Seminario machine learning CESGA/localhost
-
-- Clase 13 (5/12): Tema 3: Introducción al análisis de datos masivos son sparklyr
-
-- Clase 14 (12/12): Tema 3: Prácticas de Aprendizaje Estadístico/Automático, Data Mining con rattle
-
-- Clase 15 (19/12-R): Seminario conectividad dplyr a BBDD
-
--->
-<div id="evaluación" class="section level3 hasAnchor" number="1.2.1">
-<h3><span class="header-section-number">1.2.1</span> Evaluación<a href="planificación-tentativa.html#evaluaci%C3%B3n" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Python puede ejecutarse de diferentes maneras según la necesidad:
+- Desde la <strong>línea de comandos</strong></p>
+<div class="sourceCode" id="cb277"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb277-1"><a href="introducción-a-python.html#cb277-1" tabindex="-1"></a><span class="ex">python</span> <span class="at">-c</span> <span class="st">&quot;print(&#39;Hola desde Python&#39;)&quot;</span></span></code></pre></div>
 <ul>
-<li><p><strong>Examen</strong> (60%): El examen de la materia evaluará los siguientes aspectos:
-Conceptos de la materia: Dominio de los conocimientos teóricos y operativos de la materia.
-Asimilación práctica de materia: Asimilación y comprensión de los conocimientos teóricos y operativos de la materia.</p></li>
-<li><p><strong>Prácticas de laboratorio</strong> (40%): Evaluación de las prácticas de laboratorio desarrolladas por los estudiantes.</p></li>
+<li>En modo <strong>interactivo</strong></li>
 </ul>
-<!-- Curso 2019-2020
-#### Observaciones sobre la evaluación:
-
-* Las prácticas de laboratorio se realizarán de forma individual. El plazo para realizar las 3 prácticas será indicado en la presentación de la práctica. El plazo para la entrega de los trabajos tutelados es el último día de clase de la asignatura.
-
-* El estudiante que quiera realizar un trabajo tutelado ha de hablar (o mediante correo electrónico) con los profesores para validar y confirmar el tema y alcance del trabajo tutelado.
-
-* Para poder aprobar la asignatura en la primera oportunidad será necesario obtener como mínimo el 30% de la nota máxima de la suma de las prácticas de laboratorio y trabajos tutelados e, igualmente, el 30% de la nota máxima final de la Prueba mixta (examen), y tener una nota total (prácticas más trabajos tutelados más prueba mixta) igual o superior al 50% de la nota máxima.
-
-* En la segunda oportunidad solamente se podrá recuperar la nota del examen. Las notas de prácticas y de trabajos tutelados serán las obtenidas durante el curso. Para los alumnos que utilicen la oportunidad adelantada de diciembre se utilizarán las notas de prácticas y trabajos tutelados que obtuvieran en su último curso. En esta oportunidad solo será necesario para aprobar obtener una nota total igual o superior al 50% de la nota máxima.
-
-* Una vez que un estudiante es evaluado en una práctica de laboratorio o en un trabajo tutelado implica que será calificado. Por tanto, la calificación "No Presentado" no es posible una vez que una práctica/trabajo ha sido evaluada.
-
--->
+<p>Este entorno interactivo se conoce como <strong>REPL</strong> (Read, Eval, Print, Loop)</p>
+<div class="sourceCode" id="cb278"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb278-1"><a href="introducción-a-python.html#cb278-1" tabindex="-1"></a><span class="ex">$</span> python3</span>
+<span id="cb278-2"><a href="introducción-a-python.html#cb278-2" tabindex="-1"></a><span class="ex">Python</span> 3.13.5 <span class="er">(</span><span class="ex">main,</span> Jun 25 2025, 18:55:22<span class="kw">)</span> <span class="ex">[GCC</span> 14.2.0] on linux</span>
+<span id="cb278-3"><a href="introducción-a-python.html#cb278-3" tabindex="-1"></a><span class="ex">Type</span> <span class="st">&quot;help&quot;</span>, <span class="st">&quot;copyright&quot;</span>, <span class="st">&quot;credits&quot;</span> or <span class="st">&quot;license&quot;</span> for more information.</span>
+<span id="cb278-4"><a href="introducción-a-python.html#cb278-4" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> </span></code></pre></div>
+<p>Ahora se pueden escribir comandos:</p>
+<pre class="python-repl"><code>&gt;&gt;&gt; 2 + 2
+4
+&gt;&gt;&gt; print(&quot;Hola&quot;)
+Hola
+&gt;&gt;&gt; exit()</code></pre>
+<ul>
+<li>Ejecutando <strong>archivos <code>.py</code></strong></li>
+</ul>
+<div class="sourceCode" id="cb280"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb280-1"><a href="introducción-a-python.html#cb280-1" tabindex="-1"></a><span class="ex">$</span> python archivo.py</span></code></pre></div>
+<ul>
+<li>Usando <strong>entornos interactivos</strong> como IPython</li>
+<li>Empleando herramientas para generar una versión “compilada”</li>
+</ul>
+</div>
+<div id="primeros-pasos-hola-mundo" class="section level3 hasAnchor" number="4.1.2">
+<h3><span class="header-section-number">4.1.2</span> Primeros pasos: Hola Mundo<a href="introducción-a-python.html#primeros-pasos-hola-mundo" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Podemos comenzar escribiendo nuestro primer programa:</p>
+<div class="sourceCode" id="cb281"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb281-1"><a href="introducción-a-python.html#cb281-1" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Hola mundo&quot;</span>)</span></code></pre></div>
+<p>Para ejecutarlo desde la terminal</p>
+<p>python mi_programa.py</p>
+<p>También es posible utilizarlo, al igual que R, de forma interactiva:</p>
+</div>
+<div id="sintáxis-básica" class="section level3 hasAnchor" number="4.1.3">
+<h3><span class="header-section-number">4.1.3</span> Sintáxis básica<a href="introducción-a-python.html#sint%C3%A1xis-b%C3%A1sica" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Los comentarios se escriben con <code>#</code>:</p>
+<div class="sourceCode" id="cb282"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb282-1"><a href="introducción-a-python.html#cb282-1" tabindex="-1"></a><span class="co"># Esto es un comentario</span></span>
+<span id="cb282-2"><a href="introducción-a-python.html#cb282-2" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Hola&quot;</span>)</span></code></pre></div>
+<div id="variables-y-tipos-de-datos" class="section level4 hasAnchor" number="4.1.3.1">
+<h4><span class="header-section-number">4.1.3.1</span> Variables y Tipos de Datos<a href="introducción-a-python.html#variables-y-tipos-de-datos" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Python no requiere declarar el tipo de las variables (tipado dinámico):</p>
+<div class="sourceCode" id="cb283"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb283-1"><a href="introducción-a-python.html#cb283-1" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">10</span>            <span class="co"># Entero (int / long)</span></span>
+<span id="cb283-2"><a href="introducción-a-python.html#cb283-2" tabindex="-1"></a>pi <span class="op">=</span> <span class="fl">3.1416</span>       <span class="co"># Flotante (float / double)</span></span>
+<span id="cb283-3"><a href="introducción-a-python.html#cb283-3" tabindex="-1"></a>nombre <span class="op">=</span> <span class="st">&quot;Ana&quot;</span>    <span class="co"># Cadena (string)</span></span>
+<span id="cb283-4"><a href="introducción-a-python.html#cb283-4" tabindex="-1"></a>es_valido <span class="op">=</span> <span class="va">True</span>  <span class="co"># Booleano</span></span></code></pre></div>
+<p>Para mirar cuál es el tipo de dato de una variable se usa la función <code>type</code>:</p>
+<div class="sourceCode" id="cb284"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb284-1"><a href="introducción-a-python.html#cb284-1" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(x))</span>
+<span id="cb284-2"><a href="introducción-a-python.html#cb284-2" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(pi))</span>
+<span id="cb284-3"><a href="introducción-a-python.html#cb284-3" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(nombre))</span>
+<span id="cb284-4"><a href="introducción-a-python.html#cb284-4" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(es_valido))</span></code></pre></div>
+<p>Para solicitar una entrada de texto al usuario se usa la instrucción <code>input</code>:</p>
+<div class="sourceCode" id="cb285"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb285-1"><a href="introducción-a-python.html#cb285-1" tabindex="-1"></a>nombre <span class="op">=</span> <span class="bu">input</span>(<span class="st">&quot;Introduce tu nombre: &quot;</span>)</span></code></pre></div>
+<p>IMPORTANTE: <code>input</code> siempre devuelve un string aunque se introduzca un número.
+Si se quiere convertir a otro tipo de dato hay que hacerlo explícitamente:</p>
+<div class="sourceCode" id="cb286"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb286-1"><a href="introducción-a-python.html#cb286-1" tabindex="-1"></a>edad <span class="op">=</span> <span class="bu">int</span>(<span class="bu">input</span>(<span class="st">&quot;Edad: &quot;</span>))</span></code></pre></div>
+<p>Para imprimir un string, se puede formatear la salida.
+Indicando una “f” antes del string se indica que es una salida formateada
+y se pueden indicar variables entre corchetes “{ }”:</p>
+<div class="sourceCode" id="cb287"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb287-1"><a href="introducción-a-python.html#cb287-1" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Nombre: </span><span class="sc">{</span>nombre<span class="sc">}</span><span class="ss">, Edad: </span><span class="sc">{</span>edad<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb287-2"><a href="introducción-a-python.html#cb287-2" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;</span><span class="sc">{</span>precio<span class="sc">:.2f}</span><span class="ss">&quot;</span></span></code></pre></div>
+<p>Una variante más antigua es con el método format sobre el string:</p>
+<div class="sourceCode" id="cb288"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb288-1"><a href="introducción-a-python.html#cb288-1" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Nombre: </span><span class="sc">{}</span><span class="st">, Edad: </span><span class="sc">{}</span><span class="st">&quot;</span>.<span class="bu">format</span>(nombre, edad))</span>
+<span id="cb288-2"><a href="introducción-a-python.html#cb288-2" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Nombre: </span><span class="sc">{n}</span><span class="st">, Edad: </span><span class="sc">{e}</span><span class="st">&quot;</span>.<span class="bu">format</span>(n<span class="op">=</span>nombre, e<span class="op">=</span>edad))</span></code></pre></div>
+<p>Se puede usar un formato similar al de C (aún más antiguo)</p>
+<div class="sourceCode" id="cb289"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb289-1"><a href="introducción-a-python.html#cb289-1" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Nombre: </span><span class="sc">%s</span><span class="st">, Edad: </span><span class="sc">%d</span><span class="st">&quot;</span> <span class="op">%</span> (nombre, edad))</span></code></pre></div>
+<p>Y también concatenar strings:</p>
+<div class="sourceCode" id="cb290"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb290-1"><a href="introducción-a-python.html#cb290-1" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Hola &quot;</span> <span class="op">+</span> nombre)</span></code></pre></div>
+</div>
+<div id="tuplas" class="section level4 hasAnchor" number="4.1.3.2">
+<h4><span class="header-section-number">4.1.3.2</span> Tuplas<a href="introducción-a-python.html#tuplas" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Una <strong>tupla</strong> es una colección <strong>ordenada e inmutable</strong> de elementos.</p>
+<ul>
+<li>Mantienen el <strong>orden</strong> de inserción.</li>
+<li><strong>No se pueden modificar</strong> (inmutables).</li>
+<li>Pueden contener valores de <strong>distintos tipos</strong>.</li>
+<li>Se usan frecuentemente para representar <strong>filas</strong> o <strong>registros de datos</strong>.</li>
+<li>Se crean con paréntesis <code>( )</code>.</li>
+</ul>
+<div class="sourceCode" id="cb291"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb291-1"><a href="introducción-a-python.html#cb291-1" tabindex="-1"></a>tupla <span class="op">=</span> (<span class="st">&quot;Ana&quot;</span>, <span class="dv">30</span>, <span class="st">&quot;Madrid&quot;</span>)</span>
+<span id="cb291-2"><a href="introducción-a-python.html#cb291-2" tabindex="-1"></a><span class="bu">print</span>(tupla[<span class="dv">0</span>])   <span class="co"># Acceso por índice</span></span></code></pre></div>
+<p>La tupla es útil cuando necesitas una estructura fija que no cambiará (por ejemplo, una fila SQL).</p>
+<p>El tipo más cercano en R es un vector (<code>c(1, 2, 3)</code>) si los datos son homogéneos o una lista (<code>list("Ana", 30, "Madrid")</code>) si son heterogéneos.</p>
+</div>
+<div id="listas" class="section level4 hasAnchor" number="4.1.3.3">
+<h4><span class="header-section-number">4.1.3.3</span> Listas<a href="introducción-a-python.html#listas" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Una <strong>lista</strong> es una colección <strong>ordenada y mutable</strong>.</p>
+<ul>
+<li>Mantienen el <strong>orden</strong>.</li>
+<li><strong>Sí pueden modificarse</strong>: agregar, borrar, reordenar, reemplazar elementos.</li>
+<li>Pueden contener cualquier tipo de dato.</li>
+<li>Se crean con corchetes <code>[ ]</code>.</li>
+</ul>
+<div class="sourceCode" id="cb292"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb292-1"><a href="introducción-a-python.html#cb292-1" tabindex="-1"></a>numeros <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]</span>
+<span id="cb292-2"><a href="introducción-a-python.html#cb292-2" tabindex="-1"></a>numeros.append(<span class="dv">5</span>)</span>
+<span id="cb292-3"><a href="introducción-a-python.html#cb292-3" tabindex="-1"></a><span class="bu">print</span>(numeros)</span>
+<span id="cb292-4"><a href="introducción-a-python.html#cb292-4" tabindex="-1"></a></span>
+<span id="cb292-5"><a href="introducción-a-python.html#cb292-5" tabindex="-1"></a>numeros[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">5</span>     <span class="co"># la lista queda: [5,2,3,4] </span></span>
+<span id="cb292-6"><a href="introducción-a-python.html#cb292-6" tabindex="-1"></a>numeros.append(<span class="dv">17</span>) <span class="co"># ahora la lista queda [5,2,3,4,17]</span></span>
+<span id="cb292-7"><a href="introducción-a-python.html#cb292-7" tabindex="-1"></a><span class="bu">print</span>(numeros)</span></code></pre></div>
+<p>La lista es útil cuando la colección va a crecer, modificarse o reordenarse.</p>
+</div>
+<div id="diccionarios" class="section level4 hasAnchor" number="4.1.3.4">
+<h4><span class="header-section-number">4.1.3.4</span> Diccionarios<a href="introducción-a-python.html#diccionarios" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Un <strong>diccionario</strong> es una colección <strong>no ordenada</strong> (en versiones modernas, conserva el orden de inserción) de pares <strong>clave-valor</strong>.</p>
+<ul>
+<li>Cada elemento tiene una <strong>clave única</strong>.</li>
+<li>Permiten acceso muy rápido a los valores mediante la clave.</li>
+<li>Se usan para representar <strong>datos estructurados</strong>, como registros con nombre.</li>
+<li>Se crean con llaves <code>{ }</code>.</li>
+</ul>
+<div class="sourceCode" id="cb293"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb293-1"><a href="introducción-a-python.html#cb293-1" tabindex="-1"></a>persona <span class="op">=</span> {<span class="st">&quot;nombre&quot;</span>: <span class="st">&quot;Luis&quot;</span>, <span class="st">&quot;edad&quot;</span>: <span class="dv">30</span>}</span>
+<span id="cb293-2"><a href="introducción-a-python.html#cb293-2" tabindex="-1"></a><span class="bu">print</span>(persona[<span class="st">&quot;nombre&quot;</span>])</span>
+<span id="cb293-3"><a href="introducción-a-python.html#cb293-3" tabindex="-1"></a>persona[<span class="st">&quot;edad&quot;</span>] <span class="op">=</span> <span class="dv">31</span></span></code></pre></div>
+<p>El diccionario es útil cuando necesitas asociar valores a nombres o claves.
+También es interesante para acceder a filas SQL por nombre de atributo.</p>
+<p>El tipo más cercano en R sería una lista nombrada: <code>list(nombre = "Luis", edad = 30)</code>,
+o bien un environment:</p>
+<pre><code>env &lt;- new.env()
+env$nombre &lt;- &quot;Luis&quot;
+env$edad &lt;- 30</code></pre>
+<p>También es similar un dataframe</p>
+<pre><code>df &lt;- data.frame(nombre = &quot;Luis&quot;, edad = 30)</code></pre>
+</div>
+<div id="operadores" class="section level4 hasAnchor" number="4.1.3.5">
+<h4><span class="header-section-number">4.1.3.5</span> Operadores<a href="introducción-a-python.html#operadores" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li>Operadores lógicos:</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>Operación</th>
+<th>Python</th>
+<th>R</th>
+<th>C</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>AND lógico</td>
+<td><code>and</code></td>
+<td><code>&amp;</code> (element-wise), <code>&amp;&amp;</code> (control-flow)</td>
+<td><code>&amp;&amp;</code></td>
+</tr>
+<tr class="even">
+<td>OR lógico</td>
+<td><code>or</code></td>
+<td><code>|</code> (element-wise), <code>||</code> (control-flow)</td>
+<td><code>||</code></td>
+</tr>
+<tr class="odd">
+<td>NOT lógico</td>
+<td><code>not</code></td>
+<td><code>!</code></td>
+<td><code>!</code></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Operadores bitwise:</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>Operación</th>
+<th>Python</th>
+<th>R</th>
+<th>C</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>AND bitwise</td>
+<td><code>&amp;</code></td>
+<td><code>bitwAnd(a,b)</code></td>
+<td><code>&amp;</code></td>
+</tr>
+<tr class="even">
+<td>OR bitwise</td>
+<td><code>|</code></td>
+<td><code>bitwOr(a,b)</code></td>
+<td><code>|</code></td>
+</tr>
+<tr class="odd">
+<td>XOR bitwise</td>
+<td><code>^</code></td>
+<td><code>bitwXor(a,b)</code></td>
+<td><code>^</code></td>
+</tr>
+<tr class="even">
+<td>NOT bitwise</td>
+<td><code>~</code></td>
+<td><code>bitwNot(a)</code></td>
+<td><code>~</code></td>
+</tr>
+<tr class="odd">
+<td>Shift izquierda</td>
+<td><code>&lt;&lt;</code></td>
+<td><code>bitwShiftL(a,n)</code></td>
+<td><code>&lt;&lt;</code></td>
+</tr>
+<tr class="even">
+<td>Shift derecha</td>
+<td><code>&gt;&gt;</code></td>
+<td><code>bitwShiftR(a,n)</code></td>
+<td><code>&gt;&gt;</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="indentación" class="section level4 hasAnchor" number="4.1.3.6">
+<h4><span class="header-section-number">4.1.3.6</span> Indentación<a href="introducción-a-python.html#indentaci%C3%B3n" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Python usa la indentación para definir bloques de código.
+Esto es fundamental: si la indentación es incorrecta, el código no funciona.</p>
+<p>La convención es usar 4 espacios por nivel (mejor que usar tabs).</p>
+<div class="sourceCode" id="cb296"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb296-1"><a href="introducción-a-python.html#cb296-1" tabindex="-1"></a><span class="cf">if</span> x <span class="op">&gt;</span> <span class="dv">5</span>:</span>
+<span id="cb296-2"><a href="introducción-a-python.html#cb296-2" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;x es mayor que 5&quot;</span>)</span>
+<span id="cb296-3"><a href="introducción-a-python.html#cb296-3" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;Esto sigue dentro del bloque&quot;</span>)</span>
+<span id="cb296-4"><a href="introducción-a-python.html#cb296-4" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Esto ya está fuera del bloque&quot;</span>)</span></code></pre></div>
+<p>Ejemplo <strong>incorrecto</strong> (producirá un error):</p>
+<div class="sourceCode" id="cb297"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb297-1"><a href="introducción-a-python.html#cb297-1" tabindex="-1"></a><span class="cf">if</span> x <span class="op">&gt;</span> <span class="dv">5</span>:</span>
+<span id="cb297-2"><a href="introducción-a-python.html#cb297-2" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">&quot;Error por mezclar espacios&quot;</span>)</span>
+<span id="cb297-3"><a href="introducción-a-python.html#cb297-3" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;Indentación inconsistente&quot;</span>)</span></code></pre></div>
+</div>
+<div id="estructuras-de-control" class="section level4 hasAnchor" number="4.1.3.7">
+<h4><span class="header-section-number">4.1.3.7</span> Estructuras de control<a href="introducción-a-python.html#estructuras-de-control" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li>Condicionales</li>
+</ul>
+<div class="sourceCode" id="cb298"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb298-1"><a href="introducción-a-python.html#cb298-1" tabindex="-1"></a>edad <span class="op">=</span> <span class="dv">18</span></span>
+<span id="cb298-2"><a href="introducción-a-python.html#cb298-2" tabindex="-1"></a></span>
+<span id="cb298-3"><a href="introducción-a-python.html#cb298-3" tabindex="-1"></a><span class="cf">if</span> edad <span class="op">&gt;=</span> <span class="dv">18</span>:</span>
+<span id="cb298-4"><a href="introducción-a-python.html#cb298-4" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;Mayor de edad&quot;</span>)</span>
+<span id="cb298-5"><a href="introducción-a-python.html#cb298-5" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb298-6"><a href="introducción-a-python.html#cb298-6" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;Menor de edad&quot;</span>)</span></code></pre></div>
+<ul>
+<li>Bucle <code>for</code></li>
+</ul>
+<div class="sourceCode" id="cb299"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb299-1"><a href="introducción-a-python.html#cb299-1" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>):</span>
+<span id="cb299-2"><a href="introducción-a-python.html#cb299-2" tabindex="-1"></a>    <span class="bu">print</span>(i)</span></code></pre></div>
+<ul>
+<li>Bucle <code>while</code></li>
+</ul>
+<div class="sourceCode" id="cb300"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb300-1"><a href="introducción-a-python.html#cb300-1" tabindex="-1"></a>contador <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb300-2"><a href="introducción-a-python.html#cb300-2" tabindex="-1"></a><span class="cf">while</span> contador <span class="op">&lt;</span> <span class="dv">5</span>:</span>
+<span id="cb300-3"><a href="introducción-a-python.html#cb300-3" tabindex="-1"></a>    <span class="bu">print</span>(contador)</span>
+<span id="cb300-4"><a href="introducción-a-python.html#cb300-4" tabindex="-1"></a>    contador <span class="op">+=</span> <span class="dv">1</span></span></code></pre></div>
+</div>
+<div id="funciones" class="section level4 hasAnchor" number="4.1.3.8">
+<h4><span class="header-section-number">4.1.3.8</span> Funciones<a href="introducción-a-python.html#funciones" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb301"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb301-1"><a href="introducción-a-python.html#cb301-1" tabindex="-1"></a><span class="kw">def</span> saludar(nombre):</span>
+<span id="cb301-2"><a href="introducción-a-python.html#cb301-2" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f&quot;Hola, </span><span class="sc">{</span>nombre<span class="sc">}</span><span class="ss">&quot;</span></span>
+<span id="cb301-3"><a href="introducción-a-python.html#cb301-3" tabindex="-1"></a></span>
+<span id="cb301-4"><a href="introducción-a-python.html#cb301-4" tabindex="-1"></a><span class="bu">print</span>(saludar(<span class="st">&quot;María&quot;</span>))</span></code></pre></div>
+</div>
+<div id="errores-comunes-de-sintaxis" class="section level4 hasAnchor" number="4.1.3.9">
+<h4><span class="header-section-number">4.1.3.9</span> Errores Comunes de Sintaxis<a href="introducción-a-python.html#errores-comunes-de-sintaxis" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li>Olvidar los dos puntos (:) al iniciar un bloque</li>
+<li>Mezclar tabs y espacios</li>
+<li>Indentación incorrecta</li>
+</ul>
+</div>
+</div>
+<div id="librerías-populares" class="section level3 hasAnchor" number="4.1.4">
+<h3><span class="header-section-number">4.1.4</span> Librerías populares<a href="introducción-a-python.html#librer%C3%ADas-populares" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Python cuenta con miles de bibliotecas.
+Para usar una biblioteca se utiliza “<strong>import</strong> …”,
+de forma análoga a “<strong>library</strong>(…)” en R.</p>
+<div class="sourceCode" id="cb302"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb302-1"><a href="introducción-a-python.html#cb302-1" tabindex="-1"></a><span class="im">import</span> math</span>
+<span id="cb302-2"><a href="introducción-a-python.html#cb302-2" tabindex="-1"></a><span class="bu">print</span>(math.sqrt(<span class="dv">16</span>))</span></code></pre></div>
+<p>Algunas destacadas:</p>
+<div id="ciencia-de-datos" class="section level4 hasAnchor" number="4.1.4.1">
+<h4><span class="header-section-number">4.1.4.1</span> 🔢 Ciencia de Datos<a href="#ciencia-de-datos" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li><strong>NumPy</strong>: Cálculo numérico y manejo de arreglos multidimensionales.</li>
+<li><strong>Pandas</strong>: Análisis y manipulación de datos mediante DataFrames.</li>
+<li><strong>SciPy</strong>: Funciones científicas y matemáticas avanzadas.</li>
+<li><strong>Matplotlib</strong>: Visualización básica y clásica.</li>
+<li><strong>Seaborn</strong>: Visualización estadística de alto nivel.</li>
+<li><strong>Plotly</strong>: Gráficos interactivos y dinámicos.</li>
+<li><strong>Statsmodels</strong>: Modelos estadísticos y econometría.</li>
+</ul>
+<hr />
+</div>
+<div id="machine-learning-e-inteligencia-artificial" class="section level4 hasAnchor" number="4.1.4.2">
+<h4><span class="header-section-number">4.1.4.2</span> 🤖 Machine Learning e Inteligencia Artificial<a href="#machine-learning-e-inteligencia-artificial" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li><strong>scikit-learn</strong>: Algoritmos tradicionales de machine learning.</li>
+<li><strong>TensorFlow</strong>: Deep learning desarrollado por Google.</li>
+<li><strong>PyTorch</strong>: Deep learning desarrollado por Meta.</li>
+<li><strong>Keras</strong>: API de alto nivel para redes neuronales.</li>
+<li><strong>XGBoost</strong>: Algoritmo de gradient boosting optimizado.</li>
+<li><strong>LightGBM</strong>: Boosting rápido para grandes datasets.</li>
+<li><strong>CatBoost</strong>: Boosting especializado en variables categóricas.</li>
+</ul>
+<hr />
+</div>
+<div id="procesamiento-del-lenguaje-natural-nlp" class="section level4 hasAnchor" number="4.1.4.3">
+<h4><span class="header-section-number">4.1.4.3</span> 🧠 Procesamiento del Lenguaje Natural (NLP)<a href="#procesamiento-del-lenguaje-natural-nlp" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li><strong>NLTK</strong>: Procesamiento de texto tradicional.</li>
+<li><strong>spaCy</strong>: NLP industrial rápido y eficiente.</li>
+<li><strong>Transformers (Hugging Face)</strong>: Modelos modernos como BERT, GPT, etc.</li>
+<li><strong>Gensim</strong>: Modelado de tópicos y embeddings semánticos.</li>
+</ul>
+<hr />
+</div>
+<div id="desarrollo-web" class="section level4 hasAnchor" number="4.1.4.4">
+<h4><span class="header-section-number">4.1.4.4</span> 🌐 Desarrollo Web<a href="#desarrollo-web" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li><strong>Django</strong>: Framework completo para aplicaciones web.</li>
+<li><strong>Flask</strong>: Microframework web ligero y flexible.</li>
+<li><strong>FastAPI</strong>: Framework moderno y rápido para APIs (asíncrono).</li>
+<li><strong>Bottle</strong>: Alternativa aún más ligera a Flask.</li>
+</ul>
+<hr />
+</div>
+<div id="utilidades-y-herramientas" class="section level4 hasAnchor" number="4.1.4.5">
+<h4><span class="header-section-number">4.1.4.5</span> 🛠️ Utilidades y Herramientas<a href="#utilidades-y-herramientas" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li><strong>Requests</strong>: Manejo de peticiones HTTP.</li>
+<li><strong>BeautifulSoup</strong>: Análisis y extracción de datos HTML.</li>
+<li><strong>Selenium</strong>: Automatización de navegadores web.</li>
+<li><strong>PyTest</strong>: Framework de testing en Python.</li>
+<li><strong>Pillow (PIL)</strong>: Manipulación de imágenes.</li>
+<li><strong>Click</strong>: Creación de interfaces de línea de comandos.</li>
+</ul>
+<hr />
+</div>
+<div id="desarrollo-y-arquitectura" class="section level4 hasAnchor" number="4.1.4.6">
+<h4><span class="header-section-number">4.1.4.6</span> 🧱 Desarrollo y Arquitectura<a href="#desarrollo-y-arquitectura" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li><strong>SQLAlchemy</strong>: ORM y manejo avanzado de bases de datos.</li>
+<li><strong>Pydantic</strong>: Validación de datos basada en tipos.</li>
+<li><strong>Celery</strong>: Ejecución de tareas distribuidas.</li>
+<li><strong>Redis-py</strong>: Cliente de Python para Redis.</li>
+</ul>
+<hr />
+</div>
+<div id="data-engineering-y-big-data" class="section level4 hasAnchor" number="4.1.4.7">
+<h4><span class="header-section-number">4.1.4.7</span> 🧪 Data Engineering y Big Data<a href="#data-engineering-y-big-data" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li><strong>PySpark</strong>: Uso de Apache Spark desde Python.</li>
+<li><strong>Dask</strong>: Computación distribuida para conjuntos grandes de datos.</li>
+<li><strong>Vaex</strong>: Manipulación de datos grandes sin cargarlos completamente en memoria.</li>
+<li><strong>Ray</strong>: Framework para computación distribuida y ML escalable.</li>
+</ul>
+<hr />
+</div>
+<div id="librerías-estándar-muy-usadas" class="section level4 hasAnchor" number="4.1.4.8">
+<h4><span class="header-section-number">4.1.4.8</span> 📦 Librerías Estándar Muy Usadas<a href="#librer%C3%ADas-est%C3%A1ndar-muy-usadas" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li><strong>os</strong>: Interacción con el sistema operativo.</li>
+<li><strong>sys</strong>: Acceso directo al intérprete de Python.</li>
+<li><strong>json</strong>: Lectura y escritura de archivos JSON.</li>
+<li><strong>re</strong>: Manejo de expresiones regulares.</li>
+<li><strong>datetime</strong>: Manejo de fechas y horas.</li>
+<li><strong>subprocess</strong>: Ejecución de comandos externos.</li>
+</ul>
+</div>
 </div>
 </div>
             </section>
@@ -465,8 +770,8 @@ Asimilación práctica de materia: Asimilación y comprensión de los conocimien
           </div>
         </div>
       </div>
-<a href="contenidos.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="fuentes-de-información.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="introPython.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="python-y-sqlite.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -497,7 +802,7 @@ gitbook.start({
     "size": 2
   },
   "edit": {
-    "link": "https://github.com/gltaboada/tgdbook/edit/master/01-Introduccion.Rmd",
+    "link": "https://github.com/gltaboada/tgdbook/edit/master/04-Python.Rmd",
     "text": "Edit"
   },
   "history": {
