@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 
 # Directorio figuras
 # ················································
-fig.path <- "figuras/"
+fig.path <- "images/"
 # fig.path <- ""
 
 # Funciones auxiliares rmarkdown -----------------
@@ -70,7 +70,10 @@ cite_cran <- function(pkg) {
 ## Citas paquetes --------------------------------
 # ················································
 
-cite_pkg_ <- function(pkg, url = sapply(pkg, downlit::href_package)) {
+cite_pkg_ <- function(pkg, url = sapply(pkg, function(p) {
+    u <- tryCatch(downlit::href_package(p), error = function(e) NA_character_)
+    if (length(u) == 0 || is.na(u)) paste0("https://CRAN.R-project.org/package=", p) else u
+})) {
     paste0("[`", pkg, "`](", url, ")",  collapse = ", ")
 }
 
@@ -95,7 +98,10 @@ cite_pkg <- function(pkg, ...) {
 cite_fun_ <- function(fun, pkg, url, full = FALSE) {
     fun_full <- if (!missing(pkg))
         paste(pkg, fun, sep = "::") else fun
-    if (missing(url)) url <- downlit::autolink_url(fun_full)
+    if (missing(url)) url <- sapply(fun_full, function(f) {
+        u <- tryCatch(downlit::autolink_url(f), error = function(e) NA_character_)
+        if (length(u) == 0 || is.na(u)) paste0("https://www.rdocumentation.org/search?q=", f) else u
+    })
     if (full) fun <- fun_full
     paste0("[`", fun, "`](", url, ")", collapse = ", ")
 }
